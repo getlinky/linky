@@ -1,0 +1,22 @@
+{
+  "name": "linkkeep",
+  "version": "0.0.1",
+  "description": "keep your links",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Steve Dignam",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "grunt": "^1.0.1",
+    "grunt-babel": "^6.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-pug": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "load-grunt-tasks": "^3.5.2",
+    "pug": "^2.0.0-beta6"
+  }
+}

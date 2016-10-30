@@ -1,0 +1,32 @@
+html {
+  color: #444;
+  font-family: georgia, serif;
+  font-size: 18px;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+.link-container {
+  overflow-wrap: break-word;
+  list-style-type: none;
+  margin-bottom: 0.5rem;
+}
+.link-container .link-title {
+  margin-bottom: 0.5rem;
+}
+.link-container .description {
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.link-container .source {
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.active {
+  background: #ffffba;
+}

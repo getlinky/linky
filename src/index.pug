@@ -1,0 +1,28 @@
+doctype html
+html(lang=en)
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title Link Keep
+    meta(name='description' content='save yerr links')
+    link(rel='stylesheet' href='dist/main.css')
+
+  body
+
+    h1 Link Keep
+    .link-container
+      each l in [{"name": "Google.com", "description": "an internet company", "source": "www.google.com"}, {"name": "Rustlings", "description": "Small exercises to get you used to reading and writing Rust code.", "source" : "https://github.com/carols10cents/rustlings"}]
+        li
+          h3.link-title
+            a(href='#{l.source}') #{l.name}
+          p.description #{l.description}
+          a.source(href='#{l.source}') #{l.source}
+
+      li.active
+        h3.link-title
+          a(href='https://github.com/carols10cents/rustlings') Rustlings
+        p.description Small exercises to get you used to reading and writing Rust code.
+        a.source(href='https://github.com/carols10cents/rustlings') https://github.com/carols10cents/rustlings
+
+  script(src='dist/index.js')

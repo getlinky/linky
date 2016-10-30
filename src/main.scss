@@ -1,0 +1,46 @@
+$text-gray: #444;
+$highlight-yellow: rgb(255, 255, 186);
+
+// background colors
+$sepia: #f8f2e3;
+$grayblack: #3c3c3c;
+
+html {
+  color: $text-gray;
+  font-family: georgia, serif;
+  font-size: 18px;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+// container for all of the link sections
+.link-container {
+  list-style-type: none;
+  margin-bottom: .5rem;
+  // TODO: make text overlfow instead of just hiding
+  overflow-wrap: break-word;
+
+  .link-title {
+    margin-bottom: .5rem;
+  }
+
+  .description {
+    font-style: italic;
+    margin-bottom: .5rem;
+    margin-top: 0;
+  }
+
+  .source {
+    font-style: italic;
+    margin-bottom: .5rem;
+    margin-top: 0;
+  }
+
+}
+
+// used to signify a link-section is selected
+.active {
+  background: $highlight-yellow;
+}
