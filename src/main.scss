@@ -4,6 +4,7 @@ $highlight-yellow: rgb(255, 255, 186);
 // background colors
 $sepia: #f8f2e3;
 $grayblack: #3c3c3c;
+$light-gray: #eee;
 
 html {
   color: $text-gray;
@@ -14,6 +15,8 @@ html {
 // container for all of the link sections
 .link-container {
   list-style-type: none;
+  margin: 0 auto;
+  max-width: 40em;
   overflow-wrap: break-word;
 
   * {
@@ -33,7 +36,7 @@ html {
 }
 
 .main-nav {
-  background: #eee;
+  background: $light-gray;
 
   h1 {
     margin-bottom: 0;
@@ -61,10 +64,10 @@ html {
 }
 
 .list-options {
-  text-align: center;
-  padding-top: 1rem;
+  background-color: transparentize($light-gray, .7);
   padding-bottom: 1rem;
-  background-color: transparentize(#eee, 0.7);
+  padding-top: 1rem;
+  text-align: center;
 
   a {
     margin-left: .5rem;

@@ -6,6 +6,8 @@ html {
 
 .link-container {
   list-style-type: none;
+  margin: 0 auto;
+  max-width: 40em;
   overflow-wrap: break-word;
 }
 .link-container * {
@@ -46,10 +48,10 @@ html {
 }
 
 .list-options {
-  text-align: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
   background-color: rgba(238, 238, 238, 0.3);
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  text-align: center;
 }
 .list-options a {
   margin-left: .5rem;
