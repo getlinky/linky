@@ -44,3 +44,13 @@ html {
   padding: 1rem;
   text-decoration: none;
 }
+
+.list-options {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: rgba(238, 238, 238, 0.3);
+}
+.list-options a {
+  margin-left: .5rem;
+}

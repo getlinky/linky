@@ -59,3 +59,14 @@ html {
     text-decoration: none;
   }
 }
+
+.list-options {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: transparentize(#eee, 0.7);
+
+  a {
+    margin-left: .5rem;
+  }
+}
