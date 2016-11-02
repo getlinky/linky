@@ -11,36 +11,51 @@ html {
   font-size: 18px;
 }
 
-h1 {
-  margin-bottom: 0;
-}
-
 // container for all of the link sections
 .link-container {
   list-style-type: none;
-  margin-bottom: .5rem;
-  // TODO: make text overlfow instead of just hiding
   overflow-wrap: break-word;
 
-  .link-title {
+  * {
     margin-bottom: .5rem;
   }
 
-  .description {
-    font-style: italic;
-    margin-bottom: .5rem;
-    margin-top: 0;
-  }
-
+  .description,
   .source {
     font-style: italic;
-    margin-bottom: .5rem;
     margin-top: 0;
   }
-
 }
 
 // used to signify a link-section is selected
 .active {
   background: $highlight-yellow;
+}
+
+.main-nav {
+  background: #eee;
+
+  h1 {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  a:not(:first-child){
+    padding-left: .5rem;
+  }
+
+  .section {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-weight: bold;
+    padding: 1rem;
+    text-decoration: none;
+  }
 }

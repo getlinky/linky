@@ -4,29 +4,43 @@ html {
   font-size: 18px;
 }
 
-h1 {
-  margin-bottom: 0;
-}
-
 .link-container {
-  overflow-wrap: break-word;
   list-style-type: none;
-  margin-bottom: 0.5rem;
+  overflow-wrap: break-word;
 }
-.link-container .link-title {
-  margin-bottom: 0.5rem;
+.link-container * {
+  margin-bottom: .5rem;
 }
-.link-container .description {
-  font-style: italic;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-}
+.link-container .description,
 .link-container .source {
   font-style: italic;
   margin-top: 0;
-  margin-bottom: 0.5rem;
 }
 
 .active {
   background: #ffffba;
+}
+
+.main-nav {
+  background: #eee;
+}
+.main-nav h1 {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.main-nav .items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.main-nav a:not(:first-child) {
+  padding-left: .5rem;
+}
+.main-nav .section {
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-weight: bold;
+  padding: 1rem;
+  text-decoration: none;
 }

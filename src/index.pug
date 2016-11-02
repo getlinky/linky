@@ -4,13 +4,26 @@ html(lang=en)
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    title Link Keep
+    title Linky
     meta(name='description' content='save yerr links')
     link(rel='stylesheet' href='dist/main.css')
 
   body
+    header
+      nav.main-nav
+        .items
+          .section
+            a(href='#')
+              h1 Linky
+          .section
+            a(href='#list') List
+            a(href='#archive') Archive
+            a(href='#favorites') Favorites
+          .section
+            a(href='#add') Add Link...
+            a(href='#settings') Settings
+            a(href='#logout') Logout
 
-    h1 Link Keep
     .link-container
       each l in [{"name": "Google.com", "description": "an internet company", "source": "www.google.com"}, {"name": "Rustlings", "description": "Small exercises to get you used to reading and writing Rust code.", "source" : "https://github.com/carols10cents/rustlings"}]
         li
