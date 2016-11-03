@@ -14,13 +14,24 @@ html {
 
 // container for all of the link sections
 .link-container {
+  background-color: $light-gray;
   list-style-type: none;
   margin: 0 auto;
   max-width: 40em;
   overflow-wrap: break-word;
+  padding-top: 1rem;
 
   * {
     margin-bottom: .5rem;
+  }
+
+  // link section
+  li {
+    margin-bottom: 1rem;
+  }
+
+  .link-title {
+    margin-top: 0;
   }
 
   .description,
@@ -43,24 +54,34 @@ html {
     margin-top: 0;
   }
 
+  a:not(:first-child) {
+    margin-left: 1rem;
+  }
+
+  .title {
+    font-style: italic;
+  }
+
   .items {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
 
-  a:not(:first-child){
-    padding-left: .5rem;
-  }
-
   .section {
-    display: flex;
     align-items: center;
-    color: #333;
+    display: flex;
     font-weight: bold;
     padding: 1rem;
     text-decoration: none;
+
+
   }
+
+  .settings-logout-save {
+    font-size: .75rem;
+  }
+
 }
 
 .list-options {
@@ -69,7 +90,8 @@ html {
   padding-top: 1rem;
   text-align: center;
 
-  a {
-    margin-left: .5rem;
+  a:not(:first-child) {
+    margin-left: 1rem;
   }
+
 }

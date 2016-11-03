@@ -5,13 +5,21 @@ html {
 }
 
 .link-container {
+  background-color: #eee;
   list-style-type: none;
   margin: 0 auto;
   max-width: 40em;
   overflow-wrap: break-word;
+  padding-top: 1rem;
 }
 .link-container * {
   margin-bottom: .5rem;
+}
+.link-container li {
+  margin-bottom: 1rem;
+}
+.link-container .link-title {
+  margin-top: 0;
 }
 .link-container .description,
 .link-container .source {
@@ -30,21 +38,26 @@ html {
   margin-bottom: 0;
   margin-top: 0;
 }
+.main-nav a:not(:first-child) {
+  margin-left: 1rem;
+}
+.main-nav .title {
+  font-style: italic;
+}
 .main-nav .items {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.main-nav a:not(:first-child) {
-  padding-left: .5rem;
-}
 .main-nav .section {
-  display: flex;
   align-items: center;
-  color: #333;
+  display: flex;
   font-weight: bold;
   padding: 1rem;
   text-decoration: none;
+}
+.main-nav .settings-logout-save {
+  font-size: .75rem;
 }
 
 .list-options {
@@ -53,6 +66,6 @@ html {
   padding-top: 1rem;
   text-align: center;
 }
-.list-options a {
-  margin-left: .5rem;
+.list-options a:not(:first-child) {
+  margin-left: 1rem;
 }
