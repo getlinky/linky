@@ -34,12 +34,18 @@ html {
 .main-nav {
   background: #eee;
 }
+.main-nav a {
+  padding: 1.25rem .5rem;
+}
+.main-nav a:hover {
+  background-color: #bbbbbb;
+}
+.main-nav a:not(:first-child) {
+  margin-left: .5rem;
+}
 .main-nav h1 {
   margin-bottom: 0;
   margin-top: 0;
-}
-.main-nav a:not(:first-child) {
-  margin-left: 1rem;
 }
 .main-nav .title {
   font-style: italic;
@@ -53,7 +59,6 @@ html {
   align-items: center;
   display: flex;
   font-weight: bold;
-  padding: 1rem;
   text-decoration: none;
 }
 .main-nav .settings-logout-save {
@@ -66,6 +71,12 @@ html {
   padding-top: 1rem;
   text-align: center;
 }
+.list-options a {
+  padding: 1rem .5rem;
+}
+.list-options a:hover {
+  background-color: rgba(187, 187, 187, 0.3);
+}
 .list-options a:not(:first-child) {
-  margin-left: 1rem;
+  margin-left: .5rem;
 }

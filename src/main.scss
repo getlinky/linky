@@ -49,13 +49,21 @@ html {
 .main-nav {
   background: $light-gray;
 
+  a {
+    padding: 1.25rem .5rem;
+
+    &:hover {
+      background-color: darken($light-gray, 20%);
+    }
+
+    &:not(:first-child) {
+      margin-left: .5rem;
+    }
+  }
+
   h1 {
     margin-bottom: 0;
     margin-top: 0;
-  }
-
-  a:not(:first-child) {
-    margin-left: 1rem;
   }
 
   .title {
@@ -72,10 +80,7 @@ html {
     align-items: center;
     display: flex;
     font-weight: bold;
-    padding: 1rem;
     text-decoration: none;
-
-
   }
 
   .settings-logout-save {
@@ -84,14 +89,24 @@ html {
 
 }
 
+// list, archive, or favorites
 .list-options {
-  background-color: transparentize($light-gray, .7);
+  $background-color: transparentize($light-gray, .7);
+  background-color: $background-color;
   padding-bottom: 1rem;
   padding-top: 1rem;
   text-align: center;
 
-  a:not(:first-child) {
-    margin-left: 1rem;
+  a {
+    padding: 1rem .5rem;
+
+    &:hover {
+      background-color: darken($background-color, 20%);
+    }
+
+    &:not(:first-child) {
+      margin-left: .5rem;
+    }
   }
 
 }
