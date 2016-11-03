@@ -25,17 +25,11 @@ html(lang=en)
       a(href='#list') List
       a(href='#archive') Archive
     .link-container
-      each l in [{"name": "Google.com", "description": "an internet company", "source": "www.google.com"}, {"name": "Rustlings", "description": "Small exercises to get you used to reading and writing Rust code.", "source" : "https://github.com/carols10cents/rustlings"}, {"name": "Google.com", "description": "an internet company", "source": "www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "www.google.com"},]
+      each l in [{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Rustlings", "description": "Small exercises to get you used to reading and writing Rust code.", "source" : "https://github.com/carols10cents/rustlings"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},]
         li
           h3.link-title
-            a(href='#{l.source}') #{l.name}
+            a(href=l.source) #{l.name}
           p.description #{l.description}
-          a.source(href='#{l.source}') #{l.source}
-
-      li.active
-        h3.link-title
-          a(href='https://github.com/carols10cents/rustlings') Rustlings
-        p.description Small exercises to get you used to reading and writing Rust code.
-        a.source(href='https://github.com/carols10cents/rustlings') https://github.com/carols10cents/rustlings
+          a.source(href=l.source) #{l.source}
 
   script(src='dist/index.js')
