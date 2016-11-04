@@ -1,8 +1,21 @@
 'use strict';
 
-/* globals document console */
+/* globals document console window */
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    var in_view = function in_view(el) {
+        var top = el.getBoundingClientRect().top;
+        var bottom = el.getBoundingClientRect().bottom;
+        return top >= 0 && bottom <= window.innerHeight;
+    };
+
+    var scroll_into_view = function scroll_into_view(el) {
+        if (!in_view(el)) {
+            el.scrollIntoView();
+            window.scroll(0, window.scrollY);
+        }
+    };
 
     var nav = function nav(selector) {
         var link = document.querySelector(selector);
@@ -16,58 +29,66 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 link.classList.remove('active');
                 link = link.nextSibling;
+                scroll_into_view(link);
                 link.classList.add('active');
             },
             previous: function previous() {
                 if (link.previousSibling == null) {
+                    window.scrollTo(0, 0);
                     return;
                 }
                 link.classList.remove('active');
                 link = link.previousSibling;
+                scroll_into_view(link);
                 link.classList.add('active');
             },
             current: link
         };
     };
 
-    var key = {
-        75: 'k',
-        74: 'j',
-        76: 'l',
-        72: 'h',
-        68: 'd',
-        65: 'a',
-        83: 's',
-        70: 'f',
-        78: 'n',
-        79: 'o',
-        80: 'p',
-        191: '/'
-
-    };
-
-    var linksNav = nav('.link-container > li');
+    var links_nav = nav('.link-container > li');
 
     document.addEventListener('keydown', function (event) {
 
-        if (key[event.keyCode] === 'j' || event.ctrlKey && key[event.keyCode] === 'n') {
-            linksNav.next();
-        } else if (key[event.keyCode] === 'k' || event.ctrlKey && key[event.keyCode === 'p']) {
-            linksNav.previous();
-        } else if (key[event.keyCode] === 'd') {
+        // takes in `event` from the current scope so it can be called more cleanly
+        var is_key = function is_key(k) {
+            return k === {
+                75: 'k',
+                74: 'j',
+                76: 'l',
+                72: 'h',
+                68: 'd',
+                65: 'a',
+                83: 's',
+                70: 'f',
+                78: 'n',
+                79: 'o',
+                80: 'p',
+                191: '/',
+                13: 'enter'
+            }[event.keyCode];
+        };
+
+        if (is_key('j') || event.ctrlKey && is_key('n')) {
+            links_nav.next();
+        } else if (is_key('k') || event.ctrlKey && is_key('p')) {
+            links_nav.previous();
+        } else if (is_key('d')) {
             console.log('delete');
-        } else if (key[event.keyCode] === 'a') {
+        } else if (is_key('a')) {
             console.log('archive');
-        } else if (key[event.keyCode] === '/' && event.shiftKey) {
+        } else if (is_key('/') && event.shiftKey) {
             console.log('help');
-        } else if (key[event.keyCode] === '/') {
+        } else if (is_key('/')) {
             console.log('search');
-        } else if (key[event.keyCode] === 'l') {
-            //TODO
+        } else if (is_key('l')) {
             console.log('switch to right column || wrap around to the left column');
-        } else if (key[event.keyCode] === 'h') {
-            //TODO
+        } else if (is_key('h')) {
             console.log('switch to left coloumn || wrap around to the right column');
+        } else if (is_key('o')) {
+            console.log('open in a new tab');
+        } else if (is_key('enter')) {
+            console.log('open in current tab');
         }
         console.log(event.keyCode);
         console.log(event.ctrlKey);
