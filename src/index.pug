@@ -32,4 +32,17 @@ html(lang=en)
           p.description #{l.description}
           a.source(href=l.source) #{l.source}
 
+    .modal-container
+      .modal-inner
+        .modal
+          nav
+            h1 Title
+            a.close(href="#close") ✕
+
+          p test
+          p X
+          hr
+          p text
+
   script(src='dist/index.js')
+  script(src='dist/nav.js')

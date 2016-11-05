@@ -4,6 +4,10 @@ html {
   font-size: 18px;
 }
 
+body {
+  margin: 0;
+}
+
 .link-container {
   background-color: #eee;
   list-style-type: none;
@@ -17,6 +21,8 @@ html {
 }
 .link-container li {
   margin-bottom: 1rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
 }
 .link-container .link-title {
   margin-top: 0;
@@ -70,6 +76,9 @@ html {
   font-weight: bold;
   text-decoration: none;
 }
+.main-nav .section:last-child {
+  margin-right: .5rem;
+}
 .main-nav .settings-logout-save {
   font-size: .75rem;
 }
@@ -88,4 +97,52 @@ html {
 }
 .list-options a:not(:first-child) {
   margin-left: .5rem;
+}
+
+.hidden {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+.modal-container {
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  outline: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.modal-inner {
+  box-sizing: border-box;
+  margin: auto;
+  position: relative;
+  min-width: 320px;
+  width: 40%;
+}
+
+.modal {
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 1rem;
+}
+.modal nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.modal nav .close {
+  font-size: 1.5rem;
 }
