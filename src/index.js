@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', event => {
 
+        if (document.activeElement.tagName.toLowerCase() !== 'body') return;
+
         // takes in `event` from the current scope so it can be called more cleanly
         const is_key = k => {
             return k === {
@@ -92,8 +94,5 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(event.ctrlKey);
 
     });
-
-
-
 
 });

@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('keydown', function (event) {
 
+        if (document.activeElement.tagName.toLowerCase() !== 'body') return;
+
         // takes in `event` from the current scope so it can be called more cleanly
         var is_key = function is_key(k) {
             return k === {
