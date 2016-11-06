@@ -63,15 +63,33 @@ html(lang=en)
                 h1
                   a.close(href="#close") ✕
               ul
-                li j - down
-                li k - up
-                li l - switch right list (wraps)
-                li h - switch left list (wraps)
-                li a - archive current item (or unarchive)
-                li # - delete current item
-                li / - search
-                li ? - toggle help menu
-                li esc - close current menu
+                li
+                  kbd j
+                  |  - down
+                li
+                  kbd k
+                  |  - up
+                li
+                  kbd l
+                  |  - switch right list (wraps)
+                li
+                  kbd h
+                  |  - switch left list (wraps)
+                li
+                  kbd a
+                  |  - archive current item (or unarchive)
+                li
+                  kbd #
+                  |  - delete current item
+                li
+                  kbd /
+                  |  - search
+                li
+                  kbd ?
+                  |  - toggle help menu
+                li
+                  kbd esc
+                  |  - close current menu
 
   script(src='dist/index.js')
   script(src='dist/nav.js')
