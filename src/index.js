@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // find modals --> find children so we don't have to search upward for the
     // correct parent element
     [...document.querySelectorAll('.modal-container')].forEach(el => {
+        // disable modal if someone clicks on the darkend background (.modal-container)
+        el.addEventListener('click', l => {
+            if (l.toElement.classList.contains('modal-container')) {
+                el.classList.add('hidden');
+            }
+        });
         [...el.querySelectorAll('a.close')].forEach(l => {
             l.addEventListener('click', () => {
                 el.classList.add('hidden');
@@ -12,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     document.querySelector('div > a[href="#add"]').addEventListener('click', () => {
-        document.querySelector('.modal-container').classList.toggle('hidden')
-    })
+        document.querySelector('.modal-container').classList.toggle('hidden');
+    });
 });
 
