@@ -58,6 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#settings').classList.toggle('hidden');
     };
 
+    const open_current_link_current_tab = () => {
+        window.location.href = document.querySelector('.link-container > li.active > a.source').href;
+    };
+
+    const open_current_link_new_tab = () => {
+        const url = document.querySelector('.link-container > li.active > a.source').href;
+        window.open(url, '_blank');
+    };
+
     const links_nav = nav('.link-container > li');
 
     document.addEventListener('keydown', event => {
@@ -104,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (is_key('h')) {
             console.log('switch to left coloumn || wrap around to the right column');
         } else if (is_key('o')) {
-            console.log('open in a new tab');
+            open_current_link_new_tab();
         } else if (is_key('enter')) {
-            console.log('open in current tab');
+            open_current_link_current_tab();
         } else if (is_key('esc') || (is_key(']') && event.ctrlKey)) {
             disable_all_modals();
         } else if (is_key('3') && event.shiftKey) {
