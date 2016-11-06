@@ -18,7 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     document.querySelector('div > a[href="#add"]').addEventListener('click', () => {
-        document.querySelector('.modal-container').classList.toggle('hidden');
+        document.querySelector('#add').classList.toggle('hidden');
+    });
+
+    document.querySelector('div > a[href="#settings"]').addEventListener('click', () => {
+        document.querySelector('#settings').classList.toggle('hidden');
     });
 });
 

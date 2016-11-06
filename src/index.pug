@@ -16,14 +16,17 @@ html(lang=en)
             a(href='#')
               h1.title Linky
           .section.settings-logout-save
-            // TODO: figure out why these won't take up the entire `.section`
-            a(href='#add') Add Link
-            a(href='#settings') Settings
+            a.icon(href='#add') +
+            a.icon(href='#settings') ⚙
             a(href='#logout') Logout
 
     nav.list-options
-      a(href='#list') List
-      a.inactive(href='#archive') Archive
+      .option-section
+        a.icon(href='#search') 🔍
+        input.search
+      .option-section
+        a(href='#list') List
+        a.inactive(href='#archive') Archive
     .link-container
       each l in [{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Rustlings", "description": "Small exercises to get you used to reading and writing Rust code.", "source" : "https://github.com/carols10cents/rustlings"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},]
         li
@@ -32,7 +35,7 @@ html(lang=en)
           p.description #{l.description}
           a.source(href=l.source) #{l.source}
 
-    .modal-container.hidden
+    #add.modal-container.add.hidden
       .modal-inner
         .modal
           nav
@@ -41,6 +44,34 @@ html(lang=en)
               a.close(href="#close") ✕
           input(type=textbox)
           button.btn.blue(type=submit) Add
+
+    #settings.modal-container.settings.hidden
+          .modal-inner
+            .modal
+              nav
+                h1 Settings
+                h1
+                  a.close(href="#close") ✕
+              p Setting 1
+              p Setting 2
+
+    #help.modal-container.help.hidden
+          .modal-inner
+            .modal
+              nav
+                h1 Key Binds
+                h1
+                  a.close(href="#close") ✕
+              ul
+                li j - down
+                li k - up
+                li l - switch right list (wraps)
+                li h - switch left list (wraps)
+                li a - archive current item (or unarchive)
+                li # - delete current item
+                li / - search
+                li ? - toggle help menu
+                li esc - close current menu
 
   script(src='dist/index.js')
   script(src='dist/nav.js')

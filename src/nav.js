@@ -50,6 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
+    const toggle_help_menu = () => {
+        document.querySelector('#help').classList.toggle('hidden');
+    };
+
+    const toggle_settings_menu = () => {
+        document.querySelector('#settings').classList.toggle('hidden');
+    };
+
     const links_nav = nav('.link-container > li');
 
     document.addEventListener('keydown', event => {
@@ -72,7 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 80: 'p',
                 191: '/',
                 13: 'enter',
-                27: 'esc'
+                27: 'esc',
+                219: ']',
+                51: '3',
+                188: ','
             }[event.keyCode];
         };
 
@@ -85,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (is_key('a')) {
             console.log('archive');
         } else if (is_key('/') && event.shiftKey) {
-            console.log('help');
+            toggle_help_menu();
         } else if (is_key('/')) {
             console.log('search');
         } else if (is_key('l')) {
@@ -96,8 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('open in a new tab');
         } else if (is_key('enter')) {
             console.log('open in current tab');
-        } else if (is_key('esc')) {
+        } else if (is_key('esc') || (is_key(']') && event.ctrlKey)) {
             disable_all_modals();
+        } else if (is_key('3') && event.shiftKey) {
+            console.log('delete current item');
+        } else if (is_key(',')) {
+            console.log('toggle settings menu');
+            toggle_settings_menu();
         }
         console.log(event.keyCode);
         console.log(event.ctrlKey);
