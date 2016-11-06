@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const disable_all_modals = () => {
+        [...document.querySelectorAll('.modal-container')].forEach(l => {
+            l.classList.add('hidden');
+        });
+    };
+
     const nav = selector => {
         let link = document.querySelector(selector);
 
@@ -65,7 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 79: 'o',
                 80: 'p',
                 191: '/',
-                13: 'enter'
+                13: 'enter',
+                27: 'esc'
             }[event.keyCode];
         };
 
@@ -89,6 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('open in a new tab');
         } else if (is_key('enter')) {
             console.log('open in current tab');
+        } else if (is_key('esc')) {
+            disable_all_modals();
         }
         console.log(event.keyCode);
         console.log(event.ctrlKey);
