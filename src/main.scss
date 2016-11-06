@@ -134,6 +134,14 @@ a {
     }
   }
 
+  .inactive {
+    color: lighten($text-gray, 30%);
+    font-style: italic;
+
+    &:hover {
+      color: lighten($text-gray, 20%);
+    }
+  }
 }
 
 .hidden {
