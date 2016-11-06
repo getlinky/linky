@@ -10,6 +10,7 @@ html {
   color: $text-gray;
   font-family: georgia, serif;
   font-size: 18px;
+  // background-color: $sepia;
 }
 
 body {
@@ -17,14 +18,18 @@ body {
   margin: 0;
 }
 
+a {
+  color: inherit;
+}
+
 // container for all of the link sections
 .link-container {
-  background-color: $light-gray;
+  // background-color: $light-gray;
   list-style-type: none;
   margin: 0 auto;
   max-width: 40em;
   overflow-wrap: break-word;
-  padding-top: 1rem;
+  padding-top: 0rem;
 
   * {
     margin-bottom: .5rem;
@@ -35,6 +40,14 @@ body {
     margin-bottom: 1rem;
     margin-left: .5rem;
     margin-right: .5rem;
+    padding-left: 5px;
+    border-left-style: solid;
+    border-left-color: #FFF;
+  }
+
+  .active {
+    background-color: lighten($light-gray, 3%);
+    border-left-color: black;
   }
 
   .link-title {
@@ -49,18 +62,17 @@ body {
 }
 
 // used to signify a link-section is selected
-.active {
-  background: $highlight-yellow;
-}
 
 .main-nav {
   background: $light-gray;
 
   a {
     padding: 1.25rem .5rem;
+    color: inherit;
+    text-decoration: none;
 
     &:hover {
-      background-color: darken($light-gray, 20%);
+      color: lighten($text-gray, 10%);
     }
 
     &:not(:first-child) {
@@ -96,24 +108,25 @@ body {
   }
 
   .settings-logout-save {
-    font-size: .75rem;
+    font-size: .8rem;
   }
 
 }
 
 // list or archive
 .list-options {
-  $background-color: transparentize($light-gray, .7);
-  background-color: $background-color;
   padding-bottom: 1rem;
   padding-top: 1rem;
   text-align: center;
 
   a {
     padding: 1rem .5rem;
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
 
     &:hover {
-      background-color: darken($background-color, 20%);
+      color: lighten($text-gray, 10%);
     }
 
     &:not(:first-child) {
@@ -147,22 +160,37 @@ body {
   margin: auto;
   position: relative;
   min-width: 320px;
-  width: 40%;
+  width: 50%;
 }
 
 .modal {
   background-color: $light-gray;
   border-radius: 5px;
-  padding: 1rem;
+  padding-top: 0rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    h1 {
+      padding: 0px;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
     .close {
       font-size: 1.5rem;
-
     }
+  }
+  input {
+    width: 100%;
+    height: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
 }

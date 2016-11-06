@@ -17,7 +17,7 @@ html(lang=en)
               h1.title Linky
           .section.settings-logout-save
             // TODO: figure out why these won't take up the entire `.section`
-            a(href='#add') Add Link...
+            a(href='#add') Add Link
             a(href='#settings') Settings
             a(href='#logout') Logout
 
@@ -32,17 +32,15 @@ html(lang=en)
           p.description #{l.description}
           a.source(href=l.source) #{l.source}
 
-    .modal-container
+    .modal-container.hidden
       .modal-inner
         .modal
           nav
-            h1 Title
-            a.close(href="#close") ✕
-
-          p test
-          p X
-          hr
-          p text
+            h1 Add Link
+            h1
+              a.close(href="#close") ✕
+          input(type=textbox)
+          button.btn.blue(type=submit) Add
 
   script(src='dist/index.js')
   script(src='dist/nav.js')

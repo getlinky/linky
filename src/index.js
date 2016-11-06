@@ -11,4 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+    document.querySelector('div > a[href="#add"]').addEventListener('click', () => {
+        document.querySelector('.modal-container').classList.toggle('hidden')
+    })
 });
+
