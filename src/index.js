@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     [...document.querySelectorAll('.modal-container')].forEach(el => {
         // disable modal if someone clicks on the darkend background (.modal-container)
         el.addEventListener('click', l => {
-            if (l.toElement.classList.contains('modal-container')) {
+            if (l.target.classList.contains('modal-container')) {
                 el.classList.add('hidden');
             }
         });
