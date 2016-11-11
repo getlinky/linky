@@ -17,8 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // make add button toggle the add modal
     document.querySelector('div > a[href="#add"]').addEventListener('click', () => {
-        document.querySelector('#add').classList.toggle('hidden');
+        const add = document.querySelector('#add');
+        add.classList.remove('hidden');
+        const input = add.querySelector('input');
+        input.disabled = false;
+        input.focus();
     });
 
     document.querySelector('div > a[href="#settings"]').addEventListener('click', () => {

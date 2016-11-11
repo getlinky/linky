@@ -29,7 +29,7 @@ html(lang=en)
         a.inactive(href='#archive') Archive
     .link-container
       each l in [{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Rustlings", "description": "Small exercises to get you used to reading and writing Rust code.", "source" : "https://github.com/carols10cents/rustlings"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},]
-        li
+        li(tabindex=0)
           h3.link-title
             a(href=l.source) #{l.name}
           p.description #{l.description}
@@ -42,7 +42,7 @@ html(lang=en)
             h1 Add Link
             h1
               a.close(href="#close") ✕
-          input(type=textbox)
+          input(type=textbox disabled)
           button.btn.blue(type=submit) Add
 
     #settings.modal-container.settings.hidden

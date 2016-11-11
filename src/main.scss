@@ -44,6 +44,7 @@ a {
   }
 }
 
+
 // container for all of the link sections
 .link-container {
   // background-color: $light-gray;
@@ -65,12 +66,14 @@ a {
     padding-left: 5px;
     border-left-style: solid;
     border-left-color: #FFF;
+
+    &:focus {
+      outline: none;
+      background-color: lighten($light-gray, 3%);
+      border-left-color: $text-gray;
+    }
   }
 
-  .active {
-    background-color: lighten($light-gray, 3%);
-    border-left-color: $text-gray;
-  }
 
   .link-title {
     margin-top: 0;

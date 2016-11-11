@@ -2,51 +2,37 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const in_view = el => {
-        const top = el.getBoundingClientRect().top;
-        const bottom = el.getBoundingClientRect().bottom;
-        return top >= 0 && bottom <= window.innerHeight;
-    };
-
-    const scroll_into_view = el => {
-        if (!in_view(el)) {
-            el.scrollIntoView();
-            window.scroll(0, window.scrollY);
-        }
-    };
-
     const disable_all_modals = () => {
         [...document.querySelectorAll('.modal-container')].forEach(l => {
             l.classList.add('hidden');
+            if (l.tagName === 'input') {
+                l.disabled = true;
+
+            }
         });
+        document.querySelector('.link-container').focus();
     };
 
-    const nav = selector => {
-        let link = document.querySelector(selector);
-
-        link.classList.add('active');
-
+    const nav = () => {
+        let link = document.activeElement;
         return {
             next: () => {
-                if (link.nextSibling == null) {
+                console.log(document.activeElement);
+                if (document.activeElement.nextSibling == null) {
                     return;
                 }
-                link.classList.remove('active');
-                link = link.nextSibling;
-                scroll_into_view(link);
-                link.classList.add('active');
+                link = document.activeElement.nextSibling;
+                link.focus();
             },
             previous: () => {
-                if (link.previousSibling == null) {
-                    window.scrollTo(0, 0);
+                console.log(document.activeElement);
+                if (document.activeElement.previousSibling == null) {
                     return;
                 }
-                link.classList.remove('active');
-                link = link.previousSibling;
-                scroll_into_view(link);
-                link.classList.add('active');
-            },
-            current: link
+
+                link = document.activeElement.previousSibling;
+                link.focus();
+            }
         };
     };
 
@@ -67,11 +53,14 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(url, '_blank');
     };
 
-    const links_nav = nav('.link-container > li');
+
+    const modal_in_use = () => {
+        return document.querySelectorAll('.modal-container:not(.hidden)').length > 0;
+    };
+
+    const links_nav = nav();
 
     document.addEventListener('keydown', event => {
-
-        if (document.activeElement.tagName.toLowerCase() !== 'body') return;
 
         // takes in `event` from the current scope so it can be called more cleanly
         const is_key = k => {
@@ -96,7 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }[event.keyCode];
         };
 
-        if (is_key('j') || (event.ctrlKey && is_key('n'))) {
+
+        if (is_key('j') || is_key('k')) {
+            const ael = document.activeElement.tagName.toLowerCase();
+            if (ael === 'input' || modal_in_use()) {
+                // do nothing since the user is editing an input / using a modal
+                return;
+            } else if (ael === 'body') {
+                // focus the first element if the activeElement is the body,
+                // which means the user isn't using an input
+                document.querySelector('.link-container > li').focus();
+                return;
+            }
+        }
+
+        if (is_key('esc') || (is_key(']') && event.ctrlKey)) {
+            disable_all_modals();
+        } else if (is_key('j') || (event.ctrlKey && is_key('n'))) {
             links_nav.next();
         } else if (is_key('k') || (event.ctrlKey && is_key('p'))) {
             links_nav.previous();
@@ -107,7 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (is_key('/') && event.shiftKey) {
             toggle_help_menu();
         } else if (is_key('/')) {
-            console.log('search');
+            window.setTimeout(() =>
+                    document.querySelector('input.search').focus(), 100);
         } else if (is_key('l')) {
             console.log('switch to right column || wrap around to the left column');
         } else if (is_key('h')) {
@@ -116,17 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
             open_current_link_new_tab();
         } else if (is_key('enter')) {
             open_current_link_current_tab();
-        } else if (is_key('esc') || (is_key(']') && event.ctrlKey)) {
-            disable_all_modals();
         } else if (is_key('3') && event.shiftKey) {
             console.log('delete current item');
         } else if (is_key(',')) {
-            console.log('toggle settings menu');
             toggle_settings_menu();
         }
         console.log(event.keyCode);
         console.log(event.ctrlKey);
-
     });
-
 });
