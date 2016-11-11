@@ -23,6 +23,18 @@ a {
   color: inherit;
 }
 
+input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+  width: 60%;
+  outline: none;
+  height: 1.5rem;
+  font-size: 1rem;
+}
+
 // container for all of the link sections
 .link-container {
   // background-color: $light-gray;
@@ -117,10 +129,8 @@ a {
 
 }
 
-// list or archive
+// list, archive, or search
 .list-options {
-  padding-bottom: 1rem;
-  padding-top: 1rem;
   margin: 0 auto;
   max-width: $max-width-main-content;
   display: flex;
@@ -149,6 +159,18 @@ a {
       color: lighten($text-gray, 20%);
     }
   }
+
+  .search-option-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .list-archive-option-section {
+    display: flex;
+    align-items: center;
+  }
+
 }
 
 .hidden {
