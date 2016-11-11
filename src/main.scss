@@ -1,3 +1,6 @@
+$font-family: georgia, serif;
+$base-font-size: 18px;
+
 $text-gray: #444;
 $highlight-yellow: rgb(255, 255, 186);
 $max-width-main-content: 40em;
@@ -9,8 +12,8 @@ $light-gray: #eee;
 
 html {
   color: $text-gray;
-  font-family: georgia, serif;
-  font-size: 18px;
+  font-family: $font-family;
+  font-size: $base-font-size;
   // background-color: $sepia;
 }
 
@@ -23,7 +26,8 @@ a {
   color: inherit;
 }
 
-input {
+// styling for search <input>
+.search {
   border-top: none;
   border-left: none;
   border-right: none;
@@ -33,6 +37,11 @@ input {
   outline: none;
   height: 1.5rem;
   font-size: 1rem;
+  font-family: $font-family;
+
+  &:focus {
+    border-color: $text-gray;
+  }
 }
 
 // container for all of the link sections
