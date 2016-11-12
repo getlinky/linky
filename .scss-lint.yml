@@ -1,0 +1,8 @@
+---
+linters:
+    PropertySortOrder:
+        enabled: false
+    ColorKeyword:
+        enabled: false
+    ColorVariable:
+        enabled: false

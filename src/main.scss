@@ -2,7 +2,6 @@ $font-family: georgia, serif;
 $base-font-size: 18px;
 
 $text-gray: #444;
-$highlight-yellow: rgb(255, 255, 186);
 $max-width-main-content: 40em;
 
 // background colors
@@ -28,9 +27,9 @@ a {
 
 // styling for search <input>
 .search {
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
   border-bottom-style: solid;
   border-bottom-color: lightgray;
   width: 60%;
@@ -39,20 +38,43 @@ a {
   font-size: 1rem;
   font-family: $font-family;
 
+  &::placeholder {
+    font-style: italic;
+
+  }
+
+  &:disabled {
+    color: lightgray;
+    border-radius: 5px;
+    background-image: repeating-linear-gradient(
+    45deg,
+    lightgray,
+    lightgray 10px,
+    white 10px,
+    white 20px
+    );
+  }
+
   &:focus {
     border-color: $text-gray;
   }
+
 }
 
+input {
+  &:disabled {
+    color: lightgray;
+    background-color: yellow;
+  }
+}
 
 // container for all of the link sections
 .link-container {
-  // background-color: $light-gray;
   list-style-type: none;
   margin: 0 auto;
   max-width: $max-width-main-content;
   overflow-wrap: break-word;
-  padding-top: 0rem;
+  padding-top: 0;
 
   * {
     margin-bottom: .5rem;
@@ -65,7 +87,7 @@ a {
     margin-right: .5rem;
     padding-left: 5px;
     border-left-style: solid;
-    border-left-color: #FFF;
+    border-left-color: #fff;
 
     &:focus {
       outline: none;
@@ -73,7 +95,6 @@ a {
       border-left-color: $text-gray;
     }
   }
-
 
   .link-title {
     margin-top: 0;
@@ -192,7 +213,7 @@ a {
 }
 
 .modal-container {
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, .7);
   bottom: 0;
   display: flex;
   outline: 0;
@@ -215,7 +236,7 @@ a {
 .modal {
   background-color: $light-gray;
   border-radius: 5px;
-  padding-top: 0rem;
+  padding-top: 0;
   padding-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -224,9 +245,11 @@ a {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
     h1 {
-      padding: 0px;
+      padding: 0;
     }
+
     a {
       text-decoration: none;
       color: inherit;
@@ -236,10 +259,11 @@ a {
       font-size: 1.5rem;
     }
   }
+
   input {
     width: 100%;
     height: 1rem;
     font-size: 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: .5rem;
   }
 }
