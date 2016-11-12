@@ -9,8 +9,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'dist/index.js': 'src/index.js',
-                    'dist/nav.js': 'src/nav.js'
+                    'dist/index.js': 'src/index.js'
                 }
             }
         },
@@ -50,7 +49,7 @@ module.exports = function(grunt) {
                 tasks: ['pug']
             },
             js: {
-                files: ['src/index.js', 'src/nav.js'],
+                files: ['src/index.js'],
                 tasks: ['babel']
             },
             sass: {
