@@ -13,7 +13,7 @@ npm install -g grunt-cli
 
 npm install
 
-grunt watch
+grunt && grunt watch
 
 # in another shell start an http server
 

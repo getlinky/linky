@@ -37,6 +37,7 @@ a {
   height: 1.5rem;
   font-size: 1rem;
   font-family: $font-family;
+  transition: border 300ms ease-out;
 
   &::placeholder {
     font-style: italic;
@@ -212,6 +213,21 @@ input {
   width: 0;
 }
 
+kbd {
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .2), 0 0 0 2px #fff inset;
+  color: #333;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  margin: 0 .1em;
+  padding: .1em .6em;
+  text-shadow: 0 1px 0 #fff;
+}
+
 .modal-container {
   background: rgba(0, 0, 0, .7);
   bottom: 0;
@@ -240,6 +256,12 @@ input {
   padding-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
+
+  ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+  }
 
   nav {
     display: flex;
