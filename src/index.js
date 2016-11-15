@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             previous: () => {
                 if (document.activeElement.previousSibling == null) {
+                    window.scroll(0, 0);
                     return;
                 }
                 link = document.activeElement.previousSibling;

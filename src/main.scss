@@ -112,7 +112,7 @@ input {
   background: $light-gray;
 
   a {
-    padding: 1.25rem .5rem;
+    padding: .5rem .5rem;
     color: inherit;
     text-decoration: none;
 
@@ -154,6 +154,10 @@ input {
     // make sure the last link section doesn't hit the edge of the browser
     &:last-child {
       margin-right: .5rem;
+    }
+
+    &:first-child {
+      margin-left: .5rem;
     }
   }
 
