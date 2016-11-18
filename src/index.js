@@ -68,12 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggle_help_menu = () => {
         toggle_search_input();
         document.querySelector('#help').classList.toggle('hidden');
+        document.querySelector('#help').classList.toggle('bg');
     };
 
     const toggle_add_menu = () => {
         toggle_search_input();
         const el = document.querySelector('#add');
         el.classList.toggle('hidden');
+        el.classList.toggle('bg');
         el.querySelector('input').disabled = false;
         if (!el.classList.contains('hidden')) {
             // need slight delay so that the keypresses don't insert into the <input>
@@ -85,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const el = document.querySelector('#settings');
         toggle_search_input();
         el.classList.toggle('hidden');
+        el.classList.toggle('bg');
     };
 
     const open_current_link_current_tab = () => {

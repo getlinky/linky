@@ -233,7 +233,7 @@ kbd {
 }
 
 .modal-container {
-  background: rgba(0, 0, 0, .7);
+  transition: background-color 300ms linear;
   bottom: 0;
   display: flex;
   outline: 0;
@@ -243,6 +243,10 @@ kbd {
   top: 0;
   width: 100%;
   z-index: 10;
+}
+
+.bg {
+    background: rgba(0, 0, 0, .7);
 }
 
 .modal-inner {
