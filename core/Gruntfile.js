@@ -9,19 +9,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'dist/index.js': 'src/index.js'
-                }
-            }
-        },
-        pug: {
-            compile: {
-                options: {
-                    data: {
-                        debug: false
-                    }
-                },
-                files: {
-                    'index.html': 'src/index.pug'
+                    'static/core/js/index.js': 'src/index.js'
                 }
             }
         },
@@ -32,23 +20,19 @@ module.exports = function(grunt) {
                     'sourcemap': 'none'
                 },
                 files: {
-                    'dist/main.css': 'src/main.scss'
+                    'static/core/css/main.css': 'src/main.scss'
                 }
             }
         },
         autoprefixer:{
             dist:{
                 files:{
-                    'dist/main.css': 'dist/main.css'
+                    'static/core/css/main.css': 'static/core/js/main.css'
                 }
             }
         },
         watch: {
-            pug: {
-                files: 'src/index.pug',
-                tasks: ['pug']
-            },
-            js: {
+                        js: {
                 files: ['src/index.js'],
                 tasks: ['babel']
             },
@@ -60,12 +44,11 @@ module.exports = function(grunt) {
                 spawn: false
             }
         },
-        clean: ['dist/']
+        clean: ['static/']
     });
 
-    grunt.registerTask('default', ['babel', 'pug', 'sass']);
+    grunt.registerTask('default', ['babel', 'sass']);
     grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-pug');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-clean');

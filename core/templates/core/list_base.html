@@ -1,0 +1,36 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<header>
+    <nav class="main-nav">
+        <div class="items">
+            <div class="section"><a href="/"><h1 class="title">Linky</h1></a></div>
+            <div class="section settings-logout-save">
+                <a class="icon" href="#add">+</a>
+                <a class="icon" href="#settings">⚙</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<nav class="list-options">
+    <div class="search-option-section">
+        <a class="icon">🔍</a>
+        <input class="search" id="search" placeholder="search" type="search">
+    </div>
+    <div class="list-archive-option-section">
+        {% block list_nav %}
+        <a href="/">List</a>
+        <a class="inactive" href="/archive">Archive</a>
+        {% endblock %}
+    </div>
+</nav>
+<ul class="link-container">
+    {% block listitems %}
+    No links available.
+    {% endblock %}
+</ul>
+{% include "core/add_link_modal.html" %}
+{% include "core/settings_modal.html" %}
+{% include "core/help_modal.html" %}
+{% endblock %}
