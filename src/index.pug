@@ -23,11 +23,11 @@ html(lang=en)
     nav.list-options
       .search-option-section
         a.icon 🔍
-        input#search.search(placeholder='search')
+        input#search.search(placeholder='search' type='search')
       .list-archive-option-section
         a(href='#list') List
         a.inactive(href='#archive') Archive
-    .link-container
+    ul.link-container
       each l in [{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Rustlings", "description": "Small exercises to get you used to reading and writing Rust code.", "source" : "https://github.com/carols10cents/rustlings"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"}, {"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},{"name": "Google.com", "description": "an internet company", "source": "https://www.google.com"},]
         li(tabindex=0)
           h3.link-title
@@ -52,8 +52,18 @@ html(lang=en)
                 h1 Settings
                 h1
                   a.close(href="#close") ✕
-              p Setting 1
-              p Setting 2
+              p Background Color
+                select
+                  option(value='bright') Bright
+                  option(value='sepia' selected="selected") Sepia
+                  option(value='dark') Dark
+              input(type='email' value='joe@gmail.com')
+              p
+                a(href='') Download Links
+              p
+                a(href='') Password Reset
+              p
+                input(type='button' value='Save')
 
     #help.modal-container.help.hidden
           .modal-inner

@@ -1,2 +1,6 @@
 dist/
 index.html
+venv/
+*.sqlite3
+notes.md
+static

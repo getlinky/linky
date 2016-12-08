@@ -48,18 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let link = document.activeElement;
         return {
             next: () => {
-                if (document.activeElement.nextSibling == null) {
+                if (document.activeElement.nextElementSibling == null) {
                     return;
                 }
-                link = document.activeElement.nextSibling;
+                link = document.activeElement.nextElementSibling;
                 link.focus();
             },
             previous: () => {
-                if (document.activeElement.previousSibling == null) {
+                if (document.activeElement.previousElementSibling == null) {
                     window.scroll(0, 0);
                     return;
                 }
-                link = document.activeElement.previousSibling;
+                link = document.activeElement.previousElementSibling;
                 link.focus();
             }
         };
@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const toggle_settings_menu = () => {
         const el = document.querySelector('#settings');
+        [...el.querySelectorAll('input')].forEach(e => e.disabled = false);
         toggle_search_input();
         el.classList.toggle('hidden');
     };
