@@ -13,9 +13,15 @@ npm install -g grunt-cli
 
 npm install
 
+python3 -m virtualenv venv
+
+. venv/bin/activate
+
+pip install -r requirements.txt
+
+python manage.py runserver
+
+# in another shell (only necessary when working with sass and js)
+
 grunt && grunt watch
-
-# in another shell start an http server
-
-python3 -m http.server
 ```
