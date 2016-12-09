@@ -25,3 +25,14 @@ python manage.py runserver
 
 grunt && grunt watch
 ```
+
+```
+# interacting with django through the shell
+
+python manage.py shell -i ipython
+
+import django
+django.setup()
+
+from app_name.models import ModelName
+```
