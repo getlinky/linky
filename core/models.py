@@ -1,10 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+class LinkList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+class Link(models.Model):
+    linklist = models.ForeignKey(LinkList, on_delete=models.CASCADE)
+    # meat of the link
+    title = models.CharField(max_length=200)
+    url = models.URLField()
+    description = models.CharField(max_length=200)
+    archived = models.BooleanField(default=False)
+    # dates
+    created = models.DateField(auto_now_add=True)
+    last_updated = models.DateField(auto_now=True)
