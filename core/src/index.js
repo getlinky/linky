@@ -208,9 +208,9 @@ document.addEventListener('DOMContentLoaded', () => {
             window.setTimeout(() =>
                     document.querySelector('input.search').focus(), 100);
         } else if (is_key('l')) {
-            console.log('switch to right column || wrap around to the left column');
+            document.querySelector('.list-archive-option-section > a.inactive').click();
         } else if (is_key('h')) {
-            console.log('switch to left coloumn || wrap around to the right column');
+            document.querySelector('.list-archive-option-section > a.inactive').click();
         } else if (is_key('o')) {
             open_current_link_new_tab();
         } else if (is_key('enter')) {
