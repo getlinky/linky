@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Linky{% endblock %}</title>
+        <title>{% if title %}Linky - {{ title }}{% else %}Linky{% endif %}</title>
         <meta name="description" content="save yerr links">
         <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
     </head>

@@ -20,10 +20,10 @@ list_items = [{'title': 'test',
     {'title': 'bah', 'source': 'https://rust-lang.org', 'description': 'lsdjfl lsdjf lsdfj '}]
 
 def index(request):
-    return render(request, 'core/list.html', {'list_items': list_items, 'page': 'list'})
+    return render(request, 'core/list.html', {'list_items': list_items, 'page': 'list', 'title': 'List'})
 
 def archive(request):
-    return render(request, 'core/archive.html', {'list_items': list_items, 'page': 'archive'})
+    return render(request, 'core/archive.html', {'list_items': list_items, 'page': 'archive', 'title': 'Archive'})
 
 def logout(request):
     # TODO
