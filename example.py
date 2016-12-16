@@ -2,9 +2,9 @@ import random, string
 import django
 django.setup()
 
-from core.models import User, Link
+from core.models import MyUser, Link
 
-u = User()
+u = MyUser()
 
 # need something unique to appease the database requirements
 # after running the script once, the database has the item so you have to make

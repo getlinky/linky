@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 
 from .forms import LoginForm, SignUpForm
-from .models import User
+from .models import MyUser
 
 list_items = [{'title': 'test',
     'source': 'https://google.com',
@@ -53,7 +53,7 @@ def signup(request):
             password = form.cleaned_data['password']
             password2 = form.cleaned_data['password2']
             if password is password2:
-                user = User.objects.create_user(email=email, password=password)
+                user = MyUser.objects.create_user(email=email, password=password)
                 return HttpResponseRedirect(reverse('index',))
             else:
                 return render(request, 'core/signup_form.html', {'form': form})
