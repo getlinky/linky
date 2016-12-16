@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<header>
+    <nav class="main-nav">
+        <div class="items">
+            <div class="section"><a href="/"><h1 class="title">Linky</h1></a></div>
+        </div>
+    </nav>
+</header>
+
+{% if error %}{{ error }}{% endif %}
+
+<h1>Login | <a href="{% url 'signup' %}">Signup</a></h1>
+
+{% if form.non_field_errors %}
+    <ul class='form-errors'>
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form action="" method="post">
+    <h1>{{ title }}</h1>
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Login">
+</form>
+
+{% endblock %}

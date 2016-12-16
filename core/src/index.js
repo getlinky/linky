@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
         // make add button toggle the add modal
-    document.querySelector('div > a[href="#add"]').addEventListener('click', () => {
+    document.querySelector('div > a#add-icon').addEventListener('click', () => {
         toggle_add_menu();
     });
 
-    document.querySelector('div > a[href="#settings"]').addEventListener('click', () => {
+    document.querySelector('div > a#settings-icon').addEventListener('click', () => {
         toggle_settings_menu();
     });
 
@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // hide all of the modals
             l.classList.add('hidden');
             // disable all of the inputs in the modals
-            [...document.querySelectorAll('input')].forEach(el => {
+            // but make sure to not disable the submit buttons
+            [...document.querySelectorAll('input:not([type="submit"])')].forEach(el => {
                 el.disabled = true;
             });
         });
@@ -74,10 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
         toggle_search_input();
         const el = document.querySelector('#add');
         el.classList.toggle('hidden');
-        el.querySelector('input').disabled = false;
+        // need to take the second input, as the first is a csrf token
+        el.querySelector('#add-input').disabled = false;
         if (!el.classList.contains('hidden')) {
             // need slight delay so that the keypresses don't insert into the <input>
-            window.setTimeout(() => el.querySelector('input').focus(), 100);
+            window.setTimeout(() => el.querySelector('#add-input').focus(), 100);
         }
     };
 
