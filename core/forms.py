@@ -17,7 +17,7 @@ class LoginForm(forms.Form):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
         user = authenticate(email=email, password=password)
-        return email
+        return user
 
 class SignUpForm(forms.Form):
     email = forms.EmailField(label='Email')

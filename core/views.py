@@ -39,7 +39,7 @@ def logout_view(request):
 def login_view(request):
     form = LoginForm(request.POST or None)
     if request.POST and form.is_valid():
-        user = form.login(request)
+        user = form.login()
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse('index',))
