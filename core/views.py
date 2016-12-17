@@ -49,14 +49,18 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
+            print('form is valid')
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             password2 = form.cleaned_data['password2']
-            if password is password2:
+            if password == password2:
+                print('passwords equal')
                 user = MyUser.objects.create_user(email=email, password=password)
+                login(request, user)
                 return HttpResponseRedirect(reverse('index',))
             else:
+                print('passwords not equal')
                 return render(request, 'core/signup_form.html', {'form': form})
     else:
-        form = LoginForm()
+        form = SignUpForm()
     return render(request, 'core/signup_form.html', {'form': form})
