@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager
-from django import forms
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+
+from django.contrib.auth.signals import user_logged_out
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -13,17 +14,24 @@ class UserManager(BaseUserManager):
 
     # https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#django.contrib.auth.models.CustomUserManager.create_superuser
     def create_superuser(self, email, password):
-        user = self.model(email=email, password=password)
+        user = self.create_user(email=email, password=password)
         user.is_admin = True
+        user.is_superuser = True
+        user.is_active = True
         user.save(using=self._db)
         return user
 
 # https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#django.contrib.auth.models.CustomUser.USERNAME_FIELD
-class MyUser(AbstractUser):
+class MyUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
+
+    first_name = models.CharField(max_length=100, default='')
+    last_name = models.CharField(max_length=100, default='')
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     created = models.DateField(auto_now_add=True)
     last_updated = models.DateField(auto_now=True)
