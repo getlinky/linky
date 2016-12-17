@@ -11,6 +11,19 @@
     </head>
 
     <body>
+        {% block nav %}
+        <header>
+            <nav class="main-nav">
+                <div class="items">
+                    <div class="section">
+                        <a href="/">
+                            <h1 class="title">Linky</h1>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        {% endblock %}
         {% block content %}
         Nothing here...
         {% endblock %}

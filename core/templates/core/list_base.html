@@ -1,6 +1,6 @@
 {% extends "core/base.html" %}
 
-{% block content %}
+{% block nav %}
 <header>
     <nav class="main-nav">
         <div class="items">
@@ -13,6 +13,10 @@
         </div>
     </nav>
 </header>
+{% endblock %}
+
+{% block content %}
+
 <nav class="list-options">
     <div class="search-option-section">
         <a class="icon">🔍</a>
@@ -30,7 +34,7 @@
     No links available.
     {% endblock %}
 </ul>
-{% include "core/add_link_modal.html" %}
+{% include "core/add_link_modal.html" with form=add_link_form %}
 {% include "core/settings_modal.html" %}
 {% include "core/help_modal.html" %}
 {% endblock %}

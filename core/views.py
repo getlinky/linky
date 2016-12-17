@@ -3,19 +3,20 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 
-from .forms import LoginForm, SignUpForm
+from .forms import LoginForm, SignUpForm, AddLinkForm
 from .models import MyUser
 
 def index(request):
     if request.user.is_authenticated:
         list_items = request.user.link_set.all()
-        return render(request, 'core/list.html', {'list_items': list_items, 'page': 'list', 'title': 'List'})
+        add_link_form = AddLinkForm()
+        return render(request, 'core/list.html', {'list_items': list_items,'add_link_form': add_link_form, 'page': 'list', 'title': 'List'})
     else:
         return render(request, 'core/landing_page.html')
 
 def archive(request):
     if request.user.is_authenticated:
-        list_items = request.user.link_set.all()
+        list_items = request.user.link_set.filter(archived=True)
         return render(request, 'core/archive.html', {'list_items': list_items, 'page': 'archive', 'title': 'Archive'})
     else:
         return render(request, 'core/landing_page.html')

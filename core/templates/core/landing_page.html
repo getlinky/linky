@@ -1,5 +1,23 @@
 {% extends 'core/base.html' %}
 
+{% block nav %}
+<header>
+    <nav class="main-nav">
+        <div class="items">
+            <div class="section">
+                <a href="/">
+                    <h1 class="title">Linky</h1>
+                </a>
+            </div>
+            <div class="section settings-logout-save">
+                <a href="/signup">signup</a>
+                <a href="/login">login</a>
+            </div>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
 {% block content %}
 landing page
 {% endblock %}

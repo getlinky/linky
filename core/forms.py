@@ -1,6 +1,13 @@
 from django import forms
 from django.contrib.auth import authenticate, login, logout
 
+class AddLinkForm(forms.Form):
+    url = forms.URLField()
+
+class SettingsForm(forms.Form):
+    # background =
+    email = forms.EmailField()
+
 class LoginForm(forms.Form):
     email = forms.EmailField(label='Email')
     password = forms.CharField(widget=forms.PasswordInput())
