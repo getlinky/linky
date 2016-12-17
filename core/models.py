@@ -64,12 +64,12 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
 class Link(models.Model):
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
-    # meat of the link
+
     title = models.CharField(max_length=200)
     url = models.URLField()
     description = models.CharField(max_length=200)
     archived = models.BooleanField(default=False)
-    # dates
+
     created = models.DateField(auto_now_add=True)
     last_updated = models.DateField(auto_now=True)
 

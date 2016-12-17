@@ -6,31 +6,19 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, SignUpForm
 from .models import MyUser
 
-list_items = [{'title': 'test',
-    'source': 'https://google.com',
-    'description': 'balh blah blah'},
-    {'title': 'bah', 'source': 'https://rust-lang.org', 'description': 'lsdjfl lsdjf lsdfj '},
-    {'title': 'test',
-        'source': 'https://google.com',
-        'description': 'balh blah blah'},
-    {'title': 'bah', 'source': 'https://rust-lang.org', 'description': 'lsdjfl lsdjf lsdfj '},
-    {'title': 'test',
-        'source': 'https://google.com',
-        'description': 'balh blah blah'},
-    {'title': 'bah', 'source': 'https://rust-lang.org', 'description': 'lsdjfl lsdjf lsdfj '},
-    {'title': 'test',
-        'source': 'https://google.com',
-        'description': 'balh blah blah'},
-    {'title': 'bah', 'source': 'https://rust-lang.org', 'description': 'lsdjfl lsdjf lsdfj '}]
-
 def index(request):
     if request.user.is_authenticated:
+        list_items = request.user.link_set.all()
         return render(request, 'core/list.html', {'list_items': list_items, 'page': 'list', 'title': 'List'})
     else:
         return render(request, 'core/landing_page.html')
 
 def archive(request):
-    return render(request, 'core/archive.html', {'list_items': list_items, 'page': 'archive', 'title': 'Archive'})
+    if request.user.is_authenticated:
+        list_items = request.user.link_set.all()
+        return render(request, 'core/archive.html', {'list_items': list_items, 'page': 'archive', 'title': 'Archive'})
+    else:
+        return render(request, 'core/landing_page.html')
 
 def logout_view(request):
     logout(request)

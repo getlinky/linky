@@ -8,9 +8,9 @@
 {% block listitems %}
 {% for li in list_items %}
 <li tabindex="0">
-    <h3 class="link-title"><a href="{{ li.source }}">{{ li.title }}</a></h3>
+    <h3 class="link-title"><a href="{{ li.url }}">{{ li.title }}</a></h3>
     <p class="description">{{ li.description }}</p>
-    <a class="source" href="{{ li.source }}">{{ li.source }}</a>
+    <a class="source" href="{{ li.url }}">{{ li.url }}</a>
 </li>
 {% endfor %}
 {% endblock %}
