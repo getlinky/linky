@@ -17,7 +17,9 @@ def index(request):
             Link.objects.create(title=title, url=url, description=description, user=request.user)
             return HttpResponseRedirect(reverse('index', ))
         else:
-            list_items = request.user.link_set.filter(archived=False)
+            # order by created date and pk, then reverse
+            # FIXME: this is only ordering by 'pk' for some reason
+            list_items = request.user.link_set.filter(archived=False).order_by('created', 'pk').reverse()
             return render(request, 'core/list.html', {
                 'list_items': list_items,
                 'add_link_form': add_link_form,
@@ -28,11 +30,21 @@ def index(request):
 
 @login_required
 def archive(request):
-    list_items = request.user.link_set.filter(archived=True)
-    return render(request, 'core/list.html', {
-        'list_items': list_items,
-        'page_name': 'archive'
-    })
+    # FIXME: this is essentially a copy and paste from index
+    add_link_form = AddLinkForm(request.POST or None)
+    if request.POST and add_link_form.is_valid():
+        title = 'Test Title, TODO will need to scrape'
+        description = 'Test description, TODO'
+        url = add_link_form.cleaned_data['url']
+        Link.objects.create(title=title, url=url, description=description, user=request.user)
+        return HttpResponseRedirect(reverse('index', ))
+    else:
+        list_items = request.user.link_set.filter(archived=True).order_by('created', 'pk').reverse()
+        return render(request, 'core/list.html', {
+            'list_items': list_items,
+            'add_link_form': add_link_form,
+            'page_name': 'archive'
+        })
 
 def logout_view(request):
     logout(request)
