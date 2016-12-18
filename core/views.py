@@ -8,7 +8,7 @@ from .models import MyUser
 
 def index(request):
     if request.user.is_authenticated:
-        list_items = request.user.link_set.all()
+        list_items = request.user.link_set.filter(archived=False)
         add_link_form = AddLinkForm()
         return render(request, 'core/list.html', {'list_items': list_items,'add_link_form': add_link_form, 'page': 'list', 'title': 'List'})
     else:
