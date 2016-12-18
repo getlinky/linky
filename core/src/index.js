@@ -91,11 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const open_current_link_current_tab = () => {
-        window.location.href = document.querySelector('.link-container > li:focus > a.source').href;
+        window.location.href = document.querySelector('.link-container > li:focus').querySelector('a.source').href;
     };
 
     const open_current_link_new_tab = () => {
-        const url = document.querySelector('.link-container > li:focus > a.source').href;
+        const url = document.querySelector('.link-container > li:focus').querySelector('a.source').href;
         window.open(url, '_blank');
     };
 

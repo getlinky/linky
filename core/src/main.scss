@@ -212,6 +212,20 @@ input {
 
 }
 
+// displays text inside the container & with the .display-on-hover class on hover
+// Usage:
+//   1. Outer container uses the container class
+//   2. Items that should display on hover of container get .display-on-hover
+.display-on-hover {
+  transition: visibility .5s ease;
+  float: right;
+  visibility: hidden;
+}
+
+.display-on-hover-container:hover .display-on-hover {
+  visibility: visible;
+}
+
 .hidden {
   display: none;
   height: 0;

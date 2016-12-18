@@ -18,14 +18,21 @@ def index(request):
             return HttpResponseRedirect(reverse('index', ))
         else:
             list_items = request.user.link_set.filter(archived=False)
-            return render(request, 'core/list.html', {'list_items': list_items,'add_link_form': add_link_form})
+            return render(request, 'core/list.html', {
+                'list_items': list_items,
+                'add_link_form': add_link_form,
+                'page_name': 'list'
+            })
     else:
         return render(request, 'core/landing_page.html')
 
 @login_required
 def archive(request):
     list_items = request.user.link_set.filter(archived=True)
-    return render(request, 'core/archive.html', {'list_items': list_items})
+    return render(request, 'core/list.html', {
+        'list_items': list_items,
+        'page_name': 'archive'
+    })
 
 def logout_view(request):
     logout(request)

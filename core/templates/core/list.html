@@ -1,20 +1,27 @@
 {% extends "core/list_base.html" %}
 
 {% block list_nav %}
-<a href="/">List</a>
-<a class="inactive" href="/archive">Archive</a>
+{% if page_name == 'list' %}
+<a href="{% url 'index' %}">List</a>
+<a class="inactive" href="{% url 'archive' %}">Archive</a>
+{% else %}
+<a class="inactive" href="{% url 'index' %}">List</a>
+<a href="{% url 'archive' %}">Archive</a>
+{% endif %}
 {% endblock %}
 
 {% block listitems %}
 {% if list_items|length > 0 %}
 {% for li in list_items %}
-<li tabindex="0">
+<li class="display-on-hover-container"tabindex="0">
     <h3 class="link-title"><a href="{{ li.url }}">{{ li.title }}</a></h3>
     <p class="description">{{ li.description }}</p>
     <a class="source" href="{{ li.url }}">{{ li.url }}</a>
+    <button class="display-on-hover">Delete</button>
+    <button class="display-on-hover">{% if page_name == 'list' %}Archive{% else %}Unarchive{% endif %}</button>
 </li>
 {% endfor %}
 {% else %}
-No list items
+No items found.
 {% endif %}
 {% endblock %}
