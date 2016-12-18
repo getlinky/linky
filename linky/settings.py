@@ -82,6 +82,9 @@ DATABASES = {
     }
 }
 
+# URL to @login_required to default redirect to
+LOGIN_URL = '/login/'
+
 AUTH_USER_MODEL = 'core.MyUser'
 
 # Password validation

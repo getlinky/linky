@@ -20,7 +20,7 @@ class LoginForm(forms.Form):
             raise forms.ValidationError('Sorry, that login was invalid. Please try again.')
         return self.cleaned_data
 
-    def login(self):
+    def auth(self):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
         user = authenticate(email=email, password=password)
