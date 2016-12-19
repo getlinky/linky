@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from .models import Link, MyUser
+from .models import Link, MyUser, Settings
 
 
 class UserCreationForm(forms.ModelForm):
@@ -39,7 +39,10 @@ class UserChangeForm(forms.ModelForm):
     the user, but replaces the password field with admin's
     password hash display field.
     """
-    password = ReadOnlyPasswordHashField()
+    password = ReadOnlyPasswordHashField(label=("Password"),
+        help_text=("Raw passwords are not stored, so there is no way to see "
+                    "this user's password, but you can change the password "
+                    "using <a href=\"../password/\">this form</a>."))
 
     class Meta:
         model = MyUser
@@ -50,7 +53,6 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
-
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -64,7 +66,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Permissions', {'fields': ('is_admin',)}),
+        ('Permissions', {'fields': ('is_active', 'is_admin', 'is_superuser')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
@@ -84,4 +86,5 @@ admin.site.register(MyUser, UserAdmin)
 # unregister the Group model from admin.
 admin.site.unregister(Group)
 
+admin.site.register(Settings)
 admin.site.register(Link)

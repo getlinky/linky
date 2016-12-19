@@ -25,16 +25,16 @@ class UserManager(BaseUserManager):
 class MyUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
 
-    first_name = models.CharField(max_length=100, default='')
-    last_name = models.CharField(max_length=100, default='')
-
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
     created = models.DateField(auto_now_add=True)
     last_updated = models.DateField(auto_now=True)
+
+    @property
+    def links(self):
+        return Link.objects.filter(user=self)
 
     objects = UserManager()
 
@@ -62,6 +62,17 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):
         return self.is_admin
 
+class Settings(models.Model):
+    user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
+    background_choices = [('sepia', 'sepia'), ('bright', 'bright'), ('dark', 'dark')]
+    background = models.CharField(max_length=10, choices=background_choices, default='bright')
+
+    def __str__(self):
+        return 'Settings of user: {}'.format(self.user)
+
+    def __repr__(self):
+        return '<Settings:: user: %s, background: %s'.format(user, background)
+
 class Link(models.Model):
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
@@ -73,5 +84,12 @@ class Link(models.Model):
     created = models.DateField(auto_now_add=True)
     last_updated = models.DateField(auto_now=True)
 
+    def as_dict(self):
+        return {'title': self.title, 'url': self.url, 'archived': self.archived}
+
     def __repr__(self):
         return "<Link: title: {}, url: {}, description: {}>".format(self.title, self.url, self.description)
+
+    # used in Django Admin page
+    def __str__(self):
+        return "Link --> title: {}, url: {}, description: {}".format(self.title, self.url, self.description)

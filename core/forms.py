@@ -1,12 +1,19 @@
 from django import forms
 from django.contrib.auth import authenticate, login, logout
+from .models import MyUser
 
 class AddLinkForm(forms.Form):
     url = forms.URLField()
 
 class SettingsForm(forms.Form):
-    # background =
+    background_choices = [('sepia', 'sepia'), ('bright', 'bright'), ('dark', 'dark')]
+    background = forms.ChoiceField(choices=background_choices)
     email = forms.EmailField()
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(SettingsForm, self).__init__(*args, **kwargs)
+        self.fields['email'].initial = user.email
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label='Email')

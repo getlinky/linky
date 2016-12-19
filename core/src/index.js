@@ -75,11 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
         toggle_search_input();
         const el = document.querySelector('#add');
         el.classList.toggle('hidden');
-        // need to take the second input, as the first is a csrf token
-        el.querySelector('#add-input').disabled = false;
+        const url_input_selector = 'input[type=url]';
+        el.querySelector(url_input_selector).disabled = false;
         if (!el.classList.contains('hidden')) {
             // need slight delay so that the keypresses don't insert into the <input>
-            window.setTimeout(() => el.querySelector('#add-input').focus(), 100);
+            window.setTimeout(() => el.querySelector(url_input_selector).focus(), 100);
         }
     };
 

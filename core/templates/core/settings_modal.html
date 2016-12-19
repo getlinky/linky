@@ -1,20 +1,20 @@
-<div class="modal-container settings hidden" id="settings">
+<div class="modal-container settings {% if not form.errors and not form.non_field_errors %}hidden{% endif %}" id="settings">
     <div class="modal-inner">
         <div class="modal">
             <nav>
                 <h1>Settings</h1>
-                <h1><a class="close" href="#close">✕</a></h1></nav>
-            <p>Background Color
-                <select>
-                    <option value="bright">Bright</option>
-                    <option value="sepia" selected="selected">Sepia</option>
-                    <option value="dark">Dark</option>
-                </select>
-            </p>
-            <input type="email" value="joe@gmail.com">
-            <p><a href="">Download Links</a></p>
+                <h1><a class="close" href="#">✕</a></h1>
+            </nav>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.errors }}
+                {{ form.non_field_errors }}
+                {{ form }}
+            <input type="submit" value="Save">
+            </form>
+            <p><a href="{% url 'download_links_json' %}">Download Links</a></p>
             <p><a href="">Password Reset</a></p>
-            <p><input type="button" value="Save"></p>
         </div>
     </div>
 </div>

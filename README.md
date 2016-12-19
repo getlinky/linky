@@ -2,7 +2,7 @@
 
 > A tool for storing links
 
-[trello](https://trello.com/c/nkjHzDa5/13-bookmarking-website)
+[trello](https://trello.com/b/ovCceyss/linky)
 
 ## Dev
 
@@ -11,7 +11,9 @@ git clone https://github.com/sbdchd/linky && cd linky
 
 npm install -g grunt-cli
 
-npm install
+cd core && \
+npm install && \
+cd ..
 
 python3 -m virtualenv venv
 
@@ -23,6 +25,7 @@ python manage.py runserver
 
 # in another shell (only necessary when working with sass and js)
 
+cd core && \
 grunt && grunt watch
 ```
 
