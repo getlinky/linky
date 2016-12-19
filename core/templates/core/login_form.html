@@ -1,10 +1,30 @@
 {% extends 'core/base.html' %}
 
+{% block nav %}
+<header>
+    <nav class="main-nav">
+        <div class="items">
+            <div class="section">
+                <a href="/">
+                    <h1 class="title">Linky</h1>
+                </a>
+            </div>
+            <div class="section settings-logout-save">
+                <a href="/signup">signup</a>
+                <a href="/login">login</a>
+            </div>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
+
 {% block content %}
 
 {% if error %}{{ error }}{% endif %}
 
-<h1>Login | <a href="{% url 'signup' %}">Signup</a></h1>
+<h2>Login</h1>
+
 
 {% if form.non_field_errors %}
     <ul class='form-errors'>

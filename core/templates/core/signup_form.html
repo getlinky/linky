@@ -1,10 +1,28 @@
 {% extends 'core/base.html' %}
 
+{% block nav %}
+<header>
+    <nav class="main-nav">
+        <div class="items">
+            <div class="section">
+                <a href="/">
+                    <h1 class="title">Linky</h1>
+                </a>
+            </div>
+            <div class="section settings-logout-save">
+                <a href="/signup">signup</a>
+                <a href="/login">login</a>
+            </div>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
 {% block content %}
 
 {% if error %}{{ error }}{% endif %}
 
-<h1>Signup | <a href="{% url 'login' %}">Login</a></h1>
+<h2>Signup</h2>
 
 <form action="" method="post">
     <h1>{{ title }}</h1>
