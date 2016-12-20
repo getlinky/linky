@@ -71,7 +71,7 @@ class Settings(models.Model):
         return 'Settings of user: {}'.format(self.user)
 
     def __repr__(self):
-        return '<Settings:: user: %s, background: %s'.format(user, background)
+        return '<Settings:: user: %s, background: %s>'.format(self.user, self.background)
 
 class Link(models.Model):
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
@@ -88,8 +88,8 @@ class Link(models.Model):
         return {'title': self.title, 'url': self.url, 'archived': self.archived}
 
     def __repr__(self):
-        return "<Link: title: {}, url: {}, description: {}>".format(self.title, self.url, self.description)
+        return "<Link:: title: {}, url: {}, description: {}>".format(self.title, self.url, self.description)
 
     # used in Django Admin page
     def __str__(self):
-        return "Link --> title: {}, url: {}, description: {}".format(self.title, self.url, self.description)
+        return "Link with title: {}, url: {}, description: {}".format(self.title, self.url, self.description)
