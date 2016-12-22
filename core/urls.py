@@ -1,9 +1,10 @@
 from django.conf.urls import include, url
 from django.contrib.auth import views as auth_views
 
-from . import views
+from . import views, router
 
 urlpatterns = [
+    url(r'^api/', include(router.router.urls)),
     url(r'^archive/', views.archive, name='archive'),
     url(r'^signup/', views.signup, name='signup'),
     url(r'^login/', views.login_view, name='login'),

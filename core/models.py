@@ -34,12 +34,29 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
     @property
     def links(self):
-        return Link.objects.filter(user=self)
+        return Link.objects.filter(user=self).values('title', 'url',
+                                                     'description', 'archived',
+                                                     'created', 'last_updated')
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    # TODO: should these methods be in serializer or the model?
+    # need to overwrite the create method so the password gets hashed
+    def create(self, validated_data):
+        user = MyUser(email=validated_data['email'])
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+    # need to overwrite update method so that the password gets hashed
+    def update(self, instance, validated_data):
+        instance.email = validated_data.get('email', instance.email)
+        instance.set_password(validated_data['password'])
+        instance.save()
+        return instance
 
     def get_full_name(self):
         return self.email
@@ -83,6 +100,17 @@ class Link(models.Model):
 
     created = models.DateField(auto_now_add=True)
     last_updated = models.DateField(auto_now=True)
+
+    def create(self, validated_data):
+        return Link.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.url = validated_data.get('url', instance.url)
+        instance.archived = validated_data.get('archived', instance.archived)
+        instance.description = validated_data.get('description', instance.description)
+        instance.save()
+        return instance
 
     def as_dict(self):
         return {'title': self.title, 'url': self.url, 'archived': self.archived}
