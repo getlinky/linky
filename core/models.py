@@ -112,9 +112,6 @@ class Link(models.Model):
         instance.save()
         return instance
 
-    def as_dict(self):
-        return {'title': self.title, 'url': self.url, 'archived': self.archived}
-
     def __repr__(self):
         return "<Link:: title: {}, url: {}, description: {}>".format(self.title, self.url, self.description)
 
