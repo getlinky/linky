@@ -1,6 +1,7 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
 from rest_framework import status
+from freezegun import freeze_time
 
 from core.models import MyUser
 
@@ -71,6 +72,7 @@ class TestEndPoints(TestCase):
             res.data,
             {'detail': 'You do not have permission to perform this action.'})
 
+    @freeze_time("2016-12-23")
     def test_links_authenticated(self):
         '''
         /links/ should be accesable to authenticated users
