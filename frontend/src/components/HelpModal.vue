@@ -1,0 +1,32 @@
+<template>
+    <div class="modal-container help" id="help">
+        <div class="modal-inner">
+            <div class="modal">
+                <nav>
+                    <h1>Key Binds</h1>
+                    <h1>
+                        <a class="close" @click="$emit('close')">✕</a>
+                    </h1>
+                </nav>
+                <ul>
+                    <li><kbd>j</kbd> - down</li>
+                    <li><kbd>k</kbd> - up</li>
+                    <li><kbd>l</kbd> - switch right list (wraps)</li>
+                    <li><kbd>h</kbd> - switch left list (wraps)</li>
+                    <li><kbd>a</kbd> - archive current item (or unarchive)</li>
+                    <li><kbd>#</kbd> - delete current item</li>
+                    <li><kbd>e</kbd> - edit current item</li>
+                    <li><kbd>/</kbd> - search</li>
+                    <li><kbd>?</kbd> - toggle help menu</li>
+                    <li><kbd>esc</kbd> - close current menu</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'help-modal'
+}
+</script>
