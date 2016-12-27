@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 from django.contrib.auth.signals import user_logged_out
 
+from fetcher.fetcher import fetch, HTTPError
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
         if not email:
@@ -93,16 +95,28 @@ class Settings(models.Model):
 class Link(models.Model):
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, blank=True)
     url = models.URLField()
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True)
     archived = models.BooleanField(default=False)
 
     created = models.DateField(auto_now_add=True)
     last_updated = models.DateField(auto_now=True)
 
-    def create(self, validated_data):
-        return Link.objects.create(**validated_data)
+    def save(self, *args, **kwargs):
+        '''
+        check to see if title or description are empty, and scrape them if necessary
+        '''
+        # TODO: make this async
+        try:
+            f = fetch(URL=self.url)
+        except HTTPError:
+            return super(Link, self).save(*args, **kwargs)
+        if self.title == '':
+            self.title = f.title
+        if self.description == '':
+            self.description = f.description
+        return super(Link, self).save(*args, **kwargs)
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
