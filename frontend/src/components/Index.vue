@@ -94,17 +94,12 @@
 </template>
 
 <script>
-import HelpModal from './HelpModal.vue'
-import AddModal from './AddModal.vue'
-import SettingsModal from './SettingsModal.vue'
+
 import modal from './modal.vue'
 
 export default {
     name: 'index',
     components: {
-        HelpModal,
-        AddModal,
-        SettingsModal,
         modal
     },
     data () {
