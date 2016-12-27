@@ -47,9 +47,49 @@
                 No items found.
             </template>
         </ul>
-        <HelpModal @close='showHelp = false' v-show='showHelp'></HelpModal>
-        <SettingsModal @close='showSettings = false' v-show='showSettings'></SettingsModal>
-        <AddModal @close='showAdd = false' v-show='showAdd'></AddModal>
+
+        <modal :show.sync='showHelp' @closed='showHelp = false'>
+          <h1 slot='header'>Key Binds</h1>
+          <ul slot="body">
+                    <li><kbd>j</kbd> - down</li>
+                    <li><kbd>k</kbd> - up</li>
+                    <li><kbd>l</kbd> - switch right list (wraps)</li>
+                    <li><kbd>h</kbd> - switch left list (wraps)</li>
+                    <li><kbd>a</kbd> - archive current item (or unarchive)</li>
+                    <li><kbd>#</kbd> - delete current item</li>
+                    <li><kbd>e</kbd> - edit current item</li>
+                    <li><kbd>/</kbd> - search</li>
+                    <li><kbd>?</kbd> - toggle help menu</li>
+                    <li><kbd>esc</kbd> - close current menu</li>
+                </ul>
+        </modal>
+
+        <modal :show.sync='showSettings' @closed='showSettings = false'>
+          <h1 slot='header'>Settings</h1>
+          <div slot='body'>
+            <form action="" method="post">
+                    <!-- {% csrf_token %} -->
+                    <!-- {{ form.errors }} -->
+                    <!-- {{ form.non_field_errors }} -->
+                    <!-- {{ form }} -->
+                    <input type="submit" value="Save">
+            </form>
+            <p><a href="{% url 'download_links_json' %}">Download Links</a></p>
+            <p><a href="">Password Reset</a></p>
+          </div>
+        </modal>
+
+        <modal :show.sync='showAdd' @closed='showAdd = false'>
+          <h1 slot='header'>Add Item</h1>
+          <form slot='body' action="" method="post">
+                    <!-- {% csrf_token %} -->
+                    <!-- {% for field in form %} -->
+                    <!-- {{ field.errors }} -->
+                    <!-- {{ field }} -->
+                    <!-- {% endfor %} -->
+                    <input type="submit" value="Add">
+                </form>
+        </modal>
     </div>
 </template>
 
@@ -57,19 +97,22 @@
 import HelpModal from './HelpModal.vue'
 import AddModal from './AddModal.vue'
 import SettingsModal from './SettingsModal.vue'
+import modal from './modal.vue'
 
 export default {
     name: 'index',
     components: {
         HelpModal,
         AddModal,
-        SettingsModal
+        SettingsModal,
+        modal
     },
     data () {
         return {
             showAdd: false,
             showSettings: false,
             showHelp: false,
+            show: true,
             list_items: [{
                 'title': 'Default title',
                 'description': 'A default description',
