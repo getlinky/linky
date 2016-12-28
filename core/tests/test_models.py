@@ -1,6 +1,7 @@
 from django.test import TestCase
+import responses
 
-from core.models import MyUser
+from core.models import MyUser, Link
 
 class UserModelTests(TestCase):
 
@@ -44,16 +45,83 @@ class UserModelTests(TestCase):
 
 class LinkModelTests(TestCase):
 
-    def test_adding_links_to_user(self):
+    def setUp(self):
+
         email = 'test@testing.com'
         raw_password = 'testingpassword'
-        user = MyUser.objects.create(email=email)
+        user = MyUser(email=email)
         user.set_password(raw_password)
+        user.save()
+        self.user = user
 
+    def test_adding_links_to_user(self):
         # make sure the links are mepty
-        self.assertEquals(len(user.link_set.all()), len(user.link_set.none()))
+        self.assertEquals(len(self.user.link_set.all()), len(self.user.link_set.none()))
         title = 'Example Title'
         url = 'http://example.com'
         description = 'An example description'
-        user.link_set.create(title=title, url=url, description=description)
-        self.assertNotEqual(user.link_set.first(), user.link_set.none())
+        self.user.link_set.create(title=title, url=url, description=description)
+        self.assertNotEqual(self.user.link_set.first(), self.user.link_set.none())
+
+    @responses.activate
+    def test_creating_link_without_title_or_description(self):
+        '''
+        Test the creation of a Link without a title or description passed as an
+        argument. Expect that the website has a description and title.
+        '''
+        body = '''
+        <title>Example Title</title>
+        <meta content="An example description" name="description">
+        '''
+        responses.add(responses.GET,
+                      'http://example.com',
+                      body=body,
+                      status=200,
+                      content_type='text/html')
+
+        l = Link(user=self.user, url='http://example.com')
+        l.save()
+
+        title = 'Example Title'
+        self.assertEquals(title, l.title)
+        description = 'An example description'
+        self.assertEquals(description, l.description)
+
+    @responses.activate
+    def test_creating_link_without_link_or_description_on_page(self):
+        '''
+        Creating a link without the link or descrption being part of the page.
+        '''
+        responses.add(responses.GET,
+                      'http://example.com',
+                      body='',
+                      status=200,
+                      content_type='text/html')
+
+        l = Link(user=self.user, url='http://example.com')
+        l.save()
+
+        title = ''
+        self.assertEquals(title, l.title)
+        description = ''
+        self.assertEquals(description, l.description)
+
+
+    @responses.activate
+    def test_creating_link_with_404_url(self):
+        '''
+        Creating a link with URL that 404s
+        '''
+        responses.add(responses.GET,
+                      'http://example.com',
+                      body='',
+                      status=404,
+                      content_type='text/html')
+
+        l = Link(user=self.user, url='http://example.com')
+        l.save()
+
+        title = ''
+        self.assertEquals(title, l.title)
+        description = ''
+        self.assertEquals(description, l.description)
