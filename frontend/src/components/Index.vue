@@ -32,6 +32,7 @@
         <ul class="link-container">
             <template v-if="list_items.length > 0">
                 <template v-for="li in list_items">
+                  <template v-if="li.archived === false">
                     <li class="display-on-hover-container" tabindex="0">
                         <h3 class="link-title">
                             <a :href="li.url">{{ li.title }}</a>
@@ -41,6 +42,7 @@
                         <button class="display-on-hover">Delete</button>
                         <button class="display-on-hover">{{ page_name === 'list' ? 'Archive' : 'Unarchive' }}</button>
                     </li>
+                  </template>
                 </template>
             </template>
             <template v-else>
@@ -68,13 +70,11 @@
           <h1 slot='header'>Settings</h1>
           <div slot='body'>
             <form action="" method="post">
-                    <!-- {% csrf_token %} -->
-                    <!-- {{ form.errors }} -->
-                    <!-- {{ form.non_field_errors }} -->
-                    <!-- {{ form }} -->
-                    <input type="submit" value="Save">
+              <!-- TODO: handle errors -->
+              <label for='email'>Email</label>
+              <input name='email' type='email' placeholder='name@example.com' required>
             </form>
-            <p><a href="{% url 'download_links_json' %}">Download Links</a></p>
+            <p><a href="">Download Links</a></p>
             <p><a href="">Password Reset</a></p>
           </div>
         </modal>
@@ -82,13 +82,9 @@
         <modal :show.sync='showAdd' @closed='showAdd = false'>
           <h1 slot='header'>Add Item</h1>
           <form slot='body' action="" method="post">
-                    <!-- {% csrf_token %} -->
-                    <!-- {% for field in form %} -->
-                    <!-- {{ field.errors }} -->
-                    <!-- {{ field }} -->
-                    <!-- {% endfor %} -->
-                    <input type="submit" value="Add">
-                </form>
+              <!-- TODO: handle errors -->
+              <input type='text' placeholder='https://example.com' required>
+          </form>
         </modal>
     </div>
 </template>
@@ -96,6 +92,8 @@
 <script>
 
 import modal from './modal.vue'
+
+import axios from 'axios'
 
 export default {
     name: 'index',
@@ -108,18 +106,23 @@ export default {
             showSettings: false,
             showHelp: false,
             show: true,
-            list_items: [{
-                'title': 'Default title',
-                'description': 'A default description',
-                'url': 'https://defaulturl.com'
-            }]
+            list_items: []
         }
     },
+    created () {
+      axios.get('http://localhost:8000/api/links.json', {
+          withCredentials: true
+        }).then(response => {
+          this.list_items = response.data
+        })
+        .catch(error => {
+          console.log('error', error);
+        });
+    }
 }
 </script>
 
 <style lang='scss'>
-
 
 $font-family: georgia, serif;
 $base-font-size: 18px;
@@ -130,8 +133,8 @@ $max-width-main-content: 40em;
 // background colors
 $sepia: #f8f2e3;
 $grayblack: #3c3c3c;
-$light-gray: #eee;
 
+$light-gray: #eee;
 html {
   color: $text-gray;
   font-family: $font-family;
@@ -369,65 +372,4 @@ kbd {
   text-shadow: 0 1px 0 #fff;
 }
 
-.modal-container {
-  background: rgba(0, 0, 0, .7);
-  bottom: 0;
-  display: flex;
-  outline: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-}
-
-.modal-inner {
-  box-sizing: border-box;
-  margin: auto;
-  position: relative;
-  min-width: 320px;
-  width: 50%;
-}
-
-.modal {
-  background-color: $light-gray;
-  border-radius: 5px;
-  padding-top: 0;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  ul {
-    margin: 0;
-    list-style: none;
-    padding: 0;
-  }
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    h1 {
-      padding: 0;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .close {
-      font-size: 1.5rem;
-    }
-  }
-
-  input {
-    width: 100%;
-    height: 1rem;
-    font-size: 1rem;
-    margin-bottom: .5rem;
-  }
-}
 </style>

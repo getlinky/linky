@@ -22,7 +22,6 @@ new Vue({
 }).$mount('#app')
 
 const nav = () => {
-  console.log('nav created')
   let link = document.activeElement
   return {
     next: () => {
