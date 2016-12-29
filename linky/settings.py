@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
+    'frontend.apps.FrontendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,8 +40,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'rest_framework.authtoken',
 ]
+# NOTE: this may not actually be needed
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email' # (="username" | "email" | "username_email)
+# TODO: see if the following is necessary
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -67,7 +82,7 @@ ROOT_URLCONF = 'linky.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./frontend/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,8 +132,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 if DEBUG:
-    CORS_ORIGIN_WHITELIST = ('localhost:8080', 'localhost:8000')
+    # TODO: figure out which of these are needed for production
+    CORS_ORIGIN_WHITELIST = ('localhost:8080', 'localhost:8000', 'http://127.0.0.1:8000')
     CORS_ALLOW_CREDENTIALS = True
+    CSRF_COOKIE_DOMAIN = "localhost"
 
 
 # Internationalization

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from rest_framework import viewsets
 from rest_framework import filters
@@ -45,3 +46,7 @@ class LinkViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+@ensure_csrf_cookie
+def index(request):
+    return render(request, 'index.html')
