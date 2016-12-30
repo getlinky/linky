@@ -54,8 +54,10 @@ SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email' # (="username" | "email" | "username_email)
+ACCOUNT_UNIQUE_EMAIL = True
 # TODO: see if the following is necessary
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
