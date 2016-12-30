@@ -1,6 +1,7 @@
 <template>
 
-  <div>
+<div>
+<h1>Homepage</h1>
   <router-link to="/login">Login</router-link>
   <router-link to="/list">list</router-link>
 </div>

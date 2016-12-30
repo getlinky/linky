@@ -9,9 +9,7 @@
 ```
 git clone https://github.com/sbdchd/linky && cd linky
 
-npm install -g grunt-cli
-
-cd core && \
+cd frontend && \
 npm install && \
 cd ..
 
@@ -25,8 +23,8 @@ python manage.py runserver
 
 # in another shell (only necessary when working with sass and js)
 
-cd core && \
-grunt && grunt watch
+cd frontend && \
+npm run dev
 ```
 
 ```
