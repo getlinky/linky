@@ -1,20 +1,31 @@
 <template>
-  <form slot='body' action="" method="post">
-    <label for='email'>Email</label>
-    <input type='email' name='email' placeholder='name@example.com' required v-model='email'>
-    <label for='password'>Password</label>
-    <input type='password' name='password' required v-model='password'>
-    <input type='button' value='Login' @click='login'>
-    <!-- TODO: make errors pretty-->
-    {{ error }}
-  </form>
+  <div>
+    <linky-nav>
+        <div></div>
+    </linky-nav>
+
+    <form slot='body' action="" method="post">
+      <label for='email'>Email</label>
+      <input type='email' name='email' placeholder='name@example.com' required v-model='email'>
+      <label for='password'>Password</label>
+      <input type='password' name='password' required v-model='password'>
+      <input type='button' value='Login' @click='login'>
+      <!-- TODO: make errors pretty-->
+      {{ error }}
+    </form>
+  </div>
 </template>
 
 
 <script>
 import axios from 'axios'
+
+import linkyNav from './LinkyNav.vue'
 export default {
   name: 'login',
+  components: {
+    linkyNav
+  },
   data() {
     return {
       email: '',
