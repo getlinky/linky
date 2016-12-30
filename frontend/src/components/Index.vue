@@ -1,15 +1,16 @@
 <template>
 
-<div>
-<h1>Homepage</h1>
-  <router-link to="/login">Login</router-link>
-  <router-link to="/list">list</router-link>
-</div>
+<linky-nav></linky-nav>
 
 </template>
 
 <script>
+import linkyNav from './LinkyNav.vue'
+
 export default {
-  name: 'index'
+  name: 'index',
+  components: {
+    linkyNav,
+  }
 }
 </script>

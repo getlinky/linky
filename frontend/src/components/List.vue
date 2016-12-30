@@ -2,13 +2,10 @@
     <div id="index">
 
       <linky-nav>
-        <div class="section settings-logout-save">
           <a id="add-icon" @click='showAdd = true' class="icon">+</a>
           <a id="settings-icon" @click='showSettings = true' class="icon">⚙</a>
           <a v-if="user.authenticated" @click='logout'>Logout</a>
           <router-link to="/login" v-else>Login</router-link>
-          <!-- TODO: send request from here to log user out -->
-        </div>
       </linky-nav>
 
         <nav class="list-options">
@@ -24,7 +21,13 @@
 
         <ul class="link-container">
           <template v-if="list_items.filter(x => !x.archived).length > 0">
-            <linky-link v-for="item in list_items" v-if="!item.archived" :li='item' v-on:remove="remove" v-on:archive="archive"></linky-link>
+            <linky-link
+              v-for="item in list_items"
+              v-if="!item.archived"
+              :li='item'
+              v-on:remove="remove"
+              v-on:archive="archive">
+            </linky-link>
           </template>
           <li v-else>
             No links found.
@@ -201,7 +204,9 @@ export default {
           withCredentials: true,
           headers: {'X-CSRFToken': this.csrf_cookie},
         }).then(response => {
+          // TODO: display msg
           console.log('logged out')
+          this.$router.replace('/')
         })
         .catch(error => {
           // TODO: redirect user to index
@@ -335,27 +340,6 @@ input {
     flex-wrap: wrap;
     justify-content: space-between;
   }
-
-  .section {
-    align-items: center;
-    display: flex;
-    font-weight: bold;
-    text-decoration: none;
-
-    // make sure the last link section doesn't hit the edge of the browser
-    &:last-child {
-      margin-right: .5rem;
-    }
-
-    &:first-child {
-      margin-left: .5rem;
-    }
-  }
-
-  .settings-logout-save {
-    font-size: .8rem;
-  }
-
 }
 
 // list, archive, or search
