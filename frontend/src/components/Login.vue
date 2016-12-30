@@ -4,12 +4,12 @@
         <div></div>
     </linky-nav>
 
-    <form slot='body' action="" method="post">
+    <form slot='body' action="" method="post" @submit.prevent='login'>
       <label for='email'>Email</label>
       <input type='email' name='email' placeholder='name@example.com' required v-model='email'>
       <label for='password'>Password</label>
       <input type='password' name='password' required v-model='password'>
-      <input type='button' value='Login' @click='login'>
+      <input type='submit' value='Login'>
       <!-- TODO: make errors pretty-->
       {{ error }}
     </form>

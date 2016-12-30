@@ -53,11 +53,11 @@
         <modal :show.sync='showSettings' @closed='showSettings = false'>
           <h1 slot='header'>Settings</h1>
           <div slot='body'>
-            <form action="" method="post">
+            <form action="" method="post" @submit.prevent='updateEmail(email)'>
               <!-- TODO: handle errors -->
               <label for='email' >Email</label>
               <input name='email' :value="user.email" type='email' placeholder='name@example.com' required v-model='email'>
-              <input name='update' type='button' value='update' @click='updateEmail(email)'>
+              <input name='update' type='submit' value='update'>
               {{ settingsModalError }}
             </form>
             <p><a href="">Download Links</a></p>
@@ -67,10 +67,10 @@
 
         <modal :show.sync='showAdd' @closed='showAdd = false'>
           <h1 slot='header'>Add Item</h1>
-          <form slot='body' action="" method="post">
+          <form slot='body' action="" method="post" @submit.prevent='add(url)'>
               <!-- TODO: handle errors -->
               <input type='url' placeholder='https://example.com' required v-model='url'>
-              <input type='button' value='Add' @click='add(url)'>
+              <input type='submit' value='Add'>
               {{ addModalError }}
           </form>
         </modal>
