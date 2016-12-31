@@ -5,8 +5,8 @@
     </h3>
     <p class="description">{{ li.description }}</p>
     <a class="source" :href="li.url">{{ li.url }}</a>
-    <button class="display-on-hover" @click="deleteLink(li.id)">Delete</button>
-    <button class="display-on-hover" @click="archiveLink(li.id)">Archive</button>
+    <button name="delete" class="display-on-hover" @click="deleteLink(li.id)">Delete</button>
+    <button name="archive" class="display-on-hover" @click="archiveLink(li.id)">Archive</button>
   </li>
 </template>
 
