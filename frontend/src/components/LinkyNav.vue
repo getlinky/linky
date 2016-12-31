@@ -9,8 +9,12 @@
         </div>
         <div class="section">
           <slot>
-            <router-link to="/login">Login</router-link>
-            <!-- TODO: send request from here to log user out -->
+            <template v-if='userAuthenticated'>
+              <router-link to="/list">List</router-link>
+              <router-link to="/archive">Archive</router-link>
+              <router-link to="/logout">Logout</router-link>
+            </template>
+            <router-link v-else to="/login">Login</router-link>
           </slot>
         </div>
         </div>
@@ -21,7 +25,16 @@
 <script>
 
 export default {
-  name: 'linky-nav'
+  name: 'linky-nav',
+  computed: {
+    userAuthenticated () {
+      return this.$store.state.user.authenticated
+    },
+    userEmail () {
+      return this.$store.state.user.email
+    }
+
+  }
 
 }
 </script>

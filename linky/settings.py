@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'rest_framework.authtoken',
+    'crispy_forms',
 ]
 # NOTE: this may not actually be needed
 SITE_ID = 1

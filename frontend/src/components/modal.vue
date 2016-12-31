@@ -17,7 +17,7 @@
 export default {
     name: 'modal',
     props: {
-        show : {
+        show: {
             type: Boolean,
             required: true
         }

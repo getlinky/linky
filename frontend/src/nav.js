@@ -23,7 +23,7 @@ const nav = () => {
     delete_current: () =>
       link.querySelector('button[name=delete]').click(),
     archive: () =>
-      link.querySelector('button[name=archive]').click(),
+      link.querySelector('button[name=archive], button[name=unarchive]').click(),
     toggle_add_modal: () => {
       // TODO: toggle_add_menu()
       console.log('toggle_add_modal')
@@ -88,8 +88,6 @@ const handle_event = event => {
     links_nav.next()
   } else if (is_key('k') || (event.ctrlKey && is_key('p'))) {
     links_nav.previous()
-  } else if (is_key('d')) {
-    links_nav.delete()
   } else if (is_key('a')) {
     links_nav.archive()
   } else if (is_key('c')) {
@@ -105,7 +103,7 @@ const handle_event = event => {
   } else if (is_key('enter')) {
     links_nav.open_in_current_tab()
   } else if (is_key('3') && event.shiftKey) {
-    links_nav.delete()
+    links_nav.delete_current()
   } else if (is_key(',')) {
     links_nav.toggle_settings_modal()
   }

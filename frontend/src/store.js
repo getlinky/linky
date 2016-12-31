@@ -11,22 +11,23 @@ const store = new Vuex.Store({
         csrf_cookie: document.cookie.replace(/^.*=/, ''),
         email: '',
       },
-      list: [],
-      errors: {
-        addLink: [],
+    links: [],
+    errors: {
+        addLink: null,
+        removeLink: [],
         archiveLink: [],
+        unarchiveLink: [],
         login: [],
         logout: [],
-        removeLink: [],
         updateEmail: [],
-        updateList: [],
+        updateLinks: [],
       }
   },
   mutations: {
       archiveLink(state, id) {
-        for (let i = 0; i < state.list.length; i++) {
-          if (state.list[i].id == id) {
-            state.list[i].archived = true
+        for (let i = 0; i < state.links.length; i++) {
+          if (state.links[i].id === id) {
+            state.links[i].archived = true
             return
           }
         }
@@ -34,13 +35,19 @@ const store = new Vuex.Store({
       archiveLinkErrors (state, errors) {
         state.errors.archiveLink = errors
       },
-      removeLink(state, id) {
-        for (let i = 0; i < state.list.length; i++) {
-            if (state.list[i].id == id) {
-              state.list.splice(i, 1)
-              return
-            }
+      unarchiveLink (state, id) {
+        for (let i = 0; i < state.links.length; i++) {
+          if (state.links[i].id === id) {
+            state.links[i].archived = false
+            return
+          }
         }
+      },
+      unarchiveLinkErrors (state, errors) {
+        state.errors.unarchiveLink = errors
+      },
+      removeLink(state, id) {
+        state.links = state.links.filter(x => x.id !== id)
       },
       removeLinkErrors (state, errors) {
         state.errors.removeLink = errors
@@ -48,17 +55,26 @@ const store = new Vuex.Store({
       updateEmail(state, email) {
         state.user.email = email
       },
-      updateList (state, listData) {
-        state.list = listData
+      updateLinks (state, linkData) {
+        state.links = linkData
       },
-      updateListErrors (state, errors) {
-        state.errors.updateList = errors
+      updateLinksErrors (state, errors) {
+        state.errors.updateLinks = errors
+      },
+      updateArchive (state, archiveData) {
+        state.archive = archiveData
+      },
+      updateArchiveErrors (state, errors) {
+        state.errors.updateArchive = errors
       },
       addLink(state, linkData) {
-        state.list.push(linkData)
+        state.links.push(linkData)
       },
       addLinkErrors (state, errors) {
         state.errors.addLink = errors
+      },
+      addLinkErrorsClear (state) {
+        state.errors.addLink = null
       },
       loginSuccessful(state) {
         state.user.authenticated = true
@@ -70,7 +86,7 @@ const store = new Vuex.Store({
         state.user.email = ''
         state.user.csrf_cookie = ''
         state.user.authenticated = false
-        state.list = []
+        state.links = []
       },
       logoutErrors(state, errors) {
         state.errors.logout = errors
@@ -91,7 +107,7 @@ const store = new Vuex.Store({
         .catch(error => {
           console.warn('problem logging in', error)
           context.commit('loginErrors', error)
-        });
+        })
 
     },
     logout (context) {
@@ -106,7 +122,7 @@ const store = new Vuex.Store({
         .catch(error => {
           console.log('error logging out', error)
           context.commit('logoutErrors', error)
-        });
+        })
     },
     addLink (context, url) {
       axios.post('/api/links/', {'url': url}, {
@@ -119,20 +135,20 @@ const store = new Vuex.Store({
         })
         .catch(error => {
           console.warn(error)
-          context.commit('addLinkErrors', error)
-        });
+          context.commit('addLinkErrors', error.response.data)
+        })
     },
-    refreshList (context) {
+    refreshLinks (context) {
       axios.get('/api/links.json', {
         withCredentials: true
       }).then(response => {
-        console.log('Refreshed List')
-        context.commit('updateList', response.data)
+        console.log('Refreshed links')
+        context.commit('updateLinks', response.data)
       })
       .catch(error => {
         console.log('error getting links', error)
-        context.commit('updateListErrors', error)
-      });
+        context.commit('updateLinksErrors', error)
+      })
     },
     archiveLink (context, id) {
       axios.patch(`/api/links/${id}/`, {'archived': true}, {
@@ -146,7 +162,21 @@ const store = new Vuex.Store({
         .catch(error => {
           console.log('error archiving', error)
           context.commit('archiveLinkErrors', error)
-        });
+        })
+    },
+    unarchiveLink (context, id) {
+      axios.patch(`/api/links/${id}/`, {'archived': false}, {
+          withCredentials: true,
+          headers: {'X-CSRFToken': document.cookie.replace(/^.*=/, '')},
+        })
+        .then(response => {
+          console.log('unarchived ' + id)
+          context.commit('unarchiveLink', id)
+        })
+        .catch(error => {
+          console.log('error unarchiving', error)
+          context.commit('unarchiveLinkErrors', error)
+        })
     },
     removeLink (context, id) {
       axios.delete(`/api/links/${id}/`, {
@@ -161,7 +191,7 @@ const store = new Vuex.Store({
         .catch(error => {
           console.error("Couldn't remove Link", error)
           context.commit('removeLinkErrors', error)
-        });
+        })
     },
     changeEmailAddress (context, email) {
       axios.patch(`/api/users/me/`, {'email': email}, {
@@ -175,7 +205,7 @@ const store = new Vuex.Store({
         .catch(error => {
           console.error('Couln\'t update email address', error)
           context.commit('updateEmailErrors', error)
-      });
+      })
     }
   }
 })

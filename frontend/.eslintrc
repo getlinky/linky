@@ -7,7 +7,6 @@
     "jasmine": true
   },
   "rules": {
-      "camelcase": 0,
-      "space-before-function-paren": ["never"]
+      "camelcase": 0
   }
 }

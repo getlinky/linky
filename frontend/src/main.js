@@ -2,8 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from './store.js'
 
-import list_nav from './nav.js'
-
 import Index from './components/Index.vue'
 import List from './components/List.vue'
 import Archive from './components/Archive.vue'
@@ -27,5 +25,3 @@ new Vue({
   store,
   router
 }).$mount('#app')
-
-list_nav()

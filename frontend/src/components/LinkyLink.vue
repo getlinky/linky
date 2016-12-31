@@ -1,12 +1,15 @@
 <template>
-  <li class="display-on-hover-container" tabindex="0" :name="li.id">
+  <li class="display-on-hover-container" tabindex="0">
     <h3 class="link-title">
       <a :href="li.url">{{ li.title }}</a>
     </h3>
     <p class="description">{{ li.description }}</p>
     <a class="source" :href="li.url">{{ li.url }}</a>
-    <button name="delete" class="display-on-hover" @click="deleteLink(li.id)">Delete</button>
-    <button name="archive" class="display-on-hover" @click="archiveLink(li.id)">Archive</button>
+    <button name="delete" class="display-on-hover" @click.once="deleteLink(li.id)">Delete</button>
+    <template v-if='li.archived'>
+      <button name="unarchive" class="display-on-hover" @click.once="unarchiveLink(li.id)">Unarchive</button>
+    </template>
+    <button v-else name="archive" class="display-on-hover" @click.once="archiveLink(li.id)">Archive</button>
   </li>
 </template>
 
@@ -25,6 +28,9 @@ export default {
     },
     archiveLink(id) {
       this.$store.dispatch('archiveLink', id)
+    },
+    unarchiveLink(id) {
+      this.$store.dispatch('unarchiveLink', id)
     }
   }
 }

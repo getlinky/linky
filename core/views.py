@@ -1,3 +1,4 @@
+import django_filters.rest_framework
 from django.shortcuts import render
 from django.views.decorators.csrf import ensure_csrf_cookie
 
@@ -34,8 +35,9 @@ class UserViewSet(viewsets.ModelViewSet):
 class LinkViewSet(viewsets.ModelViewSet):
     model = Link
     serializer_class = LinkSerializer
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter, django_filters.rest_framework.DjangoFilterBackend,)
     search_fields = ('title', 'url', 'description')
+    filter_fields = ('archived',)
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
