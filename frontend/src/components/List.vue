@@ -3,34 +3,34 @@
 
       <linky-nav>
           <a id="add-icon" @click='showAdd = true' class="icon">+</a>
+          <a @click="updateList" class="icon">🔄</a>
           <a id="settings-icon" @click='showSettings = true' class="icon">⚙</a>
-          <a v-if="user.authenticated" @click='logout'>Logout</a>
+          <a v-if="authenticated" @click='logout'>Logout</a>
           <router-link to="/login" v-else>Login</router-link>
       </linky-nav>
 
         <nav class="list-options">
             <div class="search-option-section">
                 <a class="icon">🔍</a>
-                <input class="search" id="search" placeholder="search" type="search">
+                <input class="search" id="search" placeholder="search" type="search" v-model="query">
             </div>
             <div class="list-archive-option-section">
-                <router-link to="/">List</router-link>
+                <router-link to="/list">List</router-link>
                 <router-link class="inactive" to="/archive">Archive</router-link>
             </div>
         </nav>
 
         <ul class="link-container">
-          <template v-if="list_items.filter(x => !x.archived).length > 0">
+          <template v-if="unarchivedItems">
             <linky-link
               v-for="item in list_items"
               v-if="!item.archived"
-              :li='item'
-              v-on:remove="remove"
-              v-on:archive="archive">
+              :li='item'>
             </linky-link>
           </template>
           <li v-else>
             No links found.
+            <pre>{{ list_items }}</pre>
           </li>
         </ul>
 
@@ -53,10 +53,10 @@
         <modal :show.sync='showSettings' @closed='showSettings = false'>
           <h1 slot='header'>Settings</h1>
           <div slot='body'>
-            <form action="" method="post" @submit.prevent='updateEmail(email)'>
+            <form action="" method="post" @submit.prevent='updateEmail(updatedEmail)'>
               <!-- TODO: handle errors -->
               <label for='email' >Email</label>
-              <input name='email' :value="user.email" type='email' placeholder='name@example.com' required v-model='email'>
+              <input name='email' :value="email" type='email' placeholder='name@example.com' required v-model='updatedEmail'>
               <input name='update' type='submit' value='update'>
               {{ settingsModalError }}
             </form>
@@ -67,7 +67,7 @@
 
         <modal :show.sync='showAdd' @closed='showAdd = false'>
           <h1 slot='header'>Add Item</h1>
-          <form slot='body' action="" method="post" @submit.prevent='add(url)'>
+          <form slot='body' action="" method="post" @submit.prevent.once='add(url)'>
               <!-- TODO: handle errors -->
               <input type='url' placeholder='https://example.com' required v-model='url'>
               <input type='submit' value='Add'>
@@ -93,125 +93,52 @@ export default {
   },
   data () {
     return {
-      list_items: [],
-      user: {},
-      email: '',
+      query: '',
+      updatedEmail : '',
       showAdd: false,
-      addModalError: {},
       showSettings: false,
-      settingsModalError: {},
-      showHelp: false,
-      csrf_cookie: document.cookie.replace(/^.*=/, '')
+      showHelp: false
     }
   },
-  created() {
-    // 1. Fetch links
-    axios.get('/api/links.json', {
-      withCredentials: true
-    }).then(response => {
-      this.list_items = response.data
-    })
-    .catch(error => {
-      // TODO: redirect user to login
-      console.log('error getting links', error)
-    });
-
-    // 2. Fetch user data
-    axios.get('/api/users/me.json', {
-      withCredentials: true
-    })
-    .then(response => {
-      this.user = response.data
-      this.email = this.user.email
-      this.user.authenticated = true
-      // TODO: display success
-    })
-    .catch(error => {
-      // TODO: redirect user to log in
-      console.log('error getting user info', error)
-    })
+  mounted() {
+    console.log('mounted')
+    this.$store.dispatch('refreshList')
+  },
+  computed: {
+    authenticated () {
+      return this.$store.state.user.authenticated
+    },
+    email () {
+      return this.$store.state.user.email
+    },
+    unarchivedItems () {
+      for (let i = 0; i < this.$store.state.list.length; i++) {
+        if (!this.$store.state.list[i].archived) {
+          return true
+        }
+      }
+      return false
+    },
+    list_items() {
+      return this.$store.state.list
+    }
   },
   methods: {
     add(url) {
-      axios.post('/api/links/', {'url': url}, {
-          withCredentials: true,
-          headers: {'X-CSRFToken': this.csrf_cookie},
-        })
-        .then(response => {
-          console.log('added ' + url)
-          this.list_items.push(response.data)
-          this.showAdd = false
-        })
-        .catch(error => {
-          // 3. add item back to list if request to server failed
-          console.log(error.response.data)
-          this.addModalError = error.response.data
-        });
-    },
-    remove(id) {
-      const item_to_remove = this.list_items.filter(x => x.id === id)
-
-      // 1. Remove item from list
-      this.list_items = this.list_items.filter(x => x.id !== id)
-
-      // 2. Send request to remove item from server
-      axios.delete(`/api/links/${id}/`, {
-          withCredentials: true,
-          headers: {'X-CSRFToken': this.csrf_cookie}
-        })
-        .then(response => {
-          console.log('deleted ' + id)
-        })
-        .catch(error => {
-          // 3. add item back to list if request to server failed
-          console.log('error deleting', error)
-          this.list_items.push(item_to_remove)
-        });
-    },
-    archive(id) {
-      const item_to_archive = this.list_items.filter(x => x.id === id)
-
-      this.list_items = this.list_items.filter(x => x.id !== id)
-
-      axios.patch(`/api/links/${id}/`, {'archived': true}, {
-          withCredentials: true,
-          headers: {'X-CSRFToken': this.csrf_cookie},
-        })
-        .then(response => {
-          console.log('archived ' + id)
-        })
-        .catch(error => {
-          // 3. add item back to list if request to server failed
-          console.log('error archiving', error)
-          this.list_items.push(item_to_archive)
-        });
+      this.$store.dispatch('addLink', url)
     },
     updateEmail(email) {
-      axios.patch(`/api/users/me/`, {'email': email}, {
-          withCredentials: true,
-          headers: {'X-CSRFToken': this.csrf_cookie},
-        })
-        .then(response => {
-          console.log('email updated ', email)
-        })
-        .catch(error => {
-          console.log('error updating email', error)
-        });
+      this.$store.dispatch('changeEmailAddress', email)
+    },
+    updateList() {
+
+    },
+    resfresh () {
+      console.log('refresh list')
+      this.$store.dispatch('refreshList')
     },
     logout() {
-      // Note: empty data payload needed for axios to send the headers as headers
-      axios.post('/rest-auth/logout/', {},  {
-          withCredentials: true,
-          headers: {'X-CSRFToken': this.csrf_cookie},
-        }).then(response => {
-          // TODO: display msg
-          console.log('logged out')
-          this.$router.replace('/')
-        })
-        .catch(error => {
-          // TODO: redirect user to index
-          console.log('error logging out', error)
-        });
+      this.$store.dispatch('logout').then(this.$router.replace('/'))
     }
   }
 }

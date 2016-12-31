@@ -11,16 +11,15 @@
       <input type='password' name='password' required v-model='password'>
       <input type='submit' value='Login'>
       <!-- TODO: make errors pretty-->
-      {{ error }}
+      <pre v-if="Object.keys(errors).length > 0">{{ errors }}</pre>
     </form>
   </div>
 </template>
 
 
 <script>
-import axios from 'axios'
-
 import linkyNav from './LinkyNav.vue'
+
 export default {
   name: 'login',
   components: {
@@ -29,35 +28,24 @@ export default {
   data() {
     return {
       email: '',
-      password: '',
-      csrf_cookie: document.cookie.replace(/^.*=/, ''),
-      error: {},
+      password: ''
+    }
+  },
+  computed: {
+    errors () {
+      return this.$store.state.errors.login
+    }
+  },
+  mounted () {
+    // redirect to list view if already logged in
+    if (this.$store.state.user.authenticated) {
+      this.$router.replace('/list')
     }
   },
   methods: {
     login() {
-      console.log('trying to login')
-
-      axios.post('/rest-auth/login/', { 'email': this.email, 'password': this.password}, {
-          withCredentials: true,
-          headers: {'X-CSRFToken': this.csrf_cookie},
-        })
-        .then(response => {
-          console.log('logged in ')
-          this.$router.replace('/list')
-          // TODO: send msg that you logged in successfully
-        })
-        .catch(error => {
-          console.log(error.response.data)
-          this.error = error.response.data
-          // TODO: send error that
-        });
-    },
+        this.$store.dispatch('login', {'email': this.email, 'password': this.password}).then(this.$router.replace('/list'))
+    }
   }
 }
 </script>
-
-<style lang='scss'>
-
-
-</style>

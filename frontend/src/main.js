@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from './store.js'
 
 import Index from './components/Index.vue'
 import List from './components/List.vue'
@@ -21,6 +22,7 @@ const router = new VueRouter({
 })
 
 new Vue({
+  store,
   router
 }).$mount('#app')
 

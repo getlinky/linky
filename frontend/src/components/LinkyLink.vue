@@ -5,8 +5,8 @@
     </h3>
     <p class="description">{{ li.description }}</p>
     <a class="source" :href="li.url">{{ li.url }}</a>
-    <button class="display-on-hover" @click="$emit('remove', li.id)">Delete</button>
-    <button class="display-on-hover" @click="$emit('archive', li.id)">Archive</button>
+    <button class="display-on-hover" @click="deleteLink(li.id)">Delete</button>
+    <button class="display-on-hover" @click="archiveLink(li.id)">Archive</button>
   </li>
 </template>
 
@@ -17,6 +17,14 @@ export default {
     li: {
       required: true,
       type: Object,
+    }
+  },
+  methods: {
+    deleteLink(id) {
+      this.$store.dispatch('removeLink', id)
+    },
+    archiveLink(id) {
+      this.$store.dispatch('archiveLink', id)
     }
   }
 }
