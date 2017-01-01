@@ -110,6 +110,21 @@ const store = new Vuex.Store({
         })
 
     },
+    isAuthenticated (context, credentials) {
+      axios.get('/api/users/me', {
+          withCredentials: true,
+          headers: {'X-CSRFToken': document.cookie.replace(/^.*=/, '')},
+        })
+        .then(response => {
+          console.log('is authenticated')
+          context.commit('loginSuccessful')
+        })
+        .catch(error => {
+          console.warn('not authenticated', error)
+          context.commit('loginErrors', error)
+        })
+
+    },
     logout (context) {
         // Note: empty data payload needed for axios to send the headers as headers
         axios.post('/rest-auth/logout/', {},  {
