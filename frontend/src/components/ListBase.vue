@@ -121,7 +121,7 @@ export default {
       this.$store.dispatch('changeEmailAddress', email)
     },
     refreshList() {
-      this.$store.dispatch('refreshList')
+      this.$store.dispatch('refreshLinks')
     },
     logout() {
       this.$store.dispatch('logout').then(this.$router.replace('/'))

@@ -8,7 +8,6 @@ const store = new Vuex.Store({
   state: {
       user: {
         authenticated: false,
-        csrf_cookie: document.cookie.replace(/^.*=/, ''),
         email: '',
       },
     links: [],
@@ -84,7 +83,6 @@ const store = new Vuex.Store({
       },
       logout(state) {
         state.user.email = ''
-        state.user.csrf_cookie = ''
         state.user.authenticated = false
         state.links = []
       },
@@ -151,6 +149,7 @@ const store = new Vuex.Store({
         .catch(error => {
           console.warn(error)
           context.commit('addLinkErrors', error.response.data)
+          context.commit('logout')
         })
     },
     refreshLinks (context) {
