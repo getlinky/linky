@@ -3,7 +3,7 @@
     <linky-nav></linky-nav>
     <form slot='body' action="" method="post" @submit.prevent='login'>
       <label for='email'>Email</label>
-      <input type='email' name='email' placeholder='name@example.com' required v-model='email'>
+      <input v-focus="emailFocused" @focus='emailFocused = true' @blur='emailFocused = false' type='email' name='email' placeholder='name@example.com' required v-model='email'>
       <label for='password'>Password</label>
       <input type='password' name='password' required v-model='password'>
       <input type='submit' value='Login'>
@@ -15,11 +15,15 @@
 
 
 <script>
+import axios from 'axios'
+import { focus } from 'vue-focus';
+
 import linkyNav from './LinkyNav.vue'
 
-import axios from 'axios'
-
 export default {
+  directives: {
+    focus
+  },
   name: 'login',
   components: {
     linkyNav
@@ -27,7 +31,8 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      emailFocused: true
     }
   },
   computed: {
