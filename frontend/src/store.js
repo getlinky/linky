@@ -77,6 +77,7 @@ const store = new Vuex.Store({
       },
       loginSuccessful(state) {
         state.user.authenticated = true
+        state.errors.login = []
       },
       loginErrors(state, errors) {
         state.errors.login = errors
@@ -88,6 +89,9 @@ const store = new Vuex.Store({
       },
       logoutErrors(state, errors) {
         state.errors.logout = errors
+      },
+      checkAuthSuccessfull(state) {
+        state.user.authenticated = true
       }
   },
   actions: {
@@ -101,6 +105,8 @@ const store = new Vuex.Store({
         .then(response => {
           console.log('logged in')
           context.commit('loginSuccessful')
+          // fetch links once user is logged in
+          store.dispatch('refreshLinks')
         })
         .catch(error => {
           console.warn('problem logging in', error)
@@ -115,11 +121,10 @@ const store = new Vuex.Store({
         })
         .then(response => {
           console.log('is authenticated')
-          context.commit('loginSuccessful')
+          context.commit('checkAuthSuccessfull')
         })
         .catch(error => {
           console.warn('not authenticated', error)
-          context.commit('loginErrors', error)
         })
 
     },

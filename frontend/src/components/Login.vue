@@ -11,7 +11,7 @@
       <input type='password' name='password' required v-model='password'>
       <input type='submit' value='Login'>
       <!-- TODO: make errors pretty-->
-      <pre v-if="Object.keys(errors).length > 0">{{ errors }}</pre>
+      <pre v-if="Object.keys(errors).length > 0">{{ errors.response.data }}</pre>
     </form>
   </div>
 </template>
@@ -19,6 +19,8 @@
 
 <script>
 import linkyNav from './LinkyNav.vue'
+
+import axios from 'axios'
 
 export default {
   name: 'login',
@@ -36,15 +38,25 @@ export default {
       return this.$store.state.errors.login
     }
   },
-  mounted () {
-    // redirect to list view if already logged in
-    if (this.$store.state.user.authenticated) {
-      this.$router.replace('/list')
-    }
-  },
   methods: {
     login() {
-        this.$store.dispatch('login', {'email': this.email, 'password': this.password}).then(this.$router.replace('/list'))
+      const creds = {'email': this.email, 'password': this.password }
+      axios.post('/rest-auth/login/', creds, {
+        withCredentials: true,
+        headers: {'X-CSRFToken': document.cookie.replace(/^.*=/, '')},
+      })
+        .then(response => {
+          console.log('logged in')
+          this.$store.commit('loginSuccessful')
+          // fetch links once user is logged in
+          this.$store.dispatch('refreshLinks')
+          this.$router.replace('/list')
+        })
+        .catch(error => {
+          console.warn('problem logging in', error)
+          this.$store.commit('loginErrors', error)
+        })
+
     }
   }
 }

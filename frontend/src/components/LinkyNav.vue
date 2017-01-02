@@ -9,10 +9,14 @@
         </div>
         <div class="section">
           <slot>
+
+            <router-link to="/list">List</router-link>
+            <router-link to="/archive">Archive</router-link>
+            <router-link to="/login">Login</router-link>
             <template v-if='userAuthenticated'>
               <router-link to="/list">List</router-link>
               <router-link to="/archive">Archive</router-link>
-              <router-link to="/logout">Logout</router-link>
+              <a @click='logoutUser'>Logout</a>
             </template>
             <router-link v-else to="/login">Login</router-link>
           </slot>
@@ -34,6 +38,11 @@ export default {
       return this.$store.state.user.email
     }
 
+  },
+  methods: {
+    logoutUser() {
+      this.$store.dispatch('logout').then(this.$router.replace('/'))
+    },
   }
 
 }

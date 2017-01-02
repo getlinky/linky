@@ -9,11 +9,44 @@ import Login from './components/Login.vue'
 
 Vue.use(VueRouter)
 
+const loginRequired = (to, from, next) => {
+  if (store.state.user.authenticated || from.path === '/login') {
+    next()
+  } else {
+    console.log(`loginRequired for ${to.path}`)
+    next('/login')
+  }
+}
+
+const anonRequired = (to, from, next) => {
+  if (store.state.user.authenticated) {
+    next('/list')
+  } else {
+    next()
+  }
+}
+
+const isAuthenticated = (to, from, next) => {
+  store.dispatch('isAuthenticated')
+  next()
+}
+
 const routes = [
-  { path: '/', component: Index },
-  { path: '/list', component: List },
-  { path: '/archive', component: Archive },
-  { path: '/login', component: Login },
+  { path: '/',
+    component: Index
+  },
+  { path: '/list',
+    component: List,
+    beforeEnter: loginRequired
+  },
+  { path: '/archive',
+    component: Archive,
+    beforeEnter: loginRequired
+  },
+  { path: '/login',
+    component: Login,
+    beforeEnter: anonRequired
+  }
 ]
 
 const router = new VueRouter({
@@ -21,10 +54,7 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  store.dispatch('isAuthenticated')
-  next()
-})
+router.beforeEach(isAuthenticated)
 
 new Vue({
   store,
