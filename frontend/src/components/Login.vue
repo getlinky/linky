@@ -1,9 +1,6 @@
 <template>
   <div>
-    <linky-nav>
-        <div></div>
-    </linky-nav>
-
+    <linky-nav></linky-nav>
     <form slot='body' action="" method="post" @submit.prevent='login'>
       <label for='email'>Email</label>
       <input type='email' name='email' placeholder='name@example.com' required v-model='email'>
@@ -56,7 +53,6 @@ export default {
           console.warn('problem logging in', error)
           this.$store.commit('loginErrors', error)
         })
-
     }
   }
 }

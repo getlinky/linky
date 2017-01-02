@@ -8,20 +8,9 @@
           </router-link>
         </div>
         <div class="section">
-          <slot>
-
-            <router-link to="/list">List</router-link>
-            <router-link to="/archive">Archive</router-link>
-            <router-link to="/login">Login</router-link>
-            <template v-if='userAuthenticated'>
-              <router-link to="/list">List</router-link>
-              <router-link to="/archive">Archive</router-link>
-              <a @click='logoutUser'>Logout</a>
-            </template>
-            <router-link v-else to="/login">Login</router-link>
-          </slot>
+          <slot></slot>
         </div>
-        </div>
+      </div>
     </nav>
   </header>
 </template>
@@ -30,21 +19,6 @@
 
 export default {
   name: 'linky-nav',
-  computed: {
-    userAuthenticated () {
-      return this.$store.state.user.authenticated
-    },
-    userEmail () {
-      return this.$store.state.user.email
-    }
-
-  },
-  methods: {
-    logoutUser() {
-      this.$store.dispatch('logout').then(this.$router.replace('/'))
-    },
-  }
-
 }
 </script>
 
