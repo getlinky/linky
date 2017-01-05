@@ -25,22 +25,7 @@
       <slot></slot>
     </ul>
 
-    <modal :show='showHelp' @closed='showHelp = false'>
-      <h1 slot='header'>Key Binds</h1>
-      <ul slot="body">
-        <li><kbd>j</kbd> - down</li>
-        <li><kbd>k</kbd> - up</li>
-        <li><kbd>l</kbd> - switch right list (wraps)</li>
-        <li><kbd>h</kbd> - switch left list (wraps)</li>
-        <li><kbd>a</kbd> - archive current item (or unarchive)</li>
-        <li><kbd>#</kbd> - delete current item</li>
-        <li><kbd>e</kbd> - edit current item</li>
-        <li><kbd>/</kbd> - search</li>
-        <li><kbd>?</kbd> - toggle help menu</li>
-        <li><kbd>esc</kbd> - close current menu</li>
-      </ul>
-    </modal>
-
+    <helpModal :show="showHelp" @close="showHelp = false"></helpModal>
     <showSettingsModal :show="showSettings" @closed="showSettings = false"></showSettingsModal>
     <addLinkModal :show="showAdd" @closed="showAdd = false"></addLinkModal>
   </div>
@@ -49,7 +34,7 @@
 <script>
 
 import linkyNav from './LinkyNav.vue'
-import modal from './Modal.vue'
+import helpModal from './helpModal.vue'
 import showSettingsModal from './showSettingsModal.vue'
 import addLinkModal from './addLinkModal.vue'
 
@@ -60,9 +45,9 @@ export default {
   name: 'list-base',
   components: {
     linkyNav,
-    modal,
     addLinkModal,
-    showSettingsModal
+    showSettingsModal,
+    helpModal,
   },
   data () {
     return {
@@ -266,20 +251,4 @@ input {
   }
 
 }
-
-kbd {
-  background-color: #f7f7f7;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, .2), 0 0 0 2px #fff inset;
-  color: #333;
-  display: inline-block;
-  font-family: sans-serif;
-  font-size: 11px;
-  line-height: 1.4;
-  margin: 0 .1em;
-  padding: .1em .6em;
-  text-shadow: 0 1px 0 #fff;
-}
-
 </style>
