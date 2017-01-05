@@ -21,8 +21,17 @@ export default {
             type: Boolean,
             required: true
         }
+    },
+    mounted () {
+      this.$nextTick(function () {
+        document.addEventListener("keydown", (e) => {
+          if (this.show && e.keyCode == 27) {
+            this.$emit('closed')
+          }
+        })
+      })
     }
-}
+  }
 </script>
 
 <style lang='scss'>
