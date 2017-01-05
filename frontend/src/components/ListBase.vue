@@ -55,17 +55,7 @@
         <p><a href="">Password Reset</a></p>
       </div>
     </modal>
-
-    <modal :show='showAdd || addModalErrors !== null' @closed='closeAddModal'>
-      <h1 slot='header'>Add Item</h1>
-      <form slot='body' action="" method="post" @submit.prevent.once='add(url)'>
-        <!-- TODO: handle errors -->
-        <input type='url' placeholder='https://example.com' required v-model='url'>
-        <input type='submit' value='Add'>
-        <h2> Are there errors? {{ addModalErrors !== null }}</h2>
-        {{ addModalErrors }}
-      </form>
-    </modal>
+    <addLinkModal :show="showAdd" @closed="showAdd = false"></addLinkModal>
   </div>
 </template>
 
@@ -73,6 +63,7 @@
 
 import linkyNav from './LinkyNav.vue'
 import modal from './Modal.vue'
+import addLinkModal from './addLinkModal.vue'
 
 import list_nav from '../nav.js'
 list_nav()
@@ -82,6 +73,7 @@ export default {
   components: {
     linkyNav,
     modal,
+    addLinkModal,
   },
   data () {
     return {
@@ -108,15 +100,8 @@ export default {
     email () {
       return this.$store.state.user.email
     },
-    addModalErrors () {
-      return this.$store.state.errors.addLink
-    }
   },
   methods: {
-    add(url) {
-      this.$store.dispatch('addLink', url)
-      this.showAdd = false
-    },
     updateEmail(email) {
       this.$store.dispatch('changeEmailAddress', email)
     },
@@ -125,10 +110,6 @@ export default {
     },
     logout() {
       this.$store.dispatch('logout').then(this.$router.replace('/'))
-    },
-    closeAddModal () {
-      this.showAdd = false
-      this.$store.commit('addLinkErrorsClear')
     }
   }
 }
