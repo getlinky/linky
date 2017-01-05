@@ -13,12 +13,13 @@ const store = new Vuex.Store({
     links: [],
     errors: {
         addLink: null,
+        updateEmail: [],
         removeLink: [],
         archiveLink: [],
         unarchiveLink: [],
         login: [],
         logout: [],
-        updateEmail: [],
+        updateEmail: null,
         updateLinks: [],
       }
   },
@@ -65,6 +66,12 @@ const store = new Vuex.Store({
       },
       updateArchiveErrors (state, errors) {
         state.errors.updateArchive = errors
+      },
+      updateEmailErrors (state, errors) {
+        state.errors.updateEmail = errors
+      },
+      updateEmailErrorsClear (state) {
+        state.errors.updateEmail = null
       },
       addLink(state, linkData) {
         state.links.push(linkData)
@@ -121,6 +128,7 @@ const store = new Vuex.Store({
         })
         .then(response => {
           console.log('is authenticated')
+          context.commit('updateEmail', response.data.email)
           context.commit('checkAuthSuccessfull')
         })
         .catch(error => {
@@ -154,7 +162,6 @@ const store = new Vuex.Store({
         .catch(error => {
           console.warn(error)
           context.commit('addLinkErrors', error.response.data)
-          context.commit('logout')
         })
     },
     refreshLinks (context) {
@@ -223,7 +230,7 @@ const store = new Vuex.Store({
         })
         .catch(error => {
           console.error('Couln\'t update email address', error)
-          context.commit('updateEmailErrors', error)
+          context.commit('updateEmailErrors', error.response.data)
       })
     }
   }

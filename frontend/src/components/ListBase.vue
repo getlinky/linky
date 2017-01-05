@@ -41,20 +41,7 @@
       </ul>
     </modal>
 
-    <modal :show='showSettings' @closed='showSettings = false'>
-      <h1 slot='header'>Settings</h1>
-      <div slot='body'>
-        <form action="" method="post" @submit.prevent='updateEmail(updatedEmail)'>
-          <!-- TODO: handle errors -->
-          <label for='email' >Email</label>
-          <input name='email' :value="email" type='email' placeholder='name@example.com' required v-model='updatedEmail'>
-          <input name='update' type='submit' value='update'>
-          {{ settingsModalError }}
-        </form>
-        <p><a href="">Download Links</a></p>
-        <p><a href="">Password Reset</a></p>
-      </div>
-    </modal>
+    <showSettingsModal :show="showSettings" @closed="showSettings = false"></showSettingsModal>
     <addLinkModal :show="showAdd" @closed="showAdd = false"></addLinkModal>
   </div>
 </template>
@@ -63,6 +50,7 @@
 
 import linkyNav from './LinkyNav.vue'
 import modal from './Modal.vue'
+import showSettingsModal from './showSettingsModal.vue'
 import addLinkModal from './addLinkModal.vue'
 
 import list_nav from '../nav.js'
@@ -74,11 +62,11 @@ export default {
     linkyNav,
     modal,
     addLinkModal,
+    showSettingsModal
   },
   data () {
     return {
       query: '',
-      updatedEmail : '',
       showAdd: false,
       showSettings: false,
       showHelp: false
@@ -97,14 +85,8 @@ export default {
     authenticated () {
       return this.$store.state.user.authenticated
     },
-    email () {
-      return this.$store.state.user.email
-    },
   },
   methods: {
-    updateEmail(email) {
-      this.$store.dispatch('changeEmailAddress', email)
-    },
     refreshList() {
       this.$store.dispatch('refreshLinks')
     },
