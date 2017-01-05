@@ -1,12 +1,14 @@
 {
   "extends": "standard",
   "plugins": [
-    "html"
+    "html",
   ],
   "env": {
-    "jasmine": true
+    "jasmine": true,
+    "browser": true,
   },
   "rules": {
-      "camelcase": 0
-  }
+      "camelcase": 0,
+      "comma-dangle": ["warn", "always"],
+  },
 }
