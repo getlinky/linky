@@ -2,7 +2,7 @@
   <modal :show='show || errors !== null' @closed='closeModal'>
     <h1 slot='header'>Add Item</h1>
     <form slot='body' action="" method="post" @submit.prevent.once='addLink(url)'>
-      <input type='url' placeholder='https://example.com' required v-model='url'>
+      <input type='url' placeholder='https://example.com' required v-focus="urlFocused" v-model='url'>
       <input type='submit' value='Add'>
         <pre v-if="errors !== null"> {{ errors }}</pre>
     </form>
@@ -10,9 +10,14 @@
 </template>
 
 <script>
+import { focus } from 'vue-focus';
+
  import modal from './modal.vue'
  export default {
-  name: 'addLinkModal',
+   name: 'addLinkModal',
+   directives: {
+     focus,
+   },
   props: {
         show: {
             type: Boolean,
@@ -21,7 +26,8 @@
    },
    data () {
     return {
-      url: ''
+      url: '',
+      urlFocused: true,
     }
    },
    computed: {
