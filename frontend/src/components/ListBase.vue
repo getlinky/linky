@@ -12,7 +12,7 @@
     <nav class="list-options">
       <div class="search-option-section">
         <a class="icon">🔍</a>
-        <input class="search" id="search" placeholder="search" type="search" v-model="query">
+        <input class="search" @focusin="searchActive" @blur="doneSearching" id="search" placeholder="search" type="search" v-model="query">
       </div>
       <div class="list-archive-option-section">
         <!-- FIXME -->
@@ -54,7 +54,8 @@ export default {
       query: '',
       showAdd: false,
       showSettings: false,
-      showHelp: false
+      showHelp: false,
+      searching: false,
     }
   },
   props: {
@@ -65,6 +66,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch('refreshLinks')
+    document.addEventListener('paste', this.pasteHandler)
+  },
+  beforeDestroy () {
+    document.removeEventListener('paste', this.pasteHandler)
   },
   computed: {
     authenticated () {
@@ -77,8 +82,20 @@ export default {
     },
     logout() {
       this.$store.dispatch('logout').then(this.$router.replace('/'))
-    }
-  }
+    },
+    pasteHandler (e) {
+      const paste = e.clipboardData.getData('text')
+      if (paste.length > 0 && this.$store.state.errors.addLink == null && !this.searching && !this.showAdd && !this.showHelp && !this.showSettings) {
+        this.$store.dispatch('addLink', paste).then(console.log('Added link from paste'))
+      }
+    },
+    searchActive () {
+      this.searching = true
+    },
+    doneSearching () {
+      this.searching = false
+    },
+  },
 }
 
 </script>
