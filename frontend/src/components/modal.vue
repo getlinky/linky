@@ -22,53 +22,26 @@ export default {
             required: true
         }
     },
-  data () {
-    return {
-      esc: false,
-      ctrl: false,
-      bracket: false,
-    }
-  },
   mounted () {
     document.addEventListener('keydown', this.keydownListener)
-    document.addEventListener('keyup', this.keyupListener)
   },
   methods: {
     keydownListener (event) {
-      if (event.keyCode === 27) {
-        this.esc = true
-      }
-      if (event.keyCode === 17) {
-        this.ctrl = true
-      }
-      if (event.keyCode === 221) {
-        this.bracket = true
-      }
       if (this.show) {
-        if (this.esc) {
+        // 27 is <esc>
+        if (event.keyCode === 27) {
           this.$emit('closed')
           return
         }
-        if (this.ctrl && this.bracket) {
+        // 221 is <]>
+        if (event.ctrlKey && event.keyCode === 221) {
           this.$emit('closed')
         }
-      }
-    },
-    keyupListener (event) {
-      if (event.keyCode === 27) {
-        this.esc = false
-      }
-      if (event.keyCode === 17) {
-        this.ctrl = false
-      }
-      if (event.keyCode === 221) {
-        this.bracket = false
       }
     },
   },
   beforeDestroy () {
     document.removeEventListener('keydown', this.keydownListener)
-    document.removeEventListener('keyup', this.keyupListener)
   },
 }
 </script>
