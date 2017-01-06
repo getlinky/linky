@@ -16,8 +16,6 @@ const nav = () => {
       link = document.activeElement.previousElementSibling
       link.focus()
     },
-    archive: () =>
-      link.querySelector('button[name=archive], button[name=unarchive]').click(),
     focus_search: () => {
       window.setTimeout(() =>
         document.querySelector('input.search').focus(), 100)
@@ -30,24 +28,10 @@ export const handle_event = event => {
   // takes in `event` from the current scope so it can be called more cleanly
   const is_key = k => {
     return k === {
-      75: 'k',
       74: 'j',
-      76: 'l',
-      72: 'h',
-      68: 'd',
-      65: 'a',
-      83: 's',
-      70: 'f',
-      78: 'n',
-      79: 'o',
+      75: 'k',
       80: 'p',
       191: '/',
-      13: 'enter',
-      27: 'esc',
-      219: ']',
-      51: '3',
-      188: ',',
-      67: 'c'
     }[event.keyCode]
   }
 
@@ -62,8 +46,6 @@ export const handle_event = event => {
     links_nav.next()
   } else if (is_key('k') || (event.ctrlKey && is_key('p'))) {
     links_nav.previous()
-  } else if (is_key('a')) {
-    links_nav.archive()
   } else if (is_key('/')) {
     links_nav.focus_search()
   }

@@ -33,15 +33,32 @@ export default {
       this.$store.dispatch('unarchiveLink', id)
     },
     keydownHandler (event) {
-      // enter - open in current tab
-      if (event.keyCode === 13) {
-        window.location.href = this.li.url
-      // o - open in new tab
-      } else if (event.keyCode === 79) {
-        window.open(this.li.url, '_blank')
-      // shift 3 - delete current item
-      } else if (event.keyCode === 51 && event.shiftKey) {
-        this.deleteLink(this.li.id)
+      switch (event.keyCode) {
+        case 13: {
+          // enter - open in current tab
+          window.location.href = this.li.url
+          break
+        }
+        case 79: {
+          // o - open in new tab
+          window.open(this.li.url, '_blank')
+          break
+        }
+        case 51: {
+          // shift 3 - delete current item
+          if (event.shiftKey) {
+            this.deleteLink(this.li.id)
+          }
+          break
+        }
+        case 65: {
+          // a - (un)archive item
+          if (!this.li.archived) {
+            this.archiveLink(this.li.id)
+          } else {
+            this.unarchiveLink(this.li.id)
+          }
+        }
       }
     },
   }
