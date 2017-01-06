@@ -27,6 +27,25 @@
         required: true
       }
     },
+    mounted () {
+      this.$nextTick(function () {
+        document.addEventListener("keydown", e => {
+
+          const active_element = document.activeElement.tagName.toLowerCase()
+          if (active_element === 'input') return
+
+          const is_slash_key = e.keyCode === 191
+          const is_question_mark = is_slash_key && e.shiftKey
+          if (is_question_mark) {
+            if (this.show) {
+              this.closeModal()
+            } else {
+              this.showModal()
+            }
+          }
+        })
+      })
+    },
     components: {
       modal
     },
@@ -34,6 +53,9 @@
       closeModal () {
         this.$emit('closed')
       },
+      showModal () {
+        this.$emit('show')
+      }
     },
   }
 </script>
