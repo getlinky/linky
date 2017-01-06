@@ -25,7 +25,7 @@
       <slot></slot>
     </ul>
 
-    <helpModal :show="showHelp" @close="showHelp = false"></helpModal>
+    <helpModal :show="showHelp" @show="showHelp = true" @closed="showHelp = false"></helpModal>
     <showSettingsModal :show="showSettings" @closed="showSettings = false"></showSettingsModal>
     <addLinkModal :show="showAdd" @closed="showAdd = false"></addLinkModal>
   </div>
