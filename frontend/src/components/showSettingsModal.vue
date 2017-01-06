@@ -4,7 +4,7 @@
       <div slot="body">
         <form action="" method="post" @submit.prevent="updateEmail(updatedEmail)">
           <label for="email" >Email</label>
-          <input name="email" type="email" placeholder="name@example.com" required v-model="updatedEmail">
+          <input name="email" type="email" placeholder="name@example.com" required v-focus="emailFocused" v-model="updatedEmail">
           <input name="update" type="submit" value="update">
           <pre v-if="errors !== null">{{errors}}</pre>
         </form>
@@ -16,6 +16,7 @@
 
 <script>
   import modal from './modal.vue'
+  import { focus } from 'vue-focus'
 
   export default {
     name: 'showSettingsModal',
@@ -31,7 +32,11 @@
     data () {
       return {
         updatedEmail: this.$store.state.user.email,
+        emailFocused: true,
       }
+    },
+    directives: {
+      focus,
     },
     computed: {
       errors () {
