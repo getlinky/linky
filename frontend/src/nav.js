@@ -16,8 +16,6 @@ const nav = () => {
       link = document.activeElement.previousElementSibling
       link.focus()
     },
-    switch_list_archive: () =>
-      document.querySelector('.list-archive-option-section > a.inactive').click(),
     archive: () =>
       link.querySelector('button[name=archive], button[name=unarchive]').click(),
     focus_search: () => {
@@ -68,7 +66,5 @@ export const handle_event = event => {
     links_nav.archive()
   } else if (is_key('/')) {
     links_nav.focus_search()
-  } else if (is_key('l') || is_key('h')) {
-    links_nav.switch_list_archive()
   }
 }

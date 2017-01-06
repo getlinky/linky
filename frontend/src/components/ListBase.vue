@@ -99,6 +99,14 @@ export default {
     keybindsHandler (event) {
       if (!(this.showAdd || this.showSettings || this.showHelp || this.searching)) {
         handle_event(event)
+        // l or h - switch list
+        if (event.keyCode === 76 || event.keyCode === 72) {
+          if (this.$router.currentRoute.path === '/list') {
+            this.$router.push('/archive')
+          } else if (this.$router.currentRoute.path === '/archive') {
+            this.$router.push('/list')
+          }
+        }
       }
     },
   },

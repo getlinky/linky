@@ -43,7 +43,6 @@ export default {
       } else if (event.keyCode === 51 && event.shiftKey) {
         this.deleteLink(this.li.id)
       }
-      console.log('link', event.keyCode)
     },
   }
 }
