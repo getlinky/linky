@@ -38,8 +38,7 @@ import helpModal from './helpModal.vue'
 import showSettingsModal from './showSettingsModal.vue'
 import addLinkModal from './addLinkModal.vue'
 
-import list_nav from '../nav.js'
-list_nav()
+import { handle_event } from '../nav.js'
 
 export default {
   name: 'list-base',
@@ -67,9 +66,11 @@ export default {
   mounted() {
     this.$store.dispatch('refreshLinks')
     document.addEventListener('paste', this.pasteHandler)
+    document.addEventListener('keydown', this.keybindsHandler)
   },
   beforeDestroy () {
     document.removeEventListener('paste', this.pasteHandler)
+    document.removeEventListener('keydown', this.keybindsHandler)
   },
   computed: {
     authenticated () {
@@ -94,6 +95,11 @@ export default {
     },
     doneSearching () {
       this.searching = false
+    },
+    keybindsHandler (event) {
+      if (!(this.showAdd || this.showSettings || this.showHelp || this.searching)) {
+        handle_event(event)
+      }
     },
   },
 }

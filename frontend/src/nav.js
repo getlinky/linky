@@ -48,7 +48,7 @@ const nav = () => {
 }
 const links_nav = nav()
 
-const handle_event = event => {
+export const handle_event = event => {
   // takes in `event` from the current scope so it can be called more cleanly
   const is_key = k => {
     return k === {
@@ -107,8 +107,4 @@ const handle_event = event => {
   } else if (is_key(',')) {
     links_nav.toggle_settings_modal()
   }
-}
-
-export default function list_nav() {
-  document.addEventListener('keydown', event => handle_event(event))
 }
