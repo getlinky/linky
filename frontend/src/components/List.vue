@@ -20,7 +20,9 @@ import linkyLink from './LinkyLink.vue'
 import listBase from './ListBase.vue'
 
 
-const compareValues = (a, b) => {
+const compareDateStrings = (a, b) => {
+  a = Date.parse(a)
+  b = Date.parse(b)
   if (a > b) {
     return 1
   }
@@ -42,7 +44,7 @@ export default {
       return this.$store.state
         .links
         .filter(x => !x.archived)
-        .sort((x, y) => compareValues(x.last_updated, y.last_updated))
+        .sort((x, y) => compareDateStrings(x.last_updated, y.last_updated))
         .reverse()
     },
   },
