@@ -18,28 +18,8 @@ const nav = () => {
     },
     switch_list_archive: () =>
       document.querySelector('.list-archive-option-section > a.inactive').click(),
-    open_in_new_tab: () =>
-      window.open(link.querySelector('a.source').href, '_blank'),
-    delete_current: () =>
-      link.querySelector('button[name=delete]').click(),
     archive: () =>
       link.querySelector('button[name=archive], button[name=unarchive]').click(),
-    toggle_add_modal: () => {
-      // TODO: toggle_add_menu()
-      console.log('toggle_add_modal')
-    },
-    toggle_help_menu: () => {
-      // TODO: toggle_help_menu()
-      console.log('toggle_help_menu')
-    },
-    toggle_settings_modal: () => {
-      // TODO: toggle_settings_menu()
-      console.log('toggle settings menu')
-    },
-    open_in_current_tab: () => {
-      window.location.href =
-        link.querySelector('a.source').href
-    },
     focus_search: () => {
       window.setTimeout(() =>
         document.querySelector('input.search').focus(), 100)
@@ -74,10 +54,6 @@ export const handle_event = event => {
   }
 
   const active_element = document.activeElement.tagName.toLowerCase()
-
-  // disable keybinds if we are using an <input>
-  if (active_element === 'input') return
-
   // focus first link element if active element is the body
   if ((is_key('j') || is_key('k')) && active_element === 'body') {
     document.querySelector('.link-container > li').focus()
@@ -90,21 +66,9 @@ export const handle_event = event => {
     links_nav.previous()
   } else if (is_key('a')) {
     links_nav.archive()
-  } else if (is_key('c')) {
-    links_nav.toggle_add_modal()
-  } else if (is_key('/') && event.shiftKey) {
-    links_nav.toggle_help_menu()
   } else if (is_key('/')) {
     links_nav.focus_search()
   } else if (is_key('l') || is_key('h')) {
     links_nav.switch_list_archive()
-  } else if (is_key('o')) {
-    links_nav.open_in_new_tab()
-  } else if (is_key('enter')) {
-    links_nav.open_in_current_tab()
-  } else if (is_key('3') && event.shiftKey) {
-    links_nav.delete_current()
-  } else if (is_key(',')) {
-    links_nav.toggle_settings_modal()
   }
 }

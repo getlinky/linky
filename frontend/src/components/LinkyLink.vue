@@ -1,5 +1,5 @@
 <template>
-  <li class="display-on-hover-container" tabindex="0">
+  <li class="display-on-hover-container" tabindex="0" @keydown="keydownHandler">
     <h3 class="link-title">
       <a :href="li.url">{{ li.title }}</a>
     </h3>
@@ -31,7 +31,20 @@ export default {
     },
     unarchiveLink(id) {
       this.$store.dispatch('unarchiveLink', id)
-    }
+    },
+    keydownHandler (event) {
+      // enter - open in current tab
+      if (event.keyCode === 13) {
+        window.location.href = this.li.url
+      // o - open in new tab
+      } else if (event.keyCode === 79) {
+        window.open(this.li.url, '_blank')
+      // shift 3 - delete current item
+      } else if (event.keyCode === 51 && event.shiftKey) {
+        this.deleteLink(this.li.id)
+      }
+      console.log('link', event.keyCode)
+    },
   }
 }
 </script>
