@@ -5,7 +5,7 @@
     </h3>
     <p class="description">{{ description }}</p>
     <a v-if="!editing" class="source" :href="url">{{ url }}</a>
-    <input v-else v-focus="editing" type="text" class="source" v-model="url">
+    <input v-else v-focus="editing" @keyup.enter="saveChanges" @keydown.esc="cancelChanges" type="text" class="source" v-model="url">
     <button name="delete" class="display-on-hover" @click.once="deleteLink">Delete</button>
     <template v-if='li.archived'>
       <button name="unarchive" class="display-on-hover" @click.once="unarchiveLink">Unarchive</button>
