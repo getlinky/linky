@@ -7,7 +7,7 @@
             <h1 class="title">Linky</h1>
           </router-link>
         </div>
-        <div class="section">
+        <div class="section noselect">
           <slot></slot>
         </div>
       </div>
@@ -41,4 +41,7 @@ export default {
       margin-left: .5rem;
     }
   }
+.noselect {
+  user-select: none;
+}
 </style>
