@@ -21,7 +21,8 @@ const store = new Vuex.Store({
         logout: [],
         updateEmail: null,
         updateLinks: [],
-      }
+      },
+    keybindsDisabled: 0,
   },
   mutations: {
       archiveLink(state, id) {
@@ -99,7 +100,31 @@ const store = new Vuex.Store({
       },
       checkAuthSuccessfull(state) {
         state.user.authenticated = true
+      },
+    disableKeybinds (state) {
+      state.keybindsDisabled++
+    },
+    enableKeybinds (state) {
+      state.keybindsDisabled--
+    },
+    updateLinkUrl (state, data) {
+      let {id, url} = data
+      for (let i = 0; i < state.links.length; i++) {
+        if (state.links[i].id === id) {
+          state.links[i].url = url
+          return
+        }
       }
+    },
+    updateLinkUrlErrors (state, errors) {
+      state.errors.updateLinkUrl = errors
+    },
+    enableEditing (state) {
+      state.keybindsDisabled++
+    },
+    disableEditing (state) {
+      state.keybindsDisabled--
+    },
   },
   actions: {
     login (context, credentials) {
@@ -231,9 +256,25 @@ const store = new Vuex.Store({
         .catch(error => {
           console.error('Couln\'t update email address', error)
           context.commit('updateEmailErrors', error.response.data)
+        })
+    },
+    changeLinkUrl (context, data) {
+      let {id, url} = data
+      console.log(url)
+      axios.patch(`/api/links/${id}/`, {'url': url}, {
+        withCredentials: true,
+        headers: {'X-CSRFToken': document.cookie.replace(/^.*=/, '')},
       })
-    }
-  }
+      .then(response => {
+        console.log('updated_url', url)
+        context.commit('updateLinkUrl', id)
+      })
+      .catch(error => {
+        console.log('error updating url', error)
+        context.commit('updateLinkUrlErrors', error)
+      })
+    },
+  },
 })
 
 export default store

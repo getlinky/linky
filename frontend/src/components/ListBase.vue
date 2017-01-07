@@ -76,6 +76,12 @@ export default {
     authenticated () {
       return this.$store.state.user.authenticated
     },
+    enableKeybinds () {
+      return !(this.$store.state.keybindsDisabled > 0) && !this.showAdd && !this.showSettings && !this.showHelp && !this.searching
+    },
+    enablePaste () {
+      return this.$store.state.errors.addLink == null && this.enableKeybinds
+    },
   },
   methods: {
     refreshList() {
@@ -86,7 +92,7 @@ export default {
     },
     pasteHandler (e) {
       const paste = e.clipboardData.getData('text')
-      if (paste.length > 0 && this.$store.state.errors.addLink == null && !this.searching && !this.showAdd && !this.showHelp && !this.showSettings) {
+      if (paste.length > 0 && this.enablePaste) {
         this.$store.dispatch('addLink', paste).then(console.log('Added link from paste'))
       }
     },
@@ -97,7 +103,7 @@ export default {
       this.searching = false
     },
     keybindsHandler (event) {
-      if (!(this.showAdd || this.showSettings || this.showHelp || this.searching)) {
+      if (this.enableKeybinds) {
         handle_event(event)
         // l or h - switch list
         if (event.keyCode === 76 || event.keyCode === 72) {
