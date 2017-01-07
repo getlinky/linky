@@ -9,6 +9,6 @@
   },
   "rules": {
       "camelcase": 0,
-      "comma-dangle": ["warn", "always"],
+      "comma-dangle": ["warn", "always-multiline"],
   },
 }
