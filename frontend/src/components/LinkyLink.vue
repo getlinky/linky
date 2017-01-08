@@ -28,7 +28,7 @@ export default {
     li: {
       required: true,
       type: Object,
-    }
+    },
   },
   directives: {
     focus,
@@ -115,7 +115,7 @@ export default {
         }
       }
     },
-  }
+  },
 }
 </script>
 

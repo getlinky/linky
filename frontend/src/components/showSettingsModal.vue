@@ -26,8 +26,8 @@
     props: {
       show: {
         type: Boolean,
-        required: true
-      }
+        required: true,
+      },
     },
     data () {
       return {
@@ -44,7 +44,7 @@
       },
     },
     methods: {
-      updateEmail(email) {
+      updateEmail (email) {
         this.$store.dispatch('changeEmailAddress', email)
       },
       closeModal () {

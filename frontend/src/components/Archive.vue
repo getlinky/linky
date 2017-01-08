@@ -14,33 +14,22 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import linkyLink from './LinkyLink.vue'
 import listBase from './ListBase.vue'
 
-const compareValues = (a, b) => {
-  if (a > b) {
-    return 1
-  }
-  if (a < b) {
-    return -1
-  }
-  return 0
-}
+import { compareDateStrings } from '../utilities.js'
 
 export default {
   name: 'archive',
   components: {
     linkyLink,
-    listBase
+    listBase,
   },
   computed: {
-    archive_items() {
-      return this.$store.state
-        .links
+    archive_items () {
+      return this.$store.state.links
         .filter(x => x.archived)
-        .sort((x, y) => compareValues(x.last_updated, y.last_updated))
+        .sort((x, y) => compareDateStrings(x.last_updated, y.last_updated))
         .reverse()
     },
   },

@@ -24,13 +24,12 @@
     props: {
       show: {
         type: Boolean,
-        required: true
-      }
+        required: true,
+      },
     },
     mounted () {
       this.$nextTick(function () {
-        document.addEventListener("keydown", e => {
-
+        document.addEventListener('keydown', e => {
           const active_element = document.activeElement.tagName.toLowerCase()
           if (active_element === 'input') return
 
@@ -47,7 +46,7 @@
       })
     },
     components: {
-      modal
+      modal,
     },
     methods: {
       closeModal () {
@@ -55,7 +54,7 @@
       },
       showModal () {
         this.$emit('show')
-      }
+      },
     },
   }
 </script>

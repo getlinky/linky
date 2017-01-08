@@ -32,7 +32,6 @@
 </template>
 
 <script>
-
 import linkyNav from './LinkyNav.vue'
 import helpModal from './helpModal.vue'
 import showSettingsModal from './showSettingsModal.vue'
@@ -61,9 +60,9 @@ export default {
     parentName: {
       type: String,
       required: true,
-    }
+    },
   },
-  mounted() {
+  mounted () {
     this.$store.dispatch('refreshLinks')
     document.addEventListener('paste', this.pasteHandler)
     document.addEventListener('keydown', this.keybindsHandler)
@@ -84,10 +83,10 @@ export default {
     },
   },
   methods: {
-    refreshList() {
+    refreshList () {
       this.$store.dispatch('refreshLinks')
     },
-    logout() {
+    logout () {
       this.$store.dispatch('logout').then(this.$router.replace('/'))
     },
     pasteHandler (e) {

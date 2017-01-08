@@ -10,33 +10,33 @@
 </template>
 
 <script>
-import { focus } from 'vue-focus';
+import modal from './modal.vue'
+import { focus } from 'vue-focus'
 
- import modal from './modal.vue'
- export default {
-   name: 'addLinkModal',
-   directives: {
-     focus,
-   },
+export default {
+  name: 'addLinkModal',
+  directives: {
+    focus,
+  },
   props: {
-        show: {
-            type: Boolean,
-            required: true
-        }
-   },
-   data () {
+    show: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  data () {
     return {
       url: '',
       urlFocused: true,
     }
-   },
-   computed: {
+  },
+  computed: {
     errors () {
       return this.$store.state.errors.addLink
-    }
-   },
-   methods: {
-    addLink(url) {
+    },
+  },
+  methods: {
+    addLink (url) {
       this.$store.dispatch('addLink', url)
       this.url = ''
       this.$emit('closed')
@@ -45,11 +45,10 @@ import { focus } from 'vue-focus';
       this.$store.commit('addLinkErrorsClear')
       this.url = ''
       this.$emit('closed')
-    }
+    },
   },
   components: {
-    modal
-  }
+    modal,
+  },
 }
-
 </script>

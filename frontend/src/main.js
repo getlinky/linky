@@ -33,30 +33,30 @@ const isAuthenticated = (to, from, next) => {
 
 const routes = [
   { path: '/',
-    component: Index
+    component: Index,
   },
   { path: '/list',
     component: List,
-    beforeEnter: loginRequired
+    beforeEnter: loginRequired,
   },
   { path: '/archive',
     component: Archive,
-    beforeEnter: loginRequired
+    beforeEnter: loginRequired,
   },
   { path: '/login',
     component: Login,
-    beforeEnter: anonRequired
-  }
+    beforeEnter: anonRequired,
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  routes
+  routes,
 })
 
 router.beforeEach(isAuthenticated)
 
 new Vue({
   store,
-  router
+  router,
 }).$mount('#app')

@@ -20,13 +20,13 @@ export default {
   computed: {
     userAuthenticated () {
       return this.$store.state.user.authenticated
-    }
+    },
   },
   methods: {
-    logoutUser() {
+    logoutUser () {
       this.$store.dispatch('logout')
         .then(this.$router.replace('/'))
-    }
-  }
+    },
+  },
 }
 </script>

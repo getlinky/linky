@@ -15,13 +15,13 @@
 
 <script>
 export default {
-    name: 'modal',
-    props: {
-        show: {
-            type: Boolean,
-            required: true
-        }
+  name: 'modal',
+  props: {
+    show: {
+      type: Boolean,
+      required: true,
     },
+  },
   mounted () {
     document.addEventListener('keydown', this.keydownListener)
   },

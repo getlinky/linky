@@ -7,7 +7,6 @@
       <label for='password'>Password</label>
       <input type='password' name='password' required v-model='password'>
       <input type='submit' value='Login'>
-      <!-- TODO: make errors pretty-->
       <pre v-if="Object.keys(errors).length > 0">{{ errors.response.data }}</pre>
     </form>
   </div>
@@ -15,36 +14,36 @@
 
 
 <script>
-import { focus } from 'vue-focus';
+import { focus } from 'vue-focus'
 
 import linkyNav from './LinkyNav.vue'
 
 export default {
   directives: {
-    focus
+    focus,
   },
   name: 'login',
   components: {
-    linkyNav
+    linkyNav,
   },
-  data() {
+  data () {
     return {
       email: '',
       password: '',
-      emailFocused: true
+      emailFocused: true,
     }
   },
   computed: {
     errors () {
       return this.$store.state.errors.login
-    }
+    },
   },
   methods: {
     login () {
       const creds = {'email': this.email, 'password': this.password}
       this.$store.dispatch('login', creds)
       .then(this.$router.replace('/list'))
-    }
-  }
+    },
+  },
 }
 </script>

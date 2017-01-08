@@ -19,7 +19,7 @@ const nav = () => {
     focus_search: () => {
       window.setTimeout(() =>
         document.querySelector('input.search').focus(), 100)
-    }
+    },
   }
 }
 const links_nav = nav()
