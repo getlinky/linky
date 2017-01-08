@@ -52,12 +52,13 @@ INSTALLED_APPS = [
 # NOTE: this may not actually be needed
 SITE_ID = 1
 
+# Required for using email and on username. http://django-allauth.readthedocs.io/en/latest/advanced.html
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email' # (="username" | "email" | "username_email)
 ACCOUNT_UNIQUE_EMAIL = True
 # TODO: see if the following is necessary
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_EMAIL_VERIFICATION = None
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 MIDDLEWARE = [
@@ -77,6 +78,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly'
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
@@ -115,6 +121,9 @@ DATABASES = {
 LOGIN_URL = '/login/'
 
 AUTH_USER_MODEL = 'core.MyUser'
+
+# Required to handle absence of username in user model
+REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'core.serializers.UserSerializer'}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
