@@ -15,7 +15,6 @@
 
 
 <script>
-import axios from 'axios'
 import { focus } from 'vue-focus';
 
 import linkyNav from './LinkyNav.vue'
@@ -41,23 +40,10 @@ export default {
     }
   },
   methods: {
-    login() {
-      const creds = {'email': this.email, 'password': this.password }
-      axios.post('/rest-auth/login/', creds, {
-        withCredentials: true,
-        headers: {'X-CSRFToken': document.cookie.replace(/^.*=/, '')},
-      })
-        .then(response => {
-          console.log('logged in')
-          this.$store.commit('loginSuccessful')
-          // fetch links once user is logged in
-          this.$store.dispatch('refreshLinks')
-          this.$router.replace('/list')
-        })
-        .catch(error => {
-          console.warn('problem logging in', error)
-          this.$store.commit('loginErrors', error)
-        })
+    login () {
+      const creds = {'email': this.email, 'password': this.password}
+      this.$store.dispatch('login', creds)
+      .then(this.$router.replace('/list'))
     }
   }
 }
