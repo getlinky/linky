@@ -42,6 +42,21 @@ export default {
       id: this.li.id,
     }
   },
+  computed: {
+    link () {
+      return this.li
+    },
+  },
+  watch: {
+    link () {
+      console.log('change')
+      this.editing = false
+      this.title = this.li.title
+      this.description = this.li.description
+      this.url = this.li.url
+      this.id = this.li.id
+    },
+  },
   methods: {
     deleteLink () {
       this.$store.dispatch('removeLink', this.id)
