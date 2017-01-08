@@ -10,15 +10,5 @@
   "rules": {
       "camelcase": 0,
       "comma-dangle": ["warn", "always-multiline"],
-      "indent": ["warn", 2],
-      "space-before-function-paren": ["warn", "always"],
-      "semi": ["warn", "never"],
-      "padded-blocks": ["warn"],
-      "quotes": ["warn"],
-      "no-multi-spaces": ["warn"],
-      "no-dupe-keys": ["warn"],
-      "standard/object-curly-even-spacing": ["warn"],
-      "no-multiple-empty-lines": ["warn"],
-      "no-unused-vars": ["warn"],
   },
 }
