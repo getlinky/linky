@@ -48,7 +48,3 @@ class LinkViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
-@ensure_csrf_cookie
-def index(request):
-    return render(request, 'index.html')

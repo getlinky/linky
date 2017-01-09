@@ -13,6 +13,5 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
-    url(r'^$', views.index, name='index'),
 ]
 
