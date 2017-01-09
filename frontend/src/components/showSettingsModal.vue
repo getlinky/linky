@@ -32,7 +32,7 @@
     mounted () {
       this.$nextTick(function () {
         document.addEventListener('keydown', e => {
-          e.preventDefault();
+          e.preventDefault()
           const active_element = document.activeElement.tagName.toLowerCase()
           if (active_element === 'input') return
 
