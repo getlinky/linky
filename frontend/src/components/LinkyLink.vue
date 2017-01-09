@@ -1,5 +1,5 @@
 <template>
-  <li class="display-on-hover-container" tabindex="0" @keydown="keydownHandler">
+  <li class="link display-on-hover-container" tabindex="0" @keydown="keydownHandler">
     <h3 class="link-title">
       <a :href="li.url">{{ title }}</a>
     </h3>
@@ -133,7 +133,7 @@ $light-gray: #eee;
 }
 
 // link section
-li {
+.link {
   margin-bottom: 1rem;
   margin-left: .5rem;
   margin-right: .5rem;

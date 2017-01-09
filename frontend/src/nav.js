@@ -46,7 +46,7 @@ export const handle_event = event => {
     links_nav.next()
   } else if (is_key('k') || (event.ctrlKey && is_key('p'))) {
     links_nav.previous()
-  } else if (is_key('/')) {
+  } else if (is_key('/') && !event.shiftKey) {
     links_nav.focus_search()
   }
 }

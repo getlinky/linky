@@ -28,13 +28,9 @@ export default {
   methods: {
     keydownListener (event) {
       if (this.show) {
-        // 27 is <esc>
-        if (event.keyCode === 27) {
-          this.$emit('closed')
-          return
-        }
-        // 221 is <]>
-        if (event.ctrlKey && event.keyCode === 221) {
+        const is_esc_key = event.keyCode === 27
+        const is_terminal_esc = event.keyCode === 219 && event.ctrlKey
+        if (is_esc_key || is_terminal_esc) {
           this.$emit('closed')
         }
       }
