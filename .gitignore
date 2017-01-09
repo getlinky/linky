@@ -3,3 +3,4 @@ venv/
 *.sqlite3
 notes.md
 frontend/static/
+npm-debug.log*

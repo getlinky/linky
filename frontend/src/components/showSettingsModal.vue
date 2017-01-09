@@ -29,6 +29,24 @@
         required: true,
       },
     },
+    mounted () {
+      this.$nextTick(function () {
+        document.addEventListener('keydown', e => {
+          e.preventDefault();
+          const active_element = document.activeElement.tagName.toLowerCase()
+          if (active_element === 'input') return
+
+          const is_comma = e.keyCode === 188
+          if (is_comma) {
+            if (this.show) {
+              this.closeModal()
+            } else {
+              this.showModal()
+            }
+          }
+        })
+      })
+    },
     data () {
       return {
         updatedEmail: this.$store.state.user.email,
@@ -51,6 +69,9 @@
         this.$store.commit('updateEmailErrorsClear')
         this.url = ''
         this.$emit('closed')
+      },
+      showModal () {
+        this.$emit('show')
       },
     },
   }
