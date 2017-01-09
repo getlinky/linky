@@ -146,7 +146,7 @@ const store = new Vuex.Store({
       })
     },
     isAuthenticated (context) {
-      axios.get('/api/users/me.json',
+      axios.get('/api/users/me/',
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
           console.log('is authenticated')
@@ -185,7 +185,7 @@ const store = new Vuex.Store({
         })
     },
     refreshLinks (context) {
-      axios.get('/api/links.json',
+      axios.get('/api/links/',
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
       .then(response => {
         console.log('Refreshed links')
