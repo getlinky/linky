@@ -31,8 +31,7 @@
     },
     mounted () {
       this.$nextTick(function () {
-        document.addEventListener('keydown', e => {
-          e.preventDefault()
+        document.addEventListener('keyup', e => {
           const active_element = document.activeElement.tagName.toLowerCase()
           if (active_element === 'input') return
 
