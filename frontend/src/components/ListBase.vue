@@ -1,6 +1,5 @@
 <template>
   <div>
-  <notification message="You may or may not have had success" type="info" :show="show" @closed="show = false"></notification>
     <linky-nav>
       <a id="add-icon" @click='showAdd = true' class="icon">+</a>
       <a @click="refreshList" class="icon">🔄</a>
@@ -28,6 +27,7 @@
     <helpModal :show="showHelp" @show="showHelp = true" @closed="showHelp = false"></helpModal>
     <showSettingsModal :show="showSettings" @show='showSettings = true' @closed="showSettings = false"></showSettingsModal>
     <addLinkModal :show="showAdd" @closed="showAdd = false"></addLinkModal>
+    <linkyNotification></linkyNotification>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ import linkyNav from './LinkyNav.vue'
 import helpModal from './helpModal.vue'
 import showSettingsModal from './showSettingsModal.vue'
 import addLinkModal from './addLinkModal.vue'
-import notification from './notification.vue'
+import linkyNotification from './linkyNotification.vue'
 
 import { handle_event } from '../nav.js'
 
@@ -47,7 +47,7 @@ export default {
     addLinkModal,
     showSettingsModal,
     helpModal,
-    notification,
+    linkyNotification,
   },
   data () {
     return {
@@ -56,7 +56,6 @@ export default {
       showSettings: false,
       showHelp: false,
       searching: false,
-      show: true,
     }
   },
   props: {

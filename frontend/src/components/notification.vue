@@ -84,8 +84,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$font-family: Helvetica Neue, sans-serif;
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
@@ -94,7 +92,8 @@ $font-family: Helvetica Neue, sans-serif;
 }
 
 .note {
-  font-family: $font-family;
+  font-family: georgia, serif;
+  font-style: italic;
   position: fixed;
   z-index: 101;
   text-align: center;
@@ -106,6 +105,8 @@ $font-family: Helvetica Neue, sans-serif;
 
   .close {
     position: absolute;
+    font-style: normal;
+    font-family: sans-serif;
     top: 15px;
     right: 25px;
     height: 30px;

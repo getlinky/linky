@@ -23,6 +23,19 @@ const store = new Vuex.Store({
       updateLinks: [],
     },
     keybindsDisabled: 0,
+    notification: {
+      message: '',
+      level: '',
+      show: false,
+      config: {
+        button: false,
+        duration: 4000,
+        position: 'bottom',
+        sticky: false,
+        theme: 'pure',
+        html: false,
+      },
+    },
   },
   mutations: {
     archiveLink (state, id) {
@@ -128,6 +141,21 @@ const store = new Vuex.Store({
     disableEditing (state) {
       state.keybindsDisabled--
     },
+    notify (state, config) {
+      const {message, level, button, duration, position, sticky, theme, html} = config
+      state.notification.message = message
+      state.notification.level = level
+      state.notification.config.button = button
+      state.notification.config.duration = duration
+      state.notification.config.position = position
+      state.notification.config.sticky = sticky
+      state.notification.config.theme = theme
+      state.notification.config.html = html
+      state.notification.show = true
+    },
+    notificationClosed (state) {
+      state.notification.show = false
+    },
   },
   actions: {
     login (context, credentials) {
@@ -135,7 +163,8 @@ const store = new Vuex.Store({
 
       axios.post('/rest-auth/login/', credentials)
       .then(response => {
-        console.log('logged in')
+        context.commit('notify', {'message': 'Login Successful', 'level': 'success'})
+        console.info('Login successful')
         context.commit('loginSuccessful', response.data.key)
         // fetch links once user is logged in
         store.dispatch('refreshLinks')
@@ -149,13 +178,14 @@ const store = new Vuex.Store({
       axios.get('/api/users/me/',
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
-          console.log('is authenticated')
+          console.info('User authenticated')
           context.commit('updateEmail', response.data.email)
           context.commit('loginSuccessful', localStorage.getItem('token'))
           context.commit('checkAuthSuccessfull')
         })
         .catch(error => {
-          console.warn('not authenticated', error)
+          context.commit('notify', {'message': 'User Not Authenticated', 'level': 'warning'})
+          console.warn('Problem authenticating user.', error)
           context.commit('logout')
         })
     },
@@ -164,11 +194,13 @@ const store = new Vuex.Store({
       axios.post('/rest-auth/logout/', {},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
       .then(response => {
-        console.log('logged out')
+        console.info('logged out')
         context.commit('logout')
+        context.commit('notify', {'message': 'Logged out', 'level': 'success'})
       })
       .catch(error => {
-        console.log('error logging out', error)
+        context.commit('notify', {'message': 'Problem Logging Out', 'level': 'warning'})
+        console.warn('Problem logging out user.', error)
         context.commit('logoutErrors', error)
       })
     },
@@ -176,11 +208,13 @@ const store = new Vuex.Store({
       axios.post('/api/links/', {'url': url},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
-          console.log('added ' + url)
+          console.info('Added ' + url)
+          context.commit('notify', {'message': 'Added New Link', 'level': 'info'})
           context.commit('addLink', response.data)
         })
         .catch(error => {
-          console.warn(error)
+          console.warn(`Problem adding link ${url}.`, error)
+          context.commit('notify', {'message': 'Problem Adding New Link', 'level': 'warning'})
           context.commit('addLinkErrors', error.response.data)
         })
     },
@@ -188,11 +222,11 @@ const store = new Vuex.Store({
       axios.get('/api/links/',
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
       .then(response => {
-        console.log('Refreshed links')
+        console.info('Refreshed links')
         context.commit('updateLinks', response.data)
       })
       .catch(error => {
-        console.log('error getting links', error)
+        console.warn('Problem getting links.', error)
         context.commit('updateLinksErrors', error)
       })
     },
@@ -200,11 +234,13 @@ const store = new Vuex.Store({
       axios.patch(`/api/links/${id}/`, {'archived': true},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
-          console.log('archived ' + id)
+          console.info('Archived Link with id:', id)
+          context.commit('notify', {'message': 'Archived Link', 'level': 'info'})
           context.commit('archiveLink', id)
         })
         .catch(error => {
-          console.log('error archiving', error)
+          console.warn('Problem archiving link with id:', id, error)
+          context.commit('notify', {'message': 'Problem archiving link', 'level': 'warning'})
           context.commit('archiveLinkErrors', error)
         })
     },
@@ -212,11 +248,13 @@ const store = new Vuex.Store({
       axios.patch(`/api/links/${id}/`, {'archived': false},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
-          console.log('unarchived ' + id)
+          console.info('Unarchived Link with id:', id)
+          context.commit('notify', {'message': 'Unarchived Link', 'level': 'info'})
           context.commit('unarchiveLink', id)
         })
         .catch(error => {
-          console.log('error unarchiving', error)
+          console.warn('Problem unarchiving link with id:', id, error)
+          context.commit('notify', {'message': 'Problem Unarchiving Link', 'level': 'warning'})
           context.commit('unarchiveLinkErrors', error)
         })
     },
@@ -224,12 +262,13 @@ const store = new Vuex.Store({
       axios.delete(`/api/links/${id}/`,
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
-          console.log('deleted ' + id)
+          console.info('Deleted link with id:', id)
+          context.commit('notify', {'message': 'Deleted Link', 'level': 'info'})
           context.commit('removeLink', id)
-          console.log('removed Link')
         })
         .catch(error => {
-          console.error("Couldn't remove Link", error)
+          context.commit('notify', {'message': 'Problem Deleting Link', 'level': 'warning'})
+          console.warn("Couldn't remove Link", error)
           context.commit('removeLinkErrors', error)
         })
     },
@@ -237,25 +276,28 @@ const store = new Vuex.Store({
       axios.patch('/api/users/me/', {'email': email},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
-          console.log('email updated ', email)
+          console.info('Email updated')
+          context.commit('notify', {'message': 'Updated Email Address', 'level': 'info'})
           context.commit('updateEmail', email)
         })
         .catch(error => {
-          console.error('Couln\'t update email address', error)
+          console.warn('Couln\'t update email address', error)
+          context.commit('notify', {'message': 'Problem Updating Email Address', 'level': 'warning'})
           context.commit('updateEmailErrors', error.response.data)
         })
     },
     changeLinkUrl (context, data) {
       let {id, url} = data
-      console.log(url)
       axios.patch(`/api/links/${id}/`, {'url': url},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
       .then(response => {
-        console.log('updated_url', url)
+        console.info('Updated link with id:', id)
+        context.commit('notify', {'message': 'Updated Link', 'level': 'info'})
         context.commit('updateLinkUrl', id)
       })
       .catch(error => {
-        console.log('error updating url', error)
+        console.warn('Problem updating link.', error)
+        context.commit('notify', {'message': 'Problem updating Link', 'level': 'warning'})
         context.commit('updateLinkUrlErrors', error)
       })
     },

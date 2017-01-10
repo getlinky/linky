@@ -8,29 +8,30 @@
     </template>
     <router-link v-else to="/login">Login</router-link>
   </linky-nav>
-  <notification message="You may or may not have had success" type="info" :show="show" @closed="show = false"></notification>
-  </div>
+  <notification-test v-if="debug"></notification-test>
+  <linkyNotification></linkyNotification>
+</div>
 </template>
 
 <script>
 import linkyNav from './LinkyNav.vue'
-import notification from './notification.vue'
+import notificationTest from './notificationTest.vue'
+import linkyNotification from './linkyNotification.vue'
 
 export default {
   name: 'index',
-  data () {
-    return {
-      show: true,
-    }
-  },
-  components: {
-    linkyNav,
-    notification,
-  },
   computed: {
     userAuthenticated () {
       return this.$store.state.user.authenticated
     },
+    debug () {
+      return localStorage.getItem('DEBUG')
+    },
+  },
+  components: {
+    linkyNav,
+    notificationTest,
+    linkyNotification,
   },
   methods: {
     logoutUser () {
