@@ -154,10 +154,10 @@ $light-gray: #eee;
 
 // link section
 .link {
-  margin-bottom: 1rem;
-  margin-left: .5rem;
-  margin-right: .5rem;
-  padding-left: 5px;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-right: .5rem;
+  padding-left: .5rem;
   border-left-style: solid;
   border-left-color: #fff;
 
