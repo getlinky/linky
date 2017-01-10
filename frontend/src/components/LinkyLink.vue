@@ -49,7 +49,6 @@ export default {
   },
   watch: {
     link () {
-      console.log('change')
       this.editing = false
       this.title = this.li.title
       this.description = this.li.description
