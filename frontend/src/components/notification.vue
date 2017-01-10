@@ -64,10 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$font-size: 1.25em;
 $font-family: Helvetica Neue, sans-serif;
-$line-height: 3em;
-$button-size: 25px;
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
@@ -78,28 +75,64 @@ $button-size: 25px;
 
 .note {
   font-family: $font-family;
-  font-size: $font-size;
   position: fixed;
   z-index: 101;
-  width: 100%;
   text-align: center;
-  line-height: $line-height;
-  // box-shadow: 0 0 1px black;
+  left: 0;
+  right: 0;
+  font-size: 1.3em;
+  padding: 15px 80px;
+  user-select: none;
 
   .close {
     position: absolute;
-    right: $button-size;
-    // Keep button vertically centered when line-height changes
-    // top: ($font-size * $line-height - $button-size * 1em) / 2em;
-    top: $font-size;
-    height: $button-size;
-    width: $button-size;
-    line-height: $button-size;
-    border-radius: $button-size;
-    background-color: rgba(0, 0, 0, 0.2);
-    color: white;
+    top: 15px;
+    right: 25px;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    box-shadow: inset 0px 0px 5px 5px black;
+    font-size: .8em;
+    font-weight: bold;
+    line-height: 30px;
+    color: rgba(255, 255, 255, .8);
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: .2;
   }
 }
+
+@media only screen and (max-width : 600px) {
+  .note {
+    font-size: 1em;
+    padding: 12px 25px;
+
+    .close {
+      font-size: .8em;
+      height: 20px;
+      line-height: 20px;
+      right: 5px;
+      top: 5px;
+      width: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width : 400px) {
+  .note {
+    font-size: .8em;
+    padding: 15px 25px 15px 10px;
+
+    .close {
+      font-size: .8em;
+      height: 20px;
+      line-height: 20px;
+      right: 5px;
+      top: 5px;
+      width: 20px;
+    }
+  }
+}
+
 .top {
   top: 0;
 }
