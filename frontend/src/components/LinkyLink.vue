@@ -94,6 +94,7 @@ export default {
         event.clipboardData.setData('text/plain', this.li.url)
         event.preventDefault()
         console.info('Copied link to clipboard.', this.li.url)
+        this.$store.commit('notify', {'message': 'Copied Link to Clipboard', 'level': 'info'})
       }
     },
     removeCopyListener () {
