@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <linky-nav>
       <a id="add-icon" @click='showAdd = true' class="icon">+</a>
       <a @click="refreshList" class="icon">🔄</a>
@@ -28,6 +27,7 @@
     <helpModal :show="showHelp" @show="showHelp = true" @closed="showHelp = false"></helpModal>
     <showSettingsModal :show="showSettings" @show='showSettings = true' @closed="showSettings = false"></showSettingsModal>
     <addLinkModal :show="showAdd" @closed="showAdd = false"></addLinkModal>
+    <linkyNotification></linkyNotification>
   </div>
 </template>
 
@@ -36,6 +36,7 @@ import linkyNav from './LinkyNav.vue'
 import helpModal from './helpModal.vue'
 import showSettingsModal from './showSettingsModal.vue'
 import addLinkModal from './addLinkModal.vue'
+import linkyNotification from './linkyNotification.vue'
 
 import { handle_event } from '../nav.js'
 
@@ -46,6 +47,7 @@ export default {
     addLinkModal,
     showSettingsModal,
     helpModal,
+    linkyNotification,
   },
   data () {
     return {
@@ -105,7 +107,8 @@ export default {
       if (this.enableKeybinds) {
         handle_event(event)
         // l or h - switch list
-        if (event.keyCode === 76 || event.keyCode === 72) {
+        const modifierKeyPressed = event.ctrlKey || event.metaKey || event.shiftKey || event.altKey
+        if ((event.keyCode === 76 || event.keyCode === 72) && !modifierKeyPressed) {
           if (this.$router.currentRoute.path === '/list') {
             this.$router.push('/archive')
           } else if (this.$router.currentRoute.path === '/archive') {
