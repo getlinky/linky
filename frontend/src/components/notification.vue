@@ -3,7 +3,7 @@
   <div v-if="show" class="note" :class="position + ' ' + level">
     <span v-if="html" v-html="message"></span>
     <span v-else class="message">{{ message }}</span>
-    <a v-if="button && sticky" class="close" @click="closed">✕</a>
+    <a v-if="button" class="close" @click="closed">✕</a>
   </div>
   </transition>
 </template>
@@ -56,16 +56,29 @@ export default {
     },
   },
   watch: {
-    show () {
-      if (this.show) {
-        this.timer = setTimeout(() => this.closed(), this.duration)
+    propData () {
+      if (this.show && !this.sticky) {
+        clearTimeout(this.timer)
+        if (!this.sticky) {
+          this.timer = setTimeout(() => this.closed(), this.duration)
+        }
       }
     },
   },
-  mounted () {
-    if (!this.sticky) {
-      this.timer = setTimeout(() => this.closed(), this.duration)
-    }
+  computed: {
+    propData () {
+      return {
+        'duration': this.duration,
+        'button': this.button,
+        'html': this.html,
+        'level': this.level,
+        'sticky': this.sticky,
+        'message': this.message,
+        'position': this.position,
+        'theme': this.theme,
+        'show': this.show,
+      }
+    },
   },
 }
 </script>
