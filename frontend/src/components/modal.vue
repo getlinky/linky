@@ -1,4 +1,5 @@
 <template>
+  <transition name="fade">
     <div class="modal-container" @click.self="$emit('closed')" v-show="show">
         <div class="modal-inner">
             <div class="modal">
@@ -11,6 +12,7 @@
             <slot name='body'></slot>
         </div>
     </div>
+  </transition>
 </template>
 
 <script>
@@ -43,6 +45,13 @@ export default {
 </script>
 
 <style lang='scss'>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 $light-gray: #eee;
 
 a {
