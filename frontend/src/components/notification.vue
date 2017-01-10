@@ -1,9 +1,9 @@
 <template>
   <transition name="fade">
-  <div v-show="show" class="note" :class="position + ' ' + level">
+  <div v-if="show" class="note" :class="position + ' ' + level">
     <span v-if="html" v-html="message"></span>
     <span v-else class="message">{{ message }}</span>
-    <a v-if="button" class="close" @click="closed">✕</a>
+    <a v-if="button && sticky" class="close" @click="closed">✕</a>
   </div>
   </transition>
 </template>
@@ -42,7 +42,7 @@ export default {
     },
     sticky: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     theme: {
       type: String,
@@ -53,6 +53,13 @@ export default {
     closed () {
       this.$emit('closed')
       clearTimeout(this.timer)
+    },
+  },
+  watch: {
+    show () {
+      if (this.show) {
+        this.timer = setTimeout(() => this.closed(), this.duration)
+      }
     },
   },
   mounted () {
