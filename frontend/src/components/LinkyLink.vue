@@ -1,5 +1,10 @@
 <template>
-  <li class="link display-on-hover-container" tabindex="0" @keydown="keydownHandler">
+  <li class="link display-on-hover-container" tabindex="0"
+      @keydown="keybindHandler"
+      @focus="addCopyListener"
+      @blur="removeCopyListener"
+      @mouseover="addCopyListener"
+      @mouseout="removeCopyListener">
     <h3 class="link-title">
       <a :href="li.url">{{ title }}</a>
     </h3>
@@ -82,7 +87,22 @@ export default {
       this.disableEditing()
       this.url = this.li.url
     },
-    keydownHandler (event) {
+    copyHandler (event) {
+      const selection = getSelection()
+      const isSelection = selection.anchorOffset !== selection.focusOffset
+      if (!this.editing && !isSelection) {
+        event.clipboardData.setData('text/plain', this.li.url)
+        event.preventDefault()
+        console.info('Copied link to clipboard.', this.li.url)
+      }
+    },
+    removeCopyListener () {
+      document.removeEventListener('copy', this.copyHandler)
+    },
+    addCopyListener () {
+      document.addEventListener('copy', this.copyHandler)
+    },
+    keybindHandler (event) {
       if (this.editing) {
         return
       }
