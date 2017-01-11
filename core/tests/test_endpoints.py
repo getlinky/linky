@@ -41,9 +41,7 @@ class TestEndPoints(TestCase):
         /users/ route is not avaliable to unauthenticated users
         '''
         res = self.client.get('/api/users/')
-        # Note: this should be a 401 but django returns a 403
-        # see: http://stackoverflow.com/a/26608178
-        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(
             res.data,
             {'detail': 'Authentication credentials were not provided.'})
@@ -53,7 +51,7 @@ class TestEndPoints(TestCase):
         /link/ route should not be available to unauthenticated users
         '''
         res = self.client.get('/api/links/')
-        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(
             res.data,
             {'detail': 'Authentication credentials were not provided.'})
@@ -104,7 +102,7 @@ class TestEndPoints(TestCase):
         '''
         client = APIClient()
         res = client.get('/api/users/me/')
-        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(
             res.data,
             {'detail': 'Authentication credentials were not provided.'})
