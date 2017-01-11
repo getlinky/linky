@@ -120,6 +120,9 @@ LOGIN_URL = '/login/'
 
 AUTH_USER_MODEL = 'core.MyUser'
 
+# Rest Auth - Require old password to create new one
+OLD_PASSWORD_FIELD_ENABLED = True
+
 # Required to handle absence of username in user model
 REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'core.serializers.UserSerializer'}
 

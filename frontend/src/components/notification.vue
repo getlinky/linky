@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-  <div v-if="show" class="note" :class="position + ' ' + level">
+  <div v-if="show" class="note" :class="[position, level]">
     <span v-if="html" v-html="message"></span>
     <span v-else class="message">{{ message }}</span>
     <a v-if="button" class="close" @click="closed">✕</a>
