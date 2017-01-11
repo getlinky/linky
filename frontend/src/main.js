@@ -9,21 +9,23 @@ import Login from './components/Login.vue'
 
 Vue.use(VueRouter)
 
+import axios from 'axios'
+
+const is_authenticated = () =>
+  axios.get('/api/users/me/', {
+    headers: {'Authorization': 'Token ' + localStorage.getItem('token')},
+  })
+
 const loginRequired = (to, from, next) => {
-  if (store.state.user.authenticated || from.path === '/login') {
-    next()
-  } else {
-    console.log(`loginRequired for ${to.path}`)
-    next('/login')
-  }
+  is_authenticated()
+    .then(() => next())
+    .catch(() => next('/login'))
 }
 
 const anonRequired = (to, from, next) => {
-  if (store.state.user.authenticated) {
-    next('/list')
-  } else {
-    next()
-  }
+  is_authenticated()
+    .then(() => next('/list'))
+    .catch(() => next())
 }
 
 const isAuthenticated = (to, from, next) => {

@@ -8,7 +8,6 @@
     </template>
     <li v-else>
       No links found.
-      <pre>{{ archive_items }}</pre>
     </li>
   </list-base>
 </template>

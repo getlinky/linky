@@ -109,9 +109,6 @@ const store = new Vuex.Store({
     logoutErrors (state, errors) {
       state.errors.logout = errors
     },
-    checkAuthSuccessfull (state) {
-      state.user.authenticated = true
-    },
     disableKeybinds (state) {
       state.keybindsDisabled++
     },
@@ -160,7 +157,6 @@ const store = new Vuex.Store({
           console.info('User authenticated')
           context.commit('updateEmail', response.data.email)
           context.commit('loginSuccessful', localStorage.getItem('token'))
-          context.commit('checkAuthSuccessfull')
         })
         .catch(error => {
           context.commit('notify', {'message': 'User Not Authenticated', 'level': 'warning'})

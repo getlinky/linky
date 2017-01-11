@@ -8,7 +8,6 @@
     </template>
     <li v-else>
       No links found.
-      <pre>{{ list_items }}</pre>
     </li>
   </list-base>
 </template>
