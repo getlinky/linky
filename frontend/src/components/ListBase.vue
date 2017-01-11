@@ -2,7 +2,6 @@
   <div>
     <linky-nav>
       <a id="add-icon" @click='showAdd = true' class="icon">+</a>
-      <a @click="refreshList" class="icon">🔄</a>
       <a id="settings-icon" @click='showSettings = true' class="icon">⚙</a>
       <a v-if="authenticated" @click='logout'>Logout</a>
       <router-link to="/login" v-else>Login</router-link>
@@ -94,10 +93,6 @@ export default {
     },
   },
   methods: {
-    refreshList () {
-      this.$store.commit('notify', {'message': 'Refreshed List', 'level': 'info'})
-      this.$store.dispatch('refreshLinks')
-    },
     logout () {
       this.$store.dispatch('logout').then(this.$router.replace('/'))
     },
