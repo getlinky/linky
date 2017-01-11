@@ -12,8 +12,8 @@
         <li><kbd>/</kbd> — search</li>
         <li><kbd>?</kbd> — toggle help menu</li>
         <li><kbd>esc</kbd> — close current menu</li>
-        <li><kbd>cmd/ctrl-c</kbd> or <kbd>y</kbd> — copy link to clipboard</li>
-        <li><kbd>cmd/ctrl-v</kbd> — add link from clipboard</li>
+        <li><kbd>{{ super_key }}-c</kbd> or <kbd>y</kbd> — copy link to clipboard</li>
+        <li><kbd>{{ super_key }}-v</kbd> — add link from clipboard</li>
       </ul>
   </modal>
 </template>
@@ -56,6 +56,12 @@
       },
       showModal () {
         this.$emit('show')
+      },
+    },
+    computed: {
+      super_key () {
+        const is_mac = navigator.platform.toUpperCase().indexOf('MAC') > -1
+        return is_mac ? 'cmd' : 'ctrl'
       },
     },
   }
