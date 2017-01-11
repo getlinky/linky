@@ -2,8 +2,8 @@
   <modal :show='show' @closed='closeModal'>
       <h1 slot='header'>Key Binds</h1>
       <ul slot="body">
-        <li><kbd>j</kbd> — down</li>
-        <li><kbd>k</kbd> — up</li>
+        <li><kbd>j</kbd> or <kbd>ctrl-n</kbd> — down</li>
+        <li><kbd>k</kbd> or <kbd>ctrl-p</kbd> — up</li>
         <li><kbd>l</kbd> — switch right list (wraps)</li>
         <li><kbd>h</kbd> — switch left list (wraps)</li>
         <li><kbd>a</kbd> — archive current item (or unarchive)</li>

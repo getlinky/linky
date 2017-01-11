@@ -167,7 +167,7 @@ $light-gray: #eee;
     margin-left: 0px;
     background-color: lighten($light-gray, 3%);
     border-left-style: solid;
-    border-left-color: $text-gray;
+    border-left-color: invert($text-gray);
     border-left-width: 3px;
     color: $text-gray;
   }
