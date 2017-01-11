@@ -53,6 +53,8 @@ import linkyNav from './LinkyNav.vue'
 import background from './background.vue'
 import linkyNotification from './linkyNotification.vue'
 
+import axios from 'axios'
+
 export default {
   name: 'settings',
   components: {
@@ -94,9 +96,23 @@ export default {
     progress (event) {
       console.log(event)
     },
+    saveFile (data) {
+      let link = document.createElement('a')
+      let file = new File([JSON.stringify(data)], 'filename', {type: 'text/plaintext', lastModified: Date.now()})
+      link.href = URL.createObjectURL(file)
+      link.download = 'linky-export.json'
+      link.click()
+    },
     exportLinks () {
       console.info('Exporting of links is to be implemented')
-      this.$store.commit('notify', {'message': 'Exporting Links', 'level': 'info'})
+      axios.get('/api/links/', {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
+      .then(response => {
+        this.saveFile(response.data)
+        this.$store.commit('notify', {'message': 'Exported Links', 'level': 'info'})
+      }, error => {
+        console.warn('Problem exporting links.', error)
+        this.$store.commit('notify', {'message': 'Problem Exporting Links', 'level': 'warning'})
+      })
     },
   },
 }
