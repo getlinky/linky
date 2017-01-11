@@ -12,7 +12,7 @@
             <input type='password' name='password' required v-model='password'>
           </label>
           <input type='submit' value='Login'>
-          <pre v-if="Object.keys(errors).length > 0">{{ errors.response.data }}</pre>
+          <p class='warning' v-show="errors"><em>Error:</em> incorrect login info</p>
         </form>
       </div>
     </div>
@@ -22,6 +22,7 @@
 
 <script>
 import { focus } from 'vue-focus'
+import axios from 'axios'
 
 import linkyNav from './LinkyNav.vue'
 
@@ -38,18 +39,26 @@ export default {
       email: '',
       password: '',
       emailFocused: true,
+      errors: false,
     }
-  },
-  computed: {
-    errors () {
-      return this.$store.state.errors.login
-    },
   },
   methods: {
     login () {
-      const creds = {'email': this.email, 'password': this.password}
-      this.$store.dispatch('login', creds)
-      .then(this.$router.replace('/list'))
+      const credentials = {'email': this.email, 'password': this.password}
+      axios.post('/rest-auth/login/', credentials)
+        .then(response => {
+          this.$store.commit('notify', {'message': 'Login Successful', 'level': 'success'})
+          console.info('Login successful')
+          this.$store.commit('loginSuccessful', response.data.key)
+          // fetch links once user is logged in
+          this.$store.dispatch('refreshLinks')
+          this.errors = false
+          this.$router.replace('/list')
+        })
+        .catch(error => {
+          console.warn('problem logging in', error)
+          this.errors = true
+        })
     },
   },
 }

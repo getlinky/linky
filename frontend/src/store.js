@@ -17,7 +17,6 @@ const store = new Vuex.Store({
       removeLink: [],
       archiveLink: [],
       unarchiveLink: [],
-      login: [],
       logout: [],
       updateEmail: null,
       updateLinks: [],
@@ -100,10 +99,6 @@ const store = new Vuex.Store({
       state.user.authenticated = true
       state.user.token = token
       localStorage.setItem('token', token)
-      state.errors.login = []
-    },
-    loginErrors (state, errors) {
-      state.errors.login = errors
     },
     logout (state) {
       state.user.email = ''
@@ -158,22 +153,6 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    login (context, credentials) {
-      context.commit('updateEmail', credentials.email)
-
-      axios.post('/rest-auth/login/', credentials)
-      .then(response => {
-        context.commit('notify', {'message': 'Login Successful', 'level': 'success'})
-        console.info('Login successful')
-        context.commit('loginSuccessful', response.data.key)
-        // fetch links once user is logged in
-        store.dispatch('refreshLinks')
-      })
-      .catch(error => {
-        console.warn('problem logging in', error)
-        context.commit('loginErrors', error)
-      })
-    },
     isAuthenticated (context) {
       axios.get('/api/users/me/',
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
