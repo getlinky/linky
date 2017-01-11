@@ -12,6 +12,8 @@
         <li><kbd>/</kbd> - search</li>
         <li><kbd>?</kbd> - toggle help menu</li>
         <li><kbd>esc</kbd> - close current menu</li>
+        <li><kbd>cmd/ctrl-c</kbd> - copy currently selected link to clipboard</li>
+        <li><kbd>cmd/ctrl-v</kbd> - add link from clipboard</li>
       </ul>
   </modal>
 </template>
