@@ -12,7 +12,9 @@
             <input type='password' name='password' required v-model='password'>
           </label>
           <input type='submit' value='Login'>
-          <p class='warning' v-show="errors"><em>Error:</em> incorrect login info</p>
+          <transition name="fade">
+            <p class='warning' v-show="errors"><em>Error:</em> incorrect login info</p>
+          </transition>
         </form>
       </div>
     </div>
@@ -65,6 +67,13 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
 .container {
   display: flex;
