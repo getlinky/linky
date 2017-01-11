@@ -1,14 +1,19 @@
 <template>
   <div>
     <linky-nav></linky-nav>
-    <form slot='body' action="" method="post" @submit.prevent='login'>
-      <label for='email'>Email</label>
-      <input v-focus="emailFocused" @focus='emailFocused = true' @blur='emailFocused = false' type='email' name='email' placeholder='name@example.com' required v-model='email'>
-      <label for='password'>Password</label>
-      <input type='password' name='password' required v-model='password'>
-      <input type='submit' value='Login'>
-      <pre v-if="Object.keys(errors).length > 0">{{ errors.response.data }}</pre>
-    </form>
+    <div class="container">
+      <div>
+        <h1>Login</h1>
+        <form slot='body' action="" method="post" @submit.prevent='login'>
+          <label for='email'>Email</label>
+          <input v-focus="emailFocused" @focus='emailFocused = true' @blur='emailFocused = false' type='email' name='email' placeholder='name@example.com' required v-model='email'>
+          <label for='password'>Password</label>
+          <input type='password' name='password' required v-model='password'>
+          <input type='submit' value='Login'>
+          <pre v-if="Object.keys(errors).length > 0">{{ errors.response.data }}</pre>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -47,3 +52,12 @@ export default {
   },
 }
 </script>
+
+<style lang='scss' scoped>
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+</style>
