@@ -210,7 +210,6 @@ input {
 }
 
 .main-nav {
-  background: $light-gray;
 
   a {
     padding: .5rem .5rem;
