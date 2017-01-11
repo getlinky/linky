@@ -15,10 +15,10 @@
             <input type="password" v-model="oldPassword" required>
           </label>
           <label>New Password
-            <input type="text" v-model="newPassword1" required>
+            <input type="password" v-model="newPassword1" required>
           </label>
           <label><i>Again</i>
-            <input type="text" v-model="newPassword2" required>
+            <input type="password" v-model="newPassword2" required>
           </label>
           <input type="submit" value="Update Password">
         </form>
@@ -84,6 +84,9 @@ export default {
         'new_password2': this.newPassword2,
       }
       this.$store.dispatch('updatePassword', data)
+      this.oldPassword = ''
+      this.newPassword1 = ''
+      this.newPassword2 = ''
     },
     updateEmail () {
       this.$store.dispatch('changeEmailAddress', this.updatedEmail)
