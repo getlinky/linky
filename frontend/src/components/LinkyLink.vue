@@ -159,17 +159,17 @@ $light-gray: #eee;
 
 // link section
 .link {
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-  padding-right: .5rem;
-  padding-left: .5rem;
-  border-left-style: solid;
-  border-left-color: #fff;
+  padding: .5em;
+  margin-left: 3px;
 
   &:focus {
     outline: none;
+    margin-left: 0px;
     background-color: lighten($light-gray, 3%);
+    border-left-style: solid;
     border-left-color: $text-gray;
+    border-left-width: 3px;
+    color: $text-gray;
   }
 
   & > * {

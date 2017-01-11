@@ -53,6 +53,7 @@ export default {
 }
 
 $light-gray: #eee;
+$text-gray: #444;
 
 a {
   cursor: pointer
@@ -69,6 +70,7 @@ a {
   top: 0;
   width: 100%;
   z-index: 10;
+  color: $text-gray;
 }
 
 .modal-inner {

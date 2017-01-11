@@ -6,6 +6,7 @@ import Index from './components/Index.vue'
 import List from './components/List.vue'
 import Archive from './components/Archive.vue'
 import Login from './components/Login.vue'
+import Settings from './components/Settings.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,10 @@ const routes = [
   { path: '/login',
     component: Login,
     beforeEnter: anonRequired,
+  },
+  { path: '/settings',
+    component: Settings,
+    beforeEnter: loginRequired,
   },
 ]
 

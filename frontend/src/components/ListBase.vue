@@ -68,6 +68,7 @@ export default {
     this.$store.dispatch('refreshLinks')
     document.addEventListener('paste', this.pasteHandler)
     document.addEventListener('keydown', this.keybindsHandler)
+    document.getElementsByTagName('body')[0].classList = this.background
   },
   beforeDestroy () {
     document.removeEventListener('paste', this.pasteHandler)
@@ -83,9 +84,18 @@ export default {
     enablePaste () {
       return this.$store.state.errors.addLink == null && this.enableKeybinds
     },
+    background () {
+      return this.$store.state.background
+    },
+  },
+  watch: {
+    background () {
+      document.getElementsByTagName('body')[0].classList = this.background
+    },
   },
   methods: {
     refreshList () {
+      this.$store.commit('notify', {'message': 'Refreshed List', 'level': 'info'})
       this.$store.dispatch('refreshLinks')
     },
     logout () {
@@ -135,11 +145,24 @@ $sepia: #f8f2e3;
 $grayblack: #3c3c3c;
 
 $light-gray: #eee;
+
 html {
   color: $text-gray;
   font-family: $font-family;
   font-size: $base-font-size;
-  // background-color: $sepia;
+}
+
+.sepia {
+  background-color: $sepia;
+}
+
+.grayblack {
+  background-color: $grayblack;
+  color: $light-gray;
+}
+
+.white {
+  background-color: white;
 }
 
 body {
@@ -210,7 +233,6 @@ input {
 }
 
 .main-nav {
-
   a {
     padding: .5rem .5rem;
     color: inherit;

@@ -35,6 +35,7 @@ const store = new Vuex.Store({
         html: false,
       },
     },
+    background: localStorage.getItem('backgroundColor') != null ? localStorage.getItem('backgroundColor') : 'white',
   },
   mutations: {
     archiveLink (state, id) {
@@ -147,6 +148,11 @@ const store = new Vuex.Store({
     },
     notificationClosed (state) {
       state.notification.show = false
+    },
+    setBackground (state, color) {
+      state.background = color
+      document.getElementsByTagName('body')[0].classList = color
+      localStorage.setItem('backgroundColor', color)
     },
   },
   actions: {

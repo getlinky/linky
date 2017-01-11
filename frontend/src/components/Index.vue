@@ -27,6 +27,9 @@ export default {
     debug () {
       return localStorage.getItem('DEBUG')
     },
+    background () {
+      return this.$store.state.background
+    },
   },
   components: {
     linkyNav,
@@ -38,6 +41,10 @@ export default {
       this.$store.dispatch('logout')
         .then(this.$router.replace('/'))
     },
+  },
+  mounted () {
+    console.log()
+    document.getElementsByTagName('body')[0].classList = this.background
   },
 }
 </script>
