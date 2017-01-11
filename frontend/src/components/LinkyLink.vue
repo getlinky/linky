@@ -108,6 +108,11 @@ export default {
         return
       }
       switch (event.keyCode) {
+        case 89: {
+          // y - copy link
+          document.execCommand('copy')
+          break
+        }
         case 13: {
           // enter - open in current tab
           window.location.href = this.li.url

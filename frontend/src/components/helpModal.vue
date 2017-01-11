@@ -2,18 +2,18 @@
   <modal :show='show' @closed='closeModal'>
       <h1 slot='header'>Key Binds</h1>
       <ul slot="body">
-        <li><kbd>j</kbd> - down</li>
-        <li><kbd>k</kbd> - up</li>
-        <li><kbd>l</kbd> - switch right list (wraps)</li>
-        <li><kbd>h</kbd> - switch left list (wraps)</li>
-        <li><kbd>a</kbd> - archive current item (or unarchive)</li>
-        <li><kbd>#</kbd> - delete current item</li>
-        <li><kbd>e</kbd> - edit current item</li>
-        <li><kbd>/</kbd> - search</li>
-        <li><kbd>?</kbd> - toggle help menu</li>
-        <li><kbd>esc</kbd> - close current menu</li>
-        <li><kbd>cmd/ctrl-c</kbd> - copy currently selected link to clipboard</li>
-        <li><kbd>cmd/ctrl-v</kbd> - add link from clipboard</li>
+        <li><kbd>j</kbd> — down</li>
+        <li><kbd>k</kbd> — up</li>
+        <li><kbd>l</kbd> — switch right list (wraps)</li>
+        <li><kbd>h</kbd> — switch left list (wraps)</li>
+        <li><kbd>a</kbd> — archive current item (or unarchive)</li>
+        <li><kbd>#</kbd> — delete current item</li>
+        <li><kbd>e</kbd> — edit current item</li>
+        <li><kbd>/</kbd> — search</li>
+        <li><kbd>?</kbd> — toggle help menu</li>
+        <li><kbd>esc</kbd> — close current menu</li>
+        <li><kbd>cmd/ctrl-c</kbd> or <kbd>y</kbd> — copy link to clipboard</li>
+        <li><kbd>cmd/ctrl-v</kbd> — add link from clipboard</li>
       </ul>
   </modal>
 </template>
