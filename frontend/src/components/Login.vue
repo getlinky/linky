@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <linky-base>
     <linky-nav></linky-nav>
     <div class="container">
       <div>
@@ -20,7 +20,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </linky-base>
 </template>
 
 
@@ -28,6 +28,7 @@
 import { focus } from 'vue-focus'
 import axios from 'axios'
 
+import linkyBase from './LinkyBase.vue'
 import linkyNav from './LinkyNav.vue'
 
 export default {
@@ -36,6 +37,7 @@ export default {
   },
   name: 'login',
   components: {
+    linkyBase,
     linkyNav,
   },
   data () {

@@ -1,13 +1,13 @@
 <template>
-<div>
-  <linky-nav>
-    <template v-if='userAuthenticated'>
-      <router-link to="/list">List</router-link>
-      <router-link to="/archive">Archive</router-link>
-      <a @click='logoutUser'>Logout</a>
-    </template>
-    <router-link v-else to="/login">Login</router-link>
-  </linky-nav>
+  <linky-base>
+    <linky-nav>
+      <template v-if='userAuthenticated'>
+        <router-link to="/list">List</router-link>
+        <router-link to="/archive">Archive</router-link>
+        <a @click='logoutUser'>Logout</a>
+      </template>
+      <router-link v-else to="/login">Login</router-link>
+    </linky-nav>
     <h1><i>Linky</i> — Save links for later</h1>
     <div class="container">
       <div class="item">
@@ -38,14 +38,16 @@
         </form>
       </div>
     </div>
-  <notification-test v-if="debug"></notification-test>
-  <linkyNotification></linkyNotification>
-</div>
+    <notification-test v-if="debug"></notification-test>
+    <linkyNotification></linkyNotification>
+  </linky-base>
 </template>
 
 <script>
 import { focus } from 'vue-focus'
 import axios from 'axios'
+
+import linkyBase from './LinkyBase.vue'
 import linkyNav from './LinkyNav.vue'
 import notificationTest from './notificationTest.vue'
 import linkyNotification from './linkyNotification.vue'
@@ -75,6 +77,7 @@ export default {
     }
   },
   components: {
+    linkyBase,
     linkyNav,
     notificationTest,
     linkyNotification,

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <linky-base>
     <linky-nav>
       <a @click='showAdd = true'>Add Link</a>
       <a @click='showSettings = true'>Settings</a>
@@ -26,10 +26,11 @@
     <showSettingsModal :show="showSettings" @show='showSettings = true' @closed="showSettings = false"></showSettingsModal>
     <addLinkModal :show="showAdd" @show='showAdd = true' @closed="showAdd = false"></addLinkModal>
     <linkyNotification></linkyNotification>
-  </div>
+  </linky-base>
 </template>
 
 <script>
+import linkyBase from './LinkyBase.vue'
 import linkyNav from './LinkyNav.vue'
 import helpModal from './helpModal.vue'
 import showSettingsModal from './showSettingsModal.vue'
@@ -41,6 +42,7 @@ import { handle_event } from '../nav.js'
 export default {
   name: 'list-base',
   components: {
+    linkyBase,
     linkyNav,
     addLinkModal,
     showSettingsModal,

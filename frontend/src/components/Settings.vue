@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <linky-base>
     <linky-nav>
       <router-link to="/list">List</router-link>
       <router-link to="/archive">Archive</router-link>
@@ -45,10 +45,11 @@
       </div>
     </div>
     <linky-notification></linky-notification>
-  </div>
+  </linky-base>
 </template>
 
 <script>
+import linkyBase from './LinkyBase.vue'
 import linkyNav from './LinkyNav.vue'
 import background from './background.vue'
 import linkyNotification from './linkyNotification.vue'
@@ -58,6 +59,7 @@ import axios from 'axios'
 export default {
   name: 'settings',
   components: {
+    linkyBase,
     linkyNav,
     background,
     linkyNotification,
