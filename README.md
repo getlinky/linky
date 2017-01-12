@@ -25,6 +25,10 @@ python manage.py runserver
 
 cd frontend && \
 npm run dev
+
+# in another shell (when testing password reset flow)
+
+python -m smtpd -n -c DebuggingServer localhost:1025
 ```
 
 ```

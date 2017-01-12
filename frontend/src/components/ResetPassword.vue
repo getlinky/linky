@@ -1,0 +1,57 @@
+<template>
+  <div>
+    <linky-nav></linky-nav>
+    <div class="container">
+      <div class="item">
+       <h1>Reset Password</h1>
+        <form @submit.prevent.once="resetPassword">
+          <label> Email
+            <input type="email" v-model="email" required>
+          </label>
+          <input type="submit" value="Reset">
+        </form>
+      </div>
+    </div>
+    <linky-notification></linky-notification>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+import linkyNav from './LinkyNav.vue'
+import linkyNotification from './linkyNotification.vue'
+
+export default {
+  components: {
+    linkyNav,
+    linkyNotification,
+  },
+  data () {
+    return {
+      email: '',
+    }
+  },
+  methods: {
+    resetPassword () {
+      axios.post('/rest-auth/password/reset/', {'email': this.email})
+      .then(response => {
+        this.$store.commit('notify', {'message': 'Password Reset. Check your email to complete the process.', 'level': 'success'})
+        console.info('Password Reset')
+        this.email = ''
+      })
+      .catch(error => {
+        this.$store.commit('notify', {'message': 'Problem Resetting Password', 'level': 'warning'})
+        console.warn('Problem resetting password.', error)
+      })
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  margin-left: 5px;
+}
+</style>

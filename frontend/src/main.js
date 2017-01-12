@@ -7,6 +7,8 @@ import List from './components/List.vue'
 import Archive from './components/Archive.vue'
 import Login from './components/Login.vue'
 import Settings from './components/Settings.vue'
+import ResetPassword from './components/ResetPassword.vue'
+import ConfirmResetPassword from './components/ConfirmResetPassword.vue'
 
 Vue.use(VueRouter)
 
@@ -53,6 +55,13 @@ const routes = [
   { path: '/settings',
     component: Settings,
     beforeEnter: loginRequired,
+  },
+  {
+    path: '/reset',
+    component: ResetPassword,
+  },
+  { path: '/reset/confirm/:uid-:token',
+    component: ConfirmResetPassword,
   },
 ]
 

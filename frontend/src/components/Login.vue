@@ -12,6 +12,8 @@
             <input type='password' name='password' required v-model='password'>
           </label>
           <input type='submit' value='Login'>
+          <br>
+          <router-link to="/reset">Forgot Password?</router-link>
           <transition name="fade">
             <p class='warning' v-show="errors"><em>Error:</em> incorrect login info</p>
           </transition>
