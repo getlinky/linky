@@ -27,6 +27,7 @@ const store = new Vuex.Store({
     },
     keybindsDisabled: 0,
     loadingprogress: 0,
+    query: '',
     notification: {
       message: '',
       level: '',
@@ -161,6 +162,9 @@ const store = new Vuex.Store({
     },
     setLoadingProgress (state, percentage) {
       state.loadingprogress = percentage
+    },
+    setQuery (state, query) {
+      state.query = query
     },
   },
   actions: {

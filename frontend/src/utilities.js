@@ -16,3 +16,9 @@ export const normalize = value => {
   value = value.toString().replace(/_/g, ' ')
   return value.charAt(0).toUpperCase() + value.slice(1)
 }
+
+export const search = (obj, query) =>
+  [obj.description, obj.title, obj.url]
+    .join(' ')
+    .toUpperCase()
+    .includes(query.toUpperCase())

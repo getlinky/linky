@@ -92,6 +92,9 @@ export default {
     background () {
       document.getElementsByTagName('body')[0].classList = this.background
     },
+    query () {
+      this.$store.commit('setQuery', this.query)
+    },
   },
   methods: {
     logout () {

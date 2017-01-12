@@ -16,7 +16,7 @@
 import linkyLink from './LinkyLink.vue'
 import listBase from './ListBase.vue'
 
-import { compareDateStrings } from '../utilities.js'
+import { compareDateStrings, search } from '../utilities.js'
 
 export default {
   name: 'list',
@@ -29,6 +29,7 @@ export default {
       return this.$store.state
         .links
         .filter(x => !x.archived)
+        .filter(x => search(x, this.$store.state.query))
         .sort((x, y) => compareDateStrings(x.last_updated, y.last_updated))
         .reverse()
     },
