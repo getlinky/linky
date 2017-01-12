@@ -34,6 +34,11 @@ const isAuthenticated = (to, from, next) => {
   next()
 }
 
+const clearNotifications = (to, from, next) => {
+  store.commit('notificationClosed')
+  next()
+}
+
 const routes = [
   { path: '/',
     component: Index,
@@ -62,6 +67,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach(isAuthenticated)
+router.beforeEach(clearNotifications)
 
 new Vue({
   store,
