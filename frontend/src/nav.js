@@ -30,6 +30,7 @@ export const handle_event = event => {
     return k === {
       74: 'j',
       75: 'k',
+      78: 'n',
       80: 'p',
       191: '/',
     }[event.keyCode]
@@ -37,14 +38,17 @@ export const handle_event = event => {
 
   const active_element = document.activeElement.tagName.toLowerCase()
   // focus first link element if active element is the body
-  if ((is_key('j') || is_key('k')) && active_element === 'body') {
+
+  const is_next = is_key('j') || (event.ctrlKey && is_key('n'))
+  const is_prev = is_key('k') || (event.ctrlKey && is_key('p'))
+  if ((is_next || is_prev) && active_element === 'body') {
     document.querySelector('.link-container > li').focus()
     return
   }
 
-  if (is_key('j') || (event.ctrlKey && is_key('n'))) {
+  if (is_next) {
     links_nav.next()
-  } else if (is_key('k') || (event.ctrlKey && is_key('p'))) {
+  } else if (is_prev) {
     links_nav.previous()
   } else if (is_key('/') && !event.shiftKey) {
     links_nav.focus_search()
