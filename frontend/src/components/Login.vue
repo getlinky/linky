@@ -31,6 +31,7 @@
 <script>
 import { focus } from 'vue-focus'
 import axios from 'axios'
+import { normalize } from '../utilities.js'
 
 import linkyBase from './LinkyBase.vue'
 import linkyNav from './LinkyNav.vue'
@@ -53,12 +54,7 @@ export default {
     }
   },
   filters: {
-    // https://vuejs.org/v2/guide/syntax.html#Filters
-    normalize: function (value) {
-      if (!value) return ''
-      value = value.toString().replace(/_/g, ' ')
-      return value.charAt(0).toUpperCase() + value.slice(1)
-    },
+    normalize,
   },
   methods: {
     login () {

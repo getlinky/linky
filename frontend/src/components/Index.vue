@@ -37,20 +37,25 @@
           <input type="submit" value="Register">
         </form>
       </div>
+      <div class="item" v-if="Object.keys(inputErrors).length > 0">
+        <h2>Input Errors</h2>
+        <transition name="fade" v-for="(errors, name) in inputErrors" v-if="errors.length > 0">
+          <p class="warning">
+          {{ name | normalize }}: <template v-for="error in errors">{{ error }}</template>
+          </p>
+        </transition>
+      </div>
     </div>
-    <notification-test v-if="debug"></notification-test>
-    <linkyNotification></linkyNotification>
   </linky-base>
 </template>
 
 <script>
 import { focus } from 'vue-focus'
 import axios from 'axios'
+import { normalize } from '../utilities.js'
 
 import linkyBase from './LinkyBase.vue'
 import linkyNav from './LinkyNav.vue'
-import notificationTest from './notificationTest.vue'
-import linkyNotification from './linkyNotification.vue'
 
 export default {
   name: 'index',
@@ -68,19 +73,21 @@ export default {
   directives: {
     focus,
   },
+  filters: {
+    normalize,
+  },
   data () {
     return {
       email: '',
       password1: '',
       password2: '',
       focusEmail: true,
+      inputErrors: {},
     }
   },
   components: {
     linkyBase,
     linkyNav,
-    notificationTest,
-    linkyNotification,
   },
   methods: {
     logoutUser () {
@@ -101,12 +108,12 @@ export default {
       })
       .catch(error => {
         console.warn('Problem registering user.', error)
-        this.$store.commit('notify', {'message': 'Problem Registering User', 'level': 'warning'})
+        this.inputErrors = error.response.data
+        this.$store.commit('notify', {'message': 'Problem Registering User', 'level': 'warning', 'sticky': true})
       })
     },
   },
   mounted () {
-    console.log()
     document.getElementsByTagName('body')[0].classList = this.background
   },
 }
