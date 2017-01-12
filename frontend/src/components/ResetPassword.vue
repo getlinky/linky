@@ -6,7 +6,7 @@
        <h1>Reset Password</h1>
         <form @submit.prevent.once="resetPassword">
           <label> Email
-            <input type="email" v-model="email" required>
+            <input v-focus="emailFocus" @focus="emailFocus = true" @blur="emailFocus = false" type="email" v-model="email" required>
           </label>
           <input type="submit" value="Reset">
         </form>
@@ -18,10 +18,14 @@
 
 <script>
 import axios from 'axios'
+import { focus } from 'vue-focus'
 import linkyNav from './LinkyNav.vue'
 import linkyNotification from './linkyNotification.vue'
 
 export default {
+  directives: {
+    focus,
+  },
   components: {
     linkyNav,
     linkyNotification,
@@ -29,6 +33,7 @@ export default {
   data () {
     return {
       email: '',
+      emailFocus: true,
     }
   },
   methods: {
