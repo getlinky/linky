@@ -165,7 +165,6 @@ const store = new Vuex.Store({
           context.commit('loginSuccessful', localStorage.getItem('token'))
         })
         .catch(error => {
-          context.commit('notify', {'message': 'User Not Authenticated', 'level': 'warning'})
           console.warn('Problem authenticating user.', error)
           context.commit('logout')
         })
