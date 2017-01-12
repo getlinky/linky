@@ -36,14 +36,14 @@
           <br>
           <input type="submit" value="Register">
         </form>
-      </div>
-      <div class="item" v-if="Object.keys(inputErrors).length > 0">
-        <h2>Input Errors</h2>
-        <transition name="fade" v-for="(errors, name) in inputErrors" v-if="errors.length > 0">
-          <p class="warning">
-          {{ name | normalize }}: <template v-for="error in errors">{{ error }}</template>
-          </p>
-        </transition>
+        <div class="errors" v-show="Object.keys(inputErrors).length > 0">
+          <transition name="fade" v-for="(errors, name) in inputErrors" v-if="errors.length > 0">
+            <p class="warning">
+            {{ name | normalize }}:
+                <template v-for="error in errors">{{ error }} </template>
+            </p>
+          </transition>
+        </div>
       </div>
     </div>
   </linky-base>
@@ -147,6 +147,10 @@ h1 {
       font-weight: normal;
       padding-top: 1em;
       font-size: .8em;
+    }
+    .errors {
+      font-size: .6em;
+      font-weight: normal;
     }
   }
 }

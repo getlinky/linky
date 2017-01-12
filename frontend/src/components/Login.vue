@@ -18,7 +18,7 @@
           </div>
           <transition name="fade" v-for="(errors, name) in inputErrors" v-if="errors.length > 0">
             <p class="warning">
-            {{ name | normalize }}: <template v-for="error in errors">{{ error }}</template>
+            {{ name | normalize }}: <template v-for="error in errors">{{ error }} </template>
             </p>
           </transition>
         </form>
