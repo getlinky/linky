@@ -65,6 +65,9 @@ export default {
       }
     },
   },
+  beforeDestroy () {
+    this.closed()
+  },
   computed: {
     propData () {
       return {
