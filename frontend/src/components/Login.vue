@@ -13,9 +13,13 @@
           </label>
           <input type='submit' value='Login'>
           <br>
-          <router-link to="/reset">Forgot Password?</router-link>
-          <transition name="fade">
-            <p class='warning' v-show="errors"><em>Error:</em> incorrect login info</p>
+          <div class="forgot">
+            <router-link to="/reset">Forgot Password?</router-link>
+          </div>
+          <transition name="fade" v-for="(errors, name) in inputErrors" v-if="errors.length > 0">
+            <p class="warning">
+            {{ name | normalize }}: <template v-for="error in errors">{{ error }}</template>
+            </p>
           </transition>
         </form>
       </div>
@@ -45,8 +49,16 @@ export default {
       email: '',
       password: '',
       emailFocused: true,
-      errors: false,
+      inputErrors: {},
     }
+  },
+  filters: {
+    // https://vuejs.org/v2/guide/syntax.html#Filters
+    normalize: function (value) {
+      if (!value) return ''
+      value = value.toString().replace(/_/g, ' ')
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    },
   },
   methods: {
     login () {
@@ -58,12 +70,13 @@ export default {
           this.$store.commit('loginSuccessful', response.data.key)
           // fetch links once user is logged in
           this.$store.dispatch('refreshLinks')
-          this.errors = false
+          this.inputErrors = null
           this.$router.replace('/list')
         })
         .catch(error => {
           console.warn('problem logging in', error)
-          this.errors = true
+          this.inputErrors = error.response.data
+          this.$store.commit('notify', {'message': 'Problem Logging In', 'level': 'warning', 'sticky': true})
         })
     },
   },
@@ -83,6 +96,14 @@ export default {
   display: flex;
   justify-content: center;
   margin-left: 5px;
+}
+
+.forgot {
+  padding-top: .5em;
+}
+
+.warning {
+  font-style: italic;
 }
 
 label {

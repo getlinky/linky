@@ -1,12 +1,18 @@
 <template>
   <div>
     <slot></slot>
+    <linky-notification></linky-notification>
   </div>
 </template>
 
 <script>
+import linkyNotification from './linkyNotification.vue'
+
 export default {
   name: 'linky-base',
+  components: {
+    linkyNotification,
+  },
 }
 </script>
 

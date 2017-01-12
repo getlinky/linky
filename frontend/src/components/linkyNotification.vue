@@ -1,5 +1,5 @@
 <template>
-  <notification :message="message" :level="level" :show="showNotification" @closed="closed"></notification>
+  <notification :message="message" :level="level" :show="showNotification" :sticky="sticky" @closed="closed"></notification>
 </template>
 
 <script>
@@ -16,6 +16,9 @@ export default {
     },
     showNotification () {
       return this.$store.state.notification.show
+    },
+    sticky () {
+      return this.$store.state.notification.config.sticky
     },
   },
   components: {
