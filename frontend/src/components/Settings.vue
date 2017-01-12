@@ -93,9 +93,6 @@ export default {
     updateEmail () {
       this.$store.dispatch('changeEmailAddress', this.updatedEmail)
     },
-    progress (event) {
-      console.log(event)
-    },
     saveFile (data) {
       let link = document.createElement('a')
       let file = new File([JSON.stringify(data)], 'filename', {type: 'text/plaintext', lastModified: Date.now()})
