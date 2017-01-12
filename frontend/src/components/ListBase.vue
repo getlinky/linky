@@ -1,8 +1,8 @@
 <template>
   <div>
     <linky-nav>
-      <a id="add-icon" @click='showAdd = true' class="icon">+</a>
-      <a id="settings-icon" @click='showSettings = true' class="icon">⚙</a>
+      <a @click='showAdd = true'>Add Link</a>
+      <a @click='showSettings = true'>Settings</a>
       <a v-if="authenticated" @click='logout'>Logout</a>
       <router-link to="/login" v-else>Login</router-link>
     </linky-nav>
@@ -13,7 +13,6 @@
         <input class="search" @focusin="searchActive" @blur="doneSearching" id="search" placeholder="search" type="search" v-model="query">
       </div>
       <div class="list-archive-option-section">
-        <!-- FIXME -->
         <router-link :class="{ inactive: parentName !== 'list' }" to="/list">List</router-link>
         <router-link :class="{ inactive: parentName !== 'archive' }" to="/archive">Archive</router-link>
       </div>
