@@ -9,7 +9,7 @@
 
     <nav class="list-options">
       <div class="search-option-section">
-        <a class="icon">🔍</a>
+        <a class="icon"><img class="searchicon" src="static/magnifying-glass.svg"></a>
         <input class="search" @focusin="searchActive" @blur="doneSearching" id="search" placeholder="search" type="search" v-model="query">
       </div>
       <div class="list-archive-option-section">
@@ -172,6 +172,10 @@ form {
   margin-bottom: 0;
 }
 
+.searchicon {
+  width: 1rem;
+}
+
 .link-container {
   list-style-type: none;
   margin: 0 auto;
@@ -240,10 +244,6 @@ input {
       margin-left: .5rem;
     }
 
-  }
-
-  .icon {
-    font-size: 1.5rem;
   }
 
   h1 {
