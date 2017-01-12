@@ -4,6 +4,10 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+import Nanobar from 'nanobar'
+
+const nb = new Nanobar()
+
 const store = new Vuex.Store({
   state: {
     user: {
@@ -22,6 +26,7 @@ const store = new Vuex.Store({
       updateLinks: [],
     },
     keybindsDisabled: 0,
+    loadingprogress: 0,
     notification: {
       message: '',
       level: '',
@@ -153,6 +158,9 @@ const store = new Vuex.Store({
       state.background = color
       document.getElementsByTagName('body')[0].classList = color
       localStorage.setItem('backgroundColor', color)
+    },
+    setLoadingProgress (state, percentage) {
+      state.loadingprogress = percentage
     },
   },
   actions: {
@@ -299,5 +307,7 @@ const store = new Vuex.Store({
     },
   },
 })
+
+store.watch(() => store.state.loadingprogress, () => nb.go(store.state.loadingprogress))
 
 export default store

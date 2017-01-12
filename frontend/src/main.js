@@ -33,6 +33,7 @@ const anonRequired = (to, from, next) => {
 
 const isAuthenticated = (to, from, next) => {
   store.dispatch('isAuthenticated')
+  store.commit('setLoadingProgress', 30)
   next()
 }
 
@@ -71,6 +72,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach(isAuthenticated)
+router.afterEach(() => store.commit('setLoadingProgress', 100))
 
 new Vue({
   store,
