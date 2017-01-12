@@ -39,6 +39,7 @@ $text-gray: #444;
   justify-content: space-around;
   // padding-bottom: 10px;
   color: $text-gray;
+  user-select: none;
 
   .item {
     padding: 1em;

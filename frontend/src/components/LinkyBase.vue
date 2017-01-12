@@ -13,7 +13,7 @@ export default {
 <style lang="scss">
 .nanobar {
   width: 100%;
-  height: 2px;
+  height: 3px;
   z-index: 9999;
   top:0
 }
