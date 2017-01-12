@@ -35,6 +35,23 @@ export default {
       return this.$store.state.errors.addLink
     },
   },
+  mounted () {
+    this.$nextTick(function () {
+      document.addEventListener('keyup', e => {
+        const active_element = document.activeElement.tagName.toLowerCase()
+        if (active_element === 'input') return
+
+        const c = 67
+        if (e.keyCode === c) {
+          if (this.show) {
+            this.closeModal()
+          } else {
+            this.showModal()
+          }
+        }
+      })
+    })
+  },
   methods: {
     addLink (url) {
       this.$store.dispatch('addLink', url)
@@ -45,6 +62,9 @@ export default {
       this.$store.commit('addLinkErrorsClear')
       this.url = ''
       this.$emit('closed')
+    },
+    showModal () {
+      this.$emit('show')
     },
   },
   components: {

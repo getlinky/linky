@@ -24,7 +24,7 @@
 
     <helpModal :show="showHelp" @show="showHelp = true" @closed="showHelp = false"></helpModal>
     <showSettingsModal :show="showSettings" @show='showSettings = true' @closed="showSettings = false"></showSettingsModal>
-    <addLinkModal :show="showAdd" @closed="showAdd = false"></addLinkModal>
+    <addLinkModal :show="showAdd" @show='showAdd = true' @closed="showAdd = false"></addLinkModal>
     <linkyNotification></linkyNotification>
   </div>
 </template>

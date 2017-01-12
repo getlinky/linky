@@ -4,11 +4,12 @@
       <ul slot="body">
         <li><kbd>j</kbd> or <kbd>ctrl-n</kbd> — down</li>
         <li><kbd>k</kbd> or <kbd>ctrl-p</kbd> — up</li>
-        <li><kbd>l</kbd> — switch right list (wraps)</li>
-        <li><kbd>h</kbd> — switch left list (wraps)</li>
+        <li><kbd>l</kbd> — switch to right list</li>
+        <li><kbd>h</kbd> — switch to left list</li>
+        <li><kbd>c</kbd> — create new link</li>
+        <li><kbd>e</kbd> — edit current item</li>
         <li><kbd>a</kbd> — archive current item (or unarchive)</li>
         <li><kbd>#</kbd> — delete current item</li>
-        <li><kbd>e</kbd> — edit current item</li>
         <li><kbd>/</kbd> — search</li>
         <li><kbd>?</kbd> — toggle help menu</li>
         <li><kbd>esc</kbd> — close current menu</li>
@@ -69,7 +70,7 @@
 
 <style lang="scss">
 kbd {
-  background-color: #f7f7f7;
+  background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 3px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, .2), 0 0 0 2px #fff inset;
