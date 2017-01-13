@@ -2,7 +2,7 @@
   <linky-modal :show='show' @closed='closeModal'>
     <h1 slot='header'>Add Item</h1>
     <form slot='body' action="" method="post" @submit.prevent.once="addLink">
-      <input type='url' placeholder='https://example.com' required v-focus="urlFocused" v-model="url">
+      <input type='text' placeholder='https://example.com' required v-focus="urlFocused" v-model="url">
       <input type='submit' value='Add'>
         <h2 v-if="Object.keys(errors).length > 0">Errors</h2>
        <linky-error-display :errors="errors"></linky-error-display>

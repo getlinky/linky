@@ -31,3 +31,11 @@ export const maxLength = (value, length) => {
 }
 
 export const normalizeUrl = value => value.replace(/^(http?:\/\/)|(https?:\/\/)/g, '')
+
+export const formatUrl = value => {
+  const pos = value.search(/^(http?:\/\/)|(https?:\/\/)/g)
+  if (pos !== 0) {
+    return 'http://' + value
+  }
+  return value
+}

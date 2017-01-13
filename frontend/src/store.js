@@ -5,6 +5,7 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 import Nanobar from 'nanobar'
+import { formatUrl } from './utilities.js'
 
 const nb = new Nanobar()
 
@@ -176,31 +177,38 @@ const store = new Vuex.Store({
     },
     logout (context) {
       // Note: empty data payload needed for axios to send the headers as headers
+      context.commit('setLoadingProgress', 30)
       axios.post('/rest-auth/logout/', {},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
       .then(response => {
         console.info('logged out')
         context.commit('logout')
         context.commit('notify', {'message': 'Logged out', 'level': 'success'})
+        context.commit('setLoadingProgress', 100)
       })
       .catch(error => {
         context.commit('notify', {'message': 'Problem Logging Out', 'level': 'warning'})
         console.warn('Problem logging out user.', error)
         context.commit('logoutErrors', error)
+        context.commit('setLoadingProgress', 0)
       })
     },
     addLink (context, url) {
+      url = formatUrl(url)
+      context.commit('setLoadingProgress', 30)
       axios.post('/api/links/', {'url': url},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
           console.info('Added ' + url)
           context.commit('notify', {'message': 'Added New Link', 'level': 'info'})
           context.commit('addLink', response.data)
+          context.commit('setLoadingProgress', 100)
         })
         .catch(error => {
           console.warn(`Problem adding link ${url}.`, error)
           context.commit('notify', {'message': 'Problem Adding New Link', 'level': 'warning'})
           context.commit('addLinkErrors', error.response.data)
+          context.commit('setLoadingProgress', 0)
         })
     },
     refreshLinks (context) {
@@ -216,60 +224,72 @@ const store = new Vuex.Store({
       })
     },
     archiveLink (context, id) {
+      context.commit('setLoadingProgress', 30)
       axios.patch(`/api/links/${id}/`, {'archived': true},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
           console.info('Archived Link with id:', id)
           context.commit('notify', {'message': 'Archived Link', 'level': 'info'})
           context.commit('archiveLink', id)
+          context.commit('setLoadingProgress', 100)
         })
         .catch(error => {
           console.warn('Problem archiving link with id:', id, error)
           context.commit('notify', {'message': 'Problem archiving link', 'level': 'warning'})
           context.commit('archiveLinkErrors', error)
+          context.commit('setLoadingProgress', 0)
         })
     },
     unarchiveLink (context, id) {
+      context.commit('setLoadingProgress', 30)
       axios.patch(`/api/links/${id}/`, {'archived': false},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
           console.info('Unarchived Link with id:', id)
           context.commit('notify', {'message': 'Unarchived Link', 'level': 'info'})
           context.commit('unarchiveLink', id)
+          context.commit('setLoadingProgress', 100)
         })
         .catch(error => {
           console.warn('Problem unarchiving link with id:', id, error)
           context.commit('notify', {'message': 'Problem Unarchiving Link', 'level': 'warning'})
           context.commit('unarchiveLinkErrors', error)
+          context.commit('setLoadingProgress', 0)
         })
     },
     removeLink (context, id) {
+      context.commit('setLoadingProgress', 30)
       axios.delete(`/api/links/${id}/`,
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
           console.info('Deleted link with id:', id)
           context.commit('notify', {'message': 'Deleted Link', 'level': 'info'})
           context.commit('removeLink', id)
+          context.commit('setLoadingProgress', 100)
         })
         .catch(error => {
           context.commit('notify', {'message': 'Problem Deleting Link', 'level': 'warning'})
           console.warn("Couldn't remove Link", error)
           context.commit('removeLinkErrors', error)
+          context.commit('setLoadingProgress', 0)
         })
     },
     changeLinkUrl (context, data) {
       let {id, url} = data
+      context.commit('setLoadingProgress', 30)
       axios.patch(`/api/links/${id}/`, {'url': url},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
       .then(response => {
         console.info('Updated link with id:', id)
         context.commit('notify', {'message': 'Updated Link', 'level': 'info'})
         context.commit('updateLinkUrl', id)
+        context.commit('setLoadingProgress', 100)
       })
       .catch(error => {
         console.warn('Problem updating link.', error)
         context.commit('notify', {'message': 'Problem updating Link', 'level': 'warning'})
         context.commit('updateLinkUrlErrors', error)
+        context.commit('setLoadingProgress', 0)
       })
     },
   },
