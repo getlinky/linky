@@ -53,6 +53,7 @@ Database (Postgresql)
 # Note: I needed to do http://stackoverflow.com/a/34092546 due to an old install
 postgres -D /usr/local/var/postgres
 
+# In another shell
 createuser linkyadmin
 
 createdb -O linkyadmin linkydb

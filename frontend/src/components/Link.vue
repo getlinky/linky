@@ -152,11 +152,13 @@ export default {
 <style lang="scss" scoped>
 $text-gray: #444;
 $light-gray: #eee;
+$sepia: #f8f2e3;
 
 .link {
   padding-left: 5px;
-  padding-bottom: .8em;
+  padding-bottom: .7em;
   margin-left: 3px;
+  line-height: 1.5em;
 
   &:focus {
     outline: none;
@@ -192,21 +194,31 @@ $light-gray: #eee;
   }
 
   input {
-    width: 60%;
+    width: 55%;
   }
 
   .button-group {
     float: right;
     visibility: hidden;
+    padding-right: 5px;
+
     button {
-      border-radius: 5px;
+      // background: #428BCA;
+      background-color: $sepia;
+      color: #fff;
+      font-size: 0.9em;
+      height: 30px;
+      width: 70px;
+      text-align: center;
       border-width: 1px;
-      border-color: black;
-      background-color: $light-gray;
-      padding: 8px;
+      border-style: solid;
+      border-color: $text-gray;
+      border-radius: 5px;
+      color: $text-gray;
+      transition: background-color .2s ease;
 
       &:hover {
-        background-color: lighten($light-gray, 5%);
+        background-color: darken($sepia, 7%);
       }
     }
   }
