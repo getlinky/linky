@@ -51,7 +51,7 @@ Database (Postgresql)
 ```bash
 # after installing postgres
 # Note: I needed to do http://stackoverflow.com/a/34092546 due to an old install
-postgres -D /user/local/var/postgres
+postgres -D /usr/local/var/postgres
 
 createuser linkyadmin
 
