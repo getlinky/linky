@@ -61,6 +61,9 @@ createdb -O linkyadmin linkydb
 # access db
 psql -d linkydb
 
+# add permission so django can create testing db
+ALTER USER linkyadmin CREATEDB;
+
 # Note: after creating your database be sure to apply django migrations and
 # createsuperuser if necessary
 
