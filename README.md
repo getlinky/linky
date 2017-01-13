@@ -19,9 +19,13 @@ python3 -m virtualenv venv
 
 pip install -r requirements.txt
 
+postgres -D /usr/local/var/postgres
+
+python manage.py migrate
+
 python manage.py runserver
 
-# in another shell (only necessary when working with sass and js)
+# in another shell
 
 cd frontend && \
 npm run dev
@@ -39,7 +43,7 @@ python manage.py shell -i ipython
 import django
 django.setup()
 
-from app_name.models import ModelName
+from .models import *
 ```
 
 Database (Postgresql)
