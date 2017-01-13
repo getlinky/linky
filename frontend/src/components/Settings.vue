@@ -22,12 +22,7 @@
           </label>
           <input type="submit" value="Update Password">
         </form>
-
-        <transition name="fade" v-for="(errors, name) in errors.updatePassword" v-if="errors.length > 0">
-          <p class="warning">
-            {{ name | normalize }}: <template v-for="error in errors">{{ error }} </template>
-            </p>
-        </transition>
+        <linky-error-display :errors="errors.updatePassword"></linky-error-display>
       </div>
 
       <div class="item">
@@ -38,12 +33,7 @@
           </label>
           <input type="submit" value="Update Email Address">
         </form>
-
-        <transition name="fade" v-for="(errors, name) in errors.updateEmail" v-if="errors.length > 0">
-          <p class="warning">
-            {{ name | normalize }}: <template v-for="error in errors">{{ error }} </template>
-            </p>
-        </transition>
+        <linky-error-display :errors="errors.updateEmail"></linky-error-display>
       </div>
 
       <div class="item">
@@ -64,6 +54,7 @@
 import linkyBase from './Base.vue'
 import linkyNav from './Nav.vue'
 import linkyBackgroundChooser from './BackgroundChooser.vue'
+import linkyErrorDisplay from './ErrorDisplay.vue'
 
 import axios from 'axios'
 
@@ -73,6 +64,7 @@ export default {
     linkyBase,
     linkyNav,
     linkyBackgroundChooser,
+    linkyErrorDisplay,
   },
   data () {
     return {

@@ -36,13 +36,8 @@
           <br>
           <input type="submit" value="Register">
         </form>
-        <div class="errors" v-show="Object.keys(inputErrors).length > 0">
-          <transition name="fade" v-for="(errors, name) in inputErrors" v-if="errors.length > 0">
-            <p class="warning">
-            {{ name | normalize }}:
-                <template v-for="error in errors">{{ error }} </template>
-            </p>
-          </transition>
+        <div class="errors">
+          <linky-error-display :errors="inputErrors"></linky-error-display>
         </div>
       </div>
     </div>
@@ -56,6 +51,7 @@ import { normalize } from '../utilities.js'
 
 import linkyBase from './Base.vue'
 import linkyNav from './Nav.vue'
+import linkyErrorDisplay from './ErrorDisplay.vue'
 
 export default {
   name: 'Index',
@@ -82,6 +78,7 @@ export default {
   components: {
     linkyBase,
     linkyNav,
+    linkyErrorDisplay,
   },
   methods: {
     logoutUser () {

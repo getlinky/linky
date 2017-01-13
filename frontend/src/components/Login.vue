@@ -16,11 +16,7 @@
           <div class="forgot">
             <router-link to="/reset">Forgot Password?</router-link>
           </div>
-          <transition name="fade" v-for="(errors, name) in inputErrors" v-if="errors.length > 0">
-            <p class="warning">
-            {{ name | normalize }}: <template v-for="error in errors">{{ error }} </template>
-            </p>
-          </transition>
+          <linky-error-display :errors="inputErrors"></linky-error-display>
         </form>
       </div>
     </div>
@@ -35,6 +31,7 @@ import { normalize } from '../utilities.js'
 
 import linkyBase from './Base.vue'
 import linkyNav from './Nav.vue'
+import linkyErrorDisplay from './ErrorDisplay.vue'
 
 export default {
   directives: {
@@ -44,6 +41,7 @@ export default {
   components: {
     linkyBase,
     linkyNav,
+    linkyErrorDisplay,
   },
   data () {
     return {
@@ -80,14 +78,6 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
 .container {
   display: flex;
   justify-content: center;

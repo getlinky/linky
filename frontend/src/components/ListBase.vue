@@ -24,7 +24,7 @@
 
     <linky-help-modal :show="showHelp" @show="showHelp = true" @closed="showHelp = false"></linky-help-modal>
     <linky-settings-modal :show="showSettings" @show='showSettings = true' @closed="showSettings = false"></linky-settings-modal>
-    <linky-add-link-modal :show="showAdd" @show='showAdd = true' @closed="showAdd = false"></linky-add-link-modal>
+    <linky-add-link-modal :show="showAdd || addLinkErrors" @show='showAdd = true' @closed="showAdd = false"></linky-add-link-modal>
   </linky-base>
 </template>
 
@@ -79,6 +79,9 @@ export default {
     },
     enablePaste () {
       return this.$store.state.errors.addLink == null && this.enableKeybinds
+    },
+    addLinkErrors () {
+      return Object.keys(this.$store.state.errors.addLink).length > 0
     },
   },
   watch: {

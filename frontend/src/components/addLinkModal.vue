@@ -1,10 +1,11 @@
 <template>
-  <linky-modal :show='show || errors !== null' @closed='closeModal'>
+  <linky-modal :show='show' @closed='closeModal'>
     <h1 slot='header'>Add Item</h1>
     <form slot='body' action="" method="post" @submit.prevent.once='addLink(url)'>
       <input type='url' placeholder='https://example.com' required v-focus="urlFocused" v-model='url'>
       <input type='submit' value='Add'>
-        <pre v-if="errors !== null"> {{ errors }}</pre>
+        <h2 v-if="Object.keys(errors).length > 0">Errors</h2>
+       <linky-error-display :errors="errors"></linky-error-display>
     </form>
   </linky-modal>
 </template>
@@ -12,6 +13,8 @@
 <script>
 import linkyModal from './Modal.vue'
 import { focus } from 'vue-focus'
+
+import linkyErrorDisplay from './ErrorDisplay.vue'
 
 export default {
   name: 'AddLinkModal',
@@ -69,6 +72,7 @@ export default {
   },
   components: {
     linkyModal,
+    linkyErrorDisplay,
   },
 }
 </script>

@@ -17,7 +17,7 @@ const store = new Vuex.Store({
     },
     links: [],
     errors: {
-      addLink: null,
+      addLink: {},
       removeLink: [],
       archiveLink: [],
       unarchiveLink: [],
