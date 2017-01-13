@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <linky-base>
     <linky-nav></linky-nav>
     <div class="container">
       <div>
@@ -17,21 +17,21 @@
         </div>
       </div>
     </div>
-    <linky-extended-notification></linky-extended-notification>
-  </div>
+  </linky-base>
 </template>
 
 <script>
 import axios from 'axios'
 import { focus } from 'vue-focus'
+
+import linkyBase from './Base.vue'
 import linkyNav from './Nav.vue'
-import linkyExtendedNotification from './ExtendedNotification.vue'
 
 export default {
   name: 'ConfirmResetPassword',
   components: {
+    linkyBase,
     linkyNav,
-    linkyExtendedNotification,
   },
   data () {
     return {
