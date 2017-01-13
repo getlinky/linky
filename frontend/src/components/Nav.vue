@@ -22,7 +22,7 @@ export default {
 </script>
 
 
-<style lang='scss'>
+<style lang="scss" scoped>
 
 .section {
     align-items: center;
@@ -38,6 +38,9 @@ export default {
 
     &:first-child {
       margin-left: .5rem;
+    }
+    a {
+      text-decoration: none;
     }
   }
 .noselect {

@@ -10,15 +10,20 @@ $grayblack: #3c3c3c;
 
 $light-gray: #eee;
 
-.button, button {
+a {
+  &:hover {
+    filter: invert(25%);
+  }
+}
+
+.button, button, input[type="submit"] {
       background-color: $sepia;
       color: #fff;
       font-size: 0.9em;
       padding: 5px;
       text-align: center;
       border-width: 1px;
-      height: autp;
-      // line-height: 1px;
+      height: auto;
       border-style: solid;
       border-color: $text-gray;
       border-radius: 5px;
@@ -37,19 +42,22 @@ input {
   border-bottom-color: lightgray;
   width: 100%;
   margin: 3px 0;
+  height: auto;
   outline: none;
-  height: 1.5rem;
-  transition: border 300ms ease-out;
+  font-size: 0.9em;
+  background-color: $sepia;
+  padding: 5px;
+  transition: box-shadow 0.2s ease;
   border-color: $text-gray;
   border-radius: 5px;
 
   &::placeholder {
     font-style: italic;
-
   }
 
   &:focus {
     border-color: lighten($text-gray, 10%);
-    box-shadow: 0px 0px 2px 1px #ccc;
+    background-color: lighten($sepia, 3%);
+    box-shadow: 0px 0px 2px 2px #ccc;
   }
 }

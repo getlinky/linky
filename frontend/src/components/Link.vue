@@ -6,10 +6,10 @@
       @mouseover="addCopyListener"
       @mouseout="removeCopyListener">
     <h1>
-      <a :href="li.url">{{ title | maxLength(120) }}</a>
+      <a tabindex="-1" :href="li.url">{{ title | maxLength(120) }}</a>
     </h1>
-    <p>{{ description | maxLength(250) }}</p>
-    <a v-if="!editing" :href="url">{{ url | normalizeUrl | maxLength(50) }}</a>
+    <p tabindex="-1">{{ description | maxLength(250) }}</p>
+    <a tabindex="-1" v-if="!editing" :href="url">{{ url | normalizeUrl | maxLength(50) }}</a>
     <input v-else v-focus="editing" @keyup.enter="saveChanges" @keydown.esc="cancelChanges" type="text" v-model="url">
     <div class="button-group">
       <button v-if="!editing" @click.once="enableEditing">Edit</button>

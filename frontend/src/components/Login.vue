@@ -78,10 +78,16 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import '../styles/_partials.scss';
+
 .container {
   display: flex;
   justify-content: center;
   margin-left: 5px;
+}
+
+input[type="submit"] {
+  width: auto;
 }
 
 .forgot {

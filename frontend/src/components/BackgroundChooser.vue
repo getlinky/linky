@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <a tabindex="0" @click="setBackground('white')" @keydown.enter="setBackground('white')" class="item white" :class="{active: background === 'white'}"> White</a>
-    <a tabindex="0" @click="setBackground('sepia')" @keydown.enter="setBackground('sepia')" class="item sepia" :class="{active: background === 'sepia'}">Sepia</a>
-    <a tabindex="0" @click="setBackground('grayblack')" @keydown.enter="setBackground('grayblack')" class="item grayblack" :class="{active: background === 'grayblack'}">Black</a>
+    <a tabindex="1" @click="setBackground('white')" @keydown.enter="setBackground('white')" class="item white" :class="{active: background === 'white'}"> White</a>
+    <a tabindex="1" @click="setBackground('sepia')" @keydown.enter="setBackground('sepia')" class="item sepia" :class="{active: background === 'sepia'}">Sepia</a>
+    <a tabindex="1" @click="setBackground('grayblack')" @keydown.enter="setBackground('grayblack')" class="item grayblack" :class="{active: background === 'grayblack'}">Black</a>
   </div>
 </template>
 

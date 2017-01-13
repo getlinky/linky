@@ -1,10 +1,10 @@
 <template>
   <linky-base>
     <linky-nav>
-      <router-link to="/list">List</router-link>
-      <router-link to="/archive">Archive</router-link>
-      <a v-if="authenticated" @click='logout'>Logout</a>
-      <router-link to="/login" v-else>Login</router-link>
+      <router-link tabindex="1" to="/list">List</router-link>
+      <router-link tabindex="1" to="/archive">Archive</router-link>
+      <a v-if="authenticated" tabindex="1" @click='logout'>Logout</a>
+      <router-link tabindex="1" to="/login" v-else>Login</router-link>
     </linky-nav>
   <div class="content">
     <div class="container">
@@ -161,15 +161,15 @@ export default {
     .item {
       flex-basis: max-content;
       padding-left: 2em;
+
       a {
         text-decoration: underline;
-        &:hover {
-          filter: invert(25%);
-        }
       }
     }
   }
 }
+
+
 h1 {
   font-size: 1.5em;
 }

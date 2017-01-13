@@ -1,9 +1,9 @@
 <template>
   <linky-base>
     <linky-nav>
-      <a @click='showAdd = true'>Add Link</a>
-      <a @click='showSettings = true'>Settings</a>
-      <a v-if="authenticated" @click='logout'>Logout</a>
+      <a tabindex="1" @click="showAdd = true" @keyup.enter="showAdd = true">Add Link</a>
+      <a tabindex="1" @click="showSettings = true" @keyup.enter="showSettings = true">Settings</a>
+      <a tabindex="1" v-if="authenticated" @click="logout" @keyup.enter="logout">Logout</a>
       <router-link to="/login" v-else>Login</router-link>
     </linky-nav>
 
@@ -125,6 +125,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../styles/_partials.scss';
 
 $font-family: georgia, serif;
 $base-font-size: 18px;
@@ -186,23 +187,10 @@ form {
 
 // styling for search <input>
 .search {
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  border-bottom-style: solid;
-  border-bottom-color: lightgray;
   width: 60%;
-  outline: none;
-  height: 1.5rem;
-  transition: border 300ms ease-out;
-
-  &::placeholder {
-    font-style: italic;
-
-  }
 
   &:focus {
-    border-color: $text-gray;
+    box-shadow: none;
   }
 
 }
