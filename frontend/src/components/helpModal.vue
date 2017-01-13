@@ -1,5 +1,5 @@
 <template>
-  <modal :show='show' @closed='closeModal'>
+  <linky-modal :show='show' @closed='closeModal'>
       <h1 slot='header'>Key Binds</h1>
       <ul slot="body">
         <li><kbd>j</kbd> or <kbd>ctrl-n</kbd> — down</li>
@@ -16,14 +16,14 @@
         <li><kbd>{{ super_key }}-c</kbd> or <kbd>y</kbd> — copy link to clipboard</li>
         <li><kbd>{{ super_key }}-v</kbd> — add link from clipboard</li>
       </ul>
-  </modal>
+  </linky-modal>
 </template>
 
 <script>
-  import modal from './modal.vue'
+  import linkyModal from './Modal.vue'
 
   export default {
-    name: 'helpModal',
+    name: 'HelpModal',
     props: {
       show: {
         type: Boolean,
@@ -49,7 +49,7 @@
       })
     },
     components: {
-      modal,
+      linkyModal,
     },
     methods: {
       closeModal () {

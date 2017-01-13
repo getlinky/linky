@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'linky-nav',
+  name: 'Nav',
 }
 </script>
 

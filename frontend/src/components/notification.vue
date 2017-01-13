@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'notification',
+  name: 'Notification',
   props: {
     button: {
       type: Boolean,

@@ -28,7 +28,7 @@
 import { focus } from 'vue-focus'
 
 export default {
-  name: 'linky-link',
+  name: 'Link',
   props: {
     li: {
       required: true,

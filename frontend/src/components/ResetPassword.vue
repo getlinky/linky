@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <linky-base>
     <linky-nav></linky-nav>
     <div class="container">
       <div class="item">
@@ -12,15 +12,14 @@
         </form>
       </div>
     </div>
-    <linky-notification></linky-notification>
-  </div>
+  </linky-base>
 </template>
 
 <script>
 import axios from 'axios'
 import { focus } from 'vue-focus'
-import linkyNav from './LinkyNav.vue'
-import linkyNotification from './linkyNotification.vue'
+import linkyNav from './Nav.vue'
+import linkyBase from './Base.vue'
 
 export default {
   directives: {
@@ -28,7 +27,7 @@ export default {
   },
   components: {
     linkyNav,
-    linkyNotification,
+    linkyBase,
   },
   data () {
     return {

@@ -1,20 +1,20 @@
 <template>
-  <modal :show='show || errors !== null' @closed='closeModal'>
+  <linky-modal :show='show || errors !== null' @closed='closeModal'>
     <h1 slot='header'>Add Item</h1>
     <form slot='body' action="" method="post" @submit.prevent.once='addLink(url)'>
       <input type='url' placeholder='https://example.com' required v-focus="urlFocused" v-model='url'>
       <input type='submit' value='Add'>
         <pre v-if="errors !== null"> {{ errors }}</pre>
     </form>
-  </modal>
+  </linky-modal>
 </template>
 
 <script>
-import modal from './modal.vue'
+import linkyModal from './Modal.vue'
 import { focus } from 'vue-focus'
 
 export default {
-  name: 'addLinkModal',
+  name: 'AddLinkModal',
   directives: {
     focus,
   },
@@ -68,7 +68,7 @@ export default {
     },
   },
   components: {
-    modal,
+    linkyModal,
   },
 }
 </script>

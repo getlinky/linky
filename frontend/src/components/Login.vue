@@ -33,8 +33,8 @@ import { focus } from 'vue-focus'
 import axios from 'axios'
 import { normalize } from '../utilities.js'
 
-import linkyBase from './LinkyBase.vue'
-import linkyNav from './LinkyNav.vue'
+import linkyBase from './Base.vue'
+import linkyNav from './Nav.vue'
 
 export default {
   directives: {

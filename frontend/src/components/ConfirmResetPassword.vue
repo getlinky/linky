@@ -17,21 +17,21 @@
         </div>
       </div>
     </div>
-    <linky-notification></linky-notification>
+    <linky-extended-notification></linky-extended-notification>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import { focus } from 'vue-focus'
-import linkyNav from './LinkyNav.vue'
-import linkyNotification from './linkyNotification.vue'
+import linkyNav from './Nav.vue'
+import linkyExtendedNotification from './ExtendedNotification.vue'
 
 export default {
   name: 'ConfirmResetPassword',
   components: {
     linkyNav,
-    linkyNotification,
+    linkyExtendedNotification,
   },
   data () {
     return {

@@ -1,17 +1,17 @@
 <template>
   <div>
     <slot></slot>
-    <linky-notification></linky-notification>
+    <linky-extended-notification></linky-extended-notification>
   </div>
 </template>
 
 <script>
-import linkyNotification from './linkyNotification.vue'
+import linkyExtendedNotification from './ExtendedNotification.vue'
 
 export default {
-  name: 'linky-base',
+  name: 'Base',
   components: {
-    linkyNotification,
+    linkyExtendedNotification,
   },
   computed: {
     background () {

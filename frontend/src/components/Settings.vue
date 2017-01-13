@@ -36,7 +36,7 @@
 
       <div class="item">
         <h1>Change Background</h1>
-        <linky-background></linky-background>
+        <linky-background-chooser></linky-background-chooser>
       </div>
 
       <div class="item">
@@ -48,9 +48,9 @@
 </template>
 
 <script>
-import linkyBase from './LinkyBase.vue'
-import linkyNav from './LinkyNav.vue'
-import linkyBackground from './background.vue'
+import linkyBase from './Base.vue'
+import linkyNav from './Nav.vue'
+import linkyBackgroundChooser from './BackgroundChooser.vue'
 
 import axios from 'axios'
 
@@ -59,7 +59,7 @@ export default {
   components: {
     linkyBase,
     linkyNav,
-    linkyBackground,
+    linkyBackgroundChooser,
   },
   data () {
     return {

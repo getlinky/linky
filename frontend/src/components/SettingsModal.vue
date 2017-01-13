@@ -1,22 +1,22 @@
 <template>
-  <modal :show="show" @closed="closeModal">
+  <linky-modal :show="show" @closed="closeModal">
       <h1 slot="header">Settings</h1>
       <div slot="body">
-        <background></background>
+        <linky-background-chooser></linky-background-chooser>
         <router-link to="/settings">Account Settings</router-link>
       </div>
   </modal>
 </template>
 
 <script>
-  import modal from './modal.vue'
-  import background from './background.vue'
+  import linkyModal from './Modal.vue'
+  import linkyBackgroundChooser from './BackgroundChooser.vue'
 
   export default {
     name: 'showSettingsModal',
     components: {
-      modal,
-      background,
+      linkyModal,
+      linkyBackgroundChooser,
     },
     props: {
       show: {

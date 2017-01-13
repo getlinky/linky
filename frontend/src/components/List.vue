@@ -1,5 +1,5 @@
 <template>
-  <list-base parentName='list'>
+  <linky-list-base parentName='list'>
     <template v-if="list_items.length > 0">
       <linky-link
         v-for="item in list_items"
@@ -9,12 +9,12 @@
     <li v-else>
       No links found.
     </li>
-  </list-base>
+  </linky-list-base>
 </template>
 
 <script>
-import linkyLink from './LinkyLink.vue'
-import listBase from './ListBase.vue'
+import linkyLink from './Link.vue'
+import linkyListBase from './ListBase.vue'
 
 import { compareDateStrings, search } from '../utilities.js'
 
@@ -22,7 +22,7 @@ export default {
   name: 'list',
   components: {
     linkyLink,
-    listBase,
+    linkyListBase,
   },
   computed: {
     list_items () {

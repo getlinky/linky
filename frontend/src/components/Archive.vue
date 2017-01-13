@@ -1,5 +1,5 @@
 <template>
-  <list-base parentName='archive'>
+  <linky-list-base parentName='archive'>
     <template v-if="archive_items.length > 0">
       <linky-link
         v-for="item in archive_items"
@@ -9,20 +9,20 @@
     <li v-else>
       No links found.
     </li>
-  </list-base>
+  </linky-list-base>
 </template>
 
 <script>
-import linkyLink from './LinkyLink.vue'
-import listBase from './ListBase.vue'
+import linkyLink from './Link.vue'
+import linkyListBase from './ListBase.vue'
 
 import { compareDateStrings, search } from '../utilities.js'
 
 export default {
-  name: 'archive',
+  name: 'Archive',
   components: {
     linkyLink,
-    listBase,
+    linkyListBase,
   },
   computed: {
     archive_items () {

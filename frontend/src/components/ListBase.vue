@@ -22,20 +22,18 @@
       <slot></slot>
     </ul>
 
-    <helpModal :show="showHelp" @show="showHelp = true" @closed="showHelp = false"></helpModal>
-    <showSettingsModal :show="showSettings" @show='showSettings = true' @closed="showSettings = false"></showSettingsModal>
-    <addLinkModal :show="showAdd" @show='showAdd = true' @closed="showAdd = false"></addLinkModal>
-    <linkyNotification></linkyNotification>
+    <linky-help-modal :show="showHelp" @show="showHelp = true" @closed="showHelp = false"></linky-help-modal>
+    <linky-settings-modal :show="showSettings" @show='showSettings = true' @closed="showSettings = false"></linky-settings-modal>
+    <linky-add-link-modal :show="showAdd" @show='showAdd = true' @closed="showAdd = false"></linky-add-link-modal>
   </linky-base>
 </template>
 
 <script>
-import linkyBase from './LinkyBase.vue'
-import linkyNav from './LinkyNav.vue'
-import helpModal from './helpModal.vue'
-import showSettingsModal from './showSettingsModal.vue'
-import addLinkModal from './addLinkModal.vue'
-import linkyNotification from './linkyNotification.vue'
+import linkyBase from './Base.vue'
+import linkyNav from './Nav.vue'
+import linkyHelpModal from './HelpModal.vue'
+import linkySettingsModal from './SettingsModal.vue'
+import linkyAddLinkModal from './AddLinkModal.vue'
 
 import { handle_event } from '../nav.js'
 
@@ -44,10 +42,9 @@ export default {
   components: {
     linkyBase,
     linkyNav,
-    addLinkModal,
-    showSettingsModal,
-    helpModal,
-    linkyNotification,
+    linkyHelpModal,
+    linkySettingsModal,
+    linkyAddLinkModal,
   },
   data () {
     return {

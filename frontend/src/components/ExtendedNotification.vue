@@ -1,12 +1,12 @@
 <template>
-  <notification :message="message" :level="level" :show="showNotification" :sticky="sticky" @closed="closed"></notification>
+  <linky-notification :message="message" :level="level" :show="show" :sticky="sticky" @closed="closed"></linky-notification>
 </template>
 
 <script>
-import notification from './notification.vue'
+import linkyNotification from './Notification.vue'
 
 export default {
-  name: 'linkyNotification',
+  name: 'ExtendedNotification',
   computed: {
     message () {
       return this.$store.state.notification.message
@@ -14,7 +14,7 @@ export default {
     level () {
       return this.$store.state.notification.level
     },
-    showNotification () {
+    show () {
       return this.$store.state.notification.show
     },
     sticky () {
@@ -22,7 +22,7 @@ export default {
     },
   },
   components: {
-    notification,
+    linkyNotification,
   },
   methods: {
     closed () {
