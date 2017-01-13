@@ -93,7 +93,7 @@ const store = new Vuex.Store({
       state.errors.addLink = errors
     },
     addLinkErrorsClear (state) {
-      state.errors.addLink = null
+      state.errors.addLink = {}
     },
     loginSuccessful (state, token) {
       state.user.authenticated = true

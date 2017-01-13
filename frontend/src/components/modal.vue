@@ -1,12 +1,12 @@
 <template>
   <transition name="fade">
-    <div class="modal-container" @click.self="$emit('closed')" v-show="show">
+    <div class="modal-container" v-show="show">
         <div class="modal-inner">
             <div class="modal">
                 <nav>
-                      <slot name='header'></slot>
+                    <slot name='header'></slot>
                     <h1>
-                        <a class="close" @click.self="$emit('closed')">✕</a>
+                        <a class="close" @click="$emit('closed')">✕</a>
                     </h1>
                 </nav>
             <slot name='body'></slot>

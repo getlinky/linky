@@ -1,31 +1,32 @@
 <template>
-  <li class="link display-on-hover-container" tabindex="0"
+  <li class="link" tabindex="0"
       @keydown="keybindHandler"
       @focus="addCopyListener"
       @blur="removeCopyListener"
       @mouseover="addCopyListener"
       @mouseout="removeCopyListener">
-    <h3 class="link-title">
-      <a :href="li.url">{{ title }}</a>
-    </h3>
-    <p class="description">{{ description }}</p>
-    <a v-if="!editing" class="source" :href="url">{{ url }}</a>
-    <input v-else v-focus="editing" @keyup.enter="saveChanges" @keydown.esc="cancelChanges" type="text" class="source" v-model="url">
-    <button name="delete" class="display-on-hover" @click.once="deleteLink">Delete</button>
-    <template v-if='li.archived'>
-      <button name="unarchive" class="display-on-hover" @click.once="unarchiveLink">Unarchive</button>
-    </template>
-    <button v-else name="archive" class="display-on-hover" @click.once="archiveLink">Archive</button>
-    <button v-if="!editing" class="display-on-hover" @click.once="enableEditing">Edit</button>
-    <template v-else>
-      <button  class="display-on-hover" @click.once="saveChanges">Done</button>
-      <button class="display-on-hover" @click.once="cancelChanges">Cancel</button>
-    </template>
+    <h1>
+      <a :href="li.url">{{ title | maxLength(120) }}</a>
+    </h1>
+    <p>{{ description | maxLength(250) }}</p>
+    <a v-if="!editing" :href="url">{{ url | normalizeUrl | maxLength(50) }}</a>
+    <input v-else v-focus="editing" @keyup.enter="saveChanges" @keydown.esc="cancelChanges" type="text" v-model="url">
+    <div class="button-group">
+      <button v-if="!editing" @click.once="enableEditing">Edit</button>
+      <template v-else>
+        <button @click.once="cancelChanges">Cancel</button>
+        <button  @click.once="saveChanges">Done</button>
+      </template>
+      <button name="delete" @click.once="deleteLink">Delete</button>
+      <button v-if='li.archived'name="unarchive" @click.once="unarchiveLink">Unarchive</button>
+      <button v-else name="archive" @click.once="archiveLink">Archive</button>
+    </div>
   </li>
 </template>
 
 <script>
 import { focus } from 'vue-focus'
+import { maxLength, normalizeUrl } from '../utilities.js'
 
 export default {
   name: 'Link',
@@ -51,6 +52,10 @@ export default {
     link () {
       return this.li
     },
+  },
+  filters: {
+    maxLength,
+    normalizeUrl,
   },
   watch: {
     link () {
@@ -144,22 +149,13 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss" scoped>
 $text-gray: #444;
 $light-gray: #eee;
-.link-title {
-  margin-top: 0;
-}
 
-.description,
-.source {
-  font-style: italic;
-  margin-top: 0;
-}
-
-// link section
 .link {
-  padding: .5em;
+  padding-left: 5px;
+  padding-bottom: .8em;
   margin-left: 3px;
 
   &:focus {
@@ -172,22 +168,47 @@ $light-gray: #eee;
     color: $text-gray;
   }
 
+  &:hover {
+    .button-group {
+      visibility: visible;
+    }
+  }
+
   & > * {
     margin-bottom: 0.5;
   }
-}
 
-// displays text inside the container & with the .display-on-hover class on hover
-// Usage:
-//   1. Outer container uses the container class
-//   2. Items that should display on hover of container get .display-on-hover
-.display-on-hover {
-  float: right;
-  visibility: hidden;
-}
+  h1 {
+    font-size: 1.25em;
+  }
 
-.display-on-hover-container:hover .display-on-hover {
-  visibility: visible;
-}
+  p {
+    padding: 0;
+    margin: 0;
+  }
 
+  a {
+    font-style: italic;
+  }
+
+  input {
+    width: 60%;
+  }
+
+  .button-group {
+    float: right;
+    visibility: hidden;
+    button {
+      border-radius: 5px;
+      border-width: 1px;
+      border-color: black;
+      background-color: $light-gray;
+      padding: 8px;
+
+      &:hover {
+        background-color: lighten($light-gray, 5%);
+      }
+    }
+  }
+}
 </style>

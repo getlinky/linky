@@ -78,7 +78,7 @@ export default {
       return !(this.$store.state.keybindsDisabled > 0) && !this.showAdd && !this.showSettings && !this.showHelp && !this.searching
     },
     enablePaste () {
-      return this.$store.state.errors.addLink == null && this.enableKeybinds
+      return Object.keys(this.$store.state.errors.addLink).length === 0 && this.enableKeybinds
     },
     addLinkErrors () {
       return Object.keys(this.$store.state.errors.addLink).length > 0
@@ -124,7 +124,7 @@ export default {
 
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 
 $font-family: georgia, serif;
 $base-font-size: 18px;
@@ -178,6 +178,7 @@ form {
   list-style-type: none;
   margin: 0 auto;
   max-width: 40em;
+  padding-left: 0;
   overflow-wrap: break-word;
   padding-top: 0;
   margin-bottom: .5rem;

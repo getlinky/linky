@@ -22,3 +22,12 @@ export const search = (obj, query) =>
     .join(' ')
     .toUpperCase()
     .includes(query.toUpperCase())
+
+export const maxLength = (value, length) => {
+  if ((value.length + 3) >= length) {
+    return value.slice(0, length) + '...'
+  }
+  return value
+}
+
+export const normalizeUrl = value => value.replace(/^(http?:\/\/)|(https?:\/\/)/g, '')
