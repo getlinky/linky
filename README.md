@@ -41,3 +41,30 @@ django.setup()
 
 from app_name.models import ModelName
 ```
+
+Database (Postgresql)
+
+```bash
+# after installing postgres
+# Note: I needed to do http://stackoverflow.com/a/34092546 due to an old install
+postgres -D /user/local/var/postgres
+
+createuser linkyadmin
+
+createdb -O linkyadmin linkydb
+
+# access db
+psql -d linkydb
+
+# Note: after creating your database be sure to apply django migrations and
+# createsuperuser if necessary
+
+# get database scheme
+\d
+
+# delete database
+dropdb linkydb
+
+# delete user
+dropuser linkyadmin
+```
