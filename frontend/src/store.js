@@ -22,7 +22,6 @@ const store = new Vuex.Store({
       archiveLink: [],
       unarchiveLink: [],
       logout: [],
-      updateEmail: null,
       updateLinks: [],
     },
     keybindsDisabled: 0,
@@ -86,12 +85,6 @@ const store = new Vuex.Store({
     },
     updateArchiveErrors (state, errors) {
       state.errors.updateArchive = errors
-    },
-    updateEmailErrors (state, errors) {
-      state.errors.updateEmail = errors
-    },
-    updateEmailErrorsClear (state) {
-      state.errors.updateEmail = null
     },
     addLink (state, linkData) {
       state.links.push(linkData)
@@ -262,20 +255,6 @@ const store = new Vuex.Store({
           context.commit('notify', {'message': 'Problem Deleting Link', 'level': 'warning'})
           console.warn("Couldn't remove Link", error)
           context.commit('removeLinkErrors', error)
-        })
-    },
-    changeEmailAddress (context, email) {
-      axios.patch('/api/users/me/', {'email': email},
-        {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
-        .then(response => {
-          console.info('Email updated')
-          context.commit('notify', {'message': 'Updated Email Address', 'level': 'info'})
-          context.commit('updateEmail', email)
-        })
-        .catch(error => {
-          console.warn('Couln\'t update email address', error)
-          context.commit('notify', {'message': 'Problem Updating Email Address', 'level': 'warning'})
-          context.commit('updateEmailErrors', error.response.data)
         })
     },
     changeLinkUrl (context, data) {

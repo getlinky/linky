@@ -6,7 +6,7 @@
       <a v-if="authenticated" @click='logout'>Logout</a>
       <router-link to="/login" v-else>Login</router-link>
     </linky-nav>
-
+  <div class="content">
     <div class="container">
       <div class="item">
         <h1>Password</h1>
@@ -22,6 +22,12 @@
           </label>
           <input type="submit" value="Update Password">
         </form>
+
+        <transition name="fade" v-for="(errors, name) in errors.updatePassword" v-if="errors.length > 0">
+          <p class="warning">
+            {{ name | normalize }}: <template v-for="error in errors">{{ error }} </template>
+            </p>
+        </transition>
       </div>
 
       <div class="item">
@@ -32,6 +38,12 @@
           </label>
           <input type="submit" value="Update Email Address">
         </form>
+
+        <transition name="fade" v-for="(errors, name) in errors.updateEmail" v-if="errors.length > 0">
+          <p class="warning">
+            {{ name | normalize }}: <template v-for="error in errors">{{ error }} </template>
+            </p>
+        </transition>
       </div>
 
       <div class="item">
@@ -44,6 +56,7 @@
         <a @click="exportLinks">Export Saved Links</a>
       </div>
     </div>
+  </div>
   </linky-base>
 </template>
 
@@ -104,7 +117,18 @@ export default {
       this.newPassword2 = ''
     },
     updateEmail () {
-      this.$store.dispatch('changeEmailAddress', this.updatedEmail)
+      axios.patch('/api/users/me/', {'email': this.updatedEmail},
+        {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
+        .then(response => {
+          console.info('Email updated')
+          this.$store.commit('notify', {'message': 'Updated Email Address', 'level': 'info'})
+          this.$store.commit('updateEmail', this.updatedEmail)
+        })
+        .catch(error => {
+          console.warn('Couln\'t update email address', error)
+          this.$store.commit('notify', {'message': 'Problem Updating Email Address', 'level': 'warning', 'sticky': true})
+          this.errors.updateEmail = error.response.data
+        })
     },
     saveFile (data) {
       let link = document.createElement('a')
@@ -129,21 +153,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.content {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin: 0 auto;
+  justify-content: center;
 
-  .item {
-    flex-basis: max-content;
-    padding-left: 2em;
-    a {
-      text-decoration: underline;
-      &:hover {
-        filter: invert(25%);
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .item {
+      flex-basis: max-content;
+      padding-left: 2em;
+      a {
+        text-decoration: underline;
+        &:hover {
+          filter: invert(25%);
+        }
       }
     }
   }
