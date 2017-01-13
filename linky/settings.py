@@ -112,7 +112,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'linkydb',
-        'USER': 'steve',
+        'USER': 'linkyadmin',
         'PASSWORD': '',
         'HOST': '',
         'PORT': '5432',
