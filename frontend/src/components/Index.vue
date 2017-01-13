@@ -34,7 +34,7 @@
             <input type="password" v-model="password2" required>
           </label>
           <br>
-          <input type="submit" value="Register">
+          <input class="button" type="submit" value="Register">
         </form>
         <div class="errors">
           <linky-error-display :errors="inputErrors"></linky-error-display>
@@ -108,6 +108,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/_partials.scss';
+
 h1 {
   font-size: 2em;
   text-align: center;

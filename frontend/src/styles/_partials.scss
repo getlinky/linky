@@ -1,0 +1,55 @@
+$font-family: georgia, serif;
+$base-font-size: 18px;
+
+$text-gray: #444;
+$max-width-main-content: 40em;
+
+// background colors
+$sepia: #f8f2e3;
+$grayblack: #3c3c3c;
+
+$light-gray: #eee;
+
+.button, button {
+      background-color: $sepia;
+      color: #fff;
+      font-size: 0.9em;
+      padding: 5px;
+      text-align: center;
+      border-width: 1px;
+      height: autp;
+      // line-height: 1px;
+      border-style: solid;
+      border-color: $text-gray;
+      border-radius: 5px;
+      color: $text-gray;
+      transition: background-color .2s ease;
+      flex-basis: max-content;
+
+      &:hover {
+        background-color: darken($sepia, 7%);
+      }
+}
+
+input {
+  border-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+  width: 100%;
+  margin: 3px 0;
+  outline: none;
+  height: 1.5rem;
+  transition: border 300ms ease-out;
+  border-color: $text-gray;
+  border-radius: 5px;
+
+  &::placeholder {
+    font-style: italic;
+
+  }
+
+  &:focus {
+    border-color: lighten($text-gray, 10%);
+    box-shadow: 0px 0px 2px 1px #ccc;
+  }
+}

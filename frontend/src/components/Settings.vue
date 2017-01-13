@@ -20,7 +20,7 @@
           <label><i>Again</i>
             <input type="password" v-model="newPassword2" required>
           </label>
-          <input type="submit" value="Update Password">
+          <input class="button" type="submit" value="Update Password">
         </form>
         <linky-error-display :errors="errors.updatePassword"></linky-error-display>
       </div>
@@ -31,7 +31,7 @@
           <label>Email
             <input type="email" placeholder="name@example.com" v-model="updatedEmail" required>
           </label>
-          <input type="submit" value="Update Email Address">
+          <input class="button" type="submit" value="Update Email Address">
         </form>
         <linky-error-display :errors="errors.updateEmail"></linky-error-display>
       </div>
@@ -145,6 +145,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/_partials.scss';
+
 .content {
   display: flex;
   justify-content: center;

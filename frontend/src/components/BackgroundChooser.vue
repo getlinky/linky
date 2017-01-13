@@ -1,15 +1,9 @@
 <template>
   <div class="container">
-  <a @click="setBackground('white')">
-    <div class="item white" :class="{active: background === 'white'}">White</div>
-  </a>
-  <a @click="setBackground('sepia')">
-    <div class="item sepia" :class="{active: background === 'sepia'}">Sepia</div>
-  </a>
-  <a @click="setBackground('grayblack')">
-    <div class="item grayblack" :class="{active: background === 'grayblack'}">Black</div>
-  </a>
-</div>
+    <a tabindex="0" @click="setBackground('white')" @keydown.enter="setBackground('white')" class="item white" :class="{active: background === 'white'}"> White</a>
+    <a tabindex="0" @click="setBackground('sepia')" @keydown.enter="setBackground('sepia')" class="item sepia" :class="{active: background === 'sepia'}">Sepia</a>
+    <a tabindex="0" @click="setBackground('grayblack')" @keydown.enter="setBackground('grayblack')" class="item grayblack" :class="{active: background === 'grayblack'}">Black</a>
+  </div>
 </template>
 
 <script>
@@ -32,30 +26,38 @@ export default {
 $sepia: #f8f2e3;
 $grayblack: #3c3c3c;
 $text-gray: #444;
+$light-gray: #eee;
+$sepia: #f8f2e3;
+$blue: #0074bf;
 
 .container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  // padding-bottom: 10px;
   color: $text-gray;
   user-select: none;
 
   .item {
     padding: 1em;
     border-radius: 5px;
-    border-color: #0074bf;
-    border-width: 4px;
-    margin: 4px;
+    border-color: gray;
+    border-width: 3px;
     flex-basis: max-content;
-    &:active {
-      margin: 0px;
-      border-style: solid;
+    outline: none;
+    border-width: 3px;
+    border-style: solid;
+    border-color: $text-gray;
+
+    a {
+      &:focus, &:active {
+        border-color: $blue;
+        box-shadow: 0 0 5px 1px lighten($blue, 15%);
+      }
     }
   }
   .active {
-      margin: 0px;
-      border-style: solid;
+      border-color: $blue;
+      box-shadow: 0 0 2px 1px lighten($blue, 5%);
     }
   .white {
     background-color: white;

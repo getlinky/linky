@@ -150,6 +150,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/_partials.scss';
+
 $text-gray: #444;
 $light-gray: #eee;
 $sepia: #f8f2e3;
@@ -198,29 +200,10 @@ $sepia: #f8f2e3;
   }
 
   .button-group {
+    display: flex;
     float: right;
     visibility: hidden;
     padding-right: 5px;
-
-    button {
-      // background: #428BCA;
-      background-color: $sepia;
-      color: #fff;
-      font-size: 0.9em;
-      height: 30px;
-      width: 70px;
-      text-align: center;
-      border-width: 1px;
-      border-style: solid;
-      border-color: $text-gray;
-      border-radius: 5px;
-      color: $text-gray;
-      transition: background-color .2s ease;
-
-      &:hover {
-        background-color: darken($sepia, 7%);
-      }
-    }
   }
 }
 </style>

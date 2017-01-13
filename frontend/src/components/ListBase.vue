@@ -201,18 +201,6 @@ form {
 
   }
 
-  &:disabled {
-    color: lightgray;
-    border-radius: 5px;
-    background-image: repeating-linear-gradient(
-    45deg,
-    lightgray,
-    lightgray 10px,
-    white 10px,
-    white 20px
-    );
-  }
-
   &:focus {
     border-color: $text-gray;
   }
@@ -222,11 +210,6 @@ form {
 input {
   font-size: 1rem;
   font-family: $font-family;
-
-  &:disabled {
-    color: lightgray;
-    background-color: yellow;
-  }
 }
 
 .main-nav {
