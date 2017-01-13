@@ -13,6 +13,14 @@ export default {
   components: {
     linkyNotification,
   },
+  computed: {
+    background () {
+      return this.$store.state.background
+    },
+  },
+  mounted () {
+    document.getElementsByTagName('body')[0].classList = this.background
+  },
 }
 </script>
 

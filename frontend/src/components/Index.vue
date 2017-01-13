@@ -63,12 +63,6 @@ export default {
     userAuthenticated () {
       return this.$store.state.user.authenticated
     },
-    debug () {
-      return localStorage.getItem('DEBUG')
-    },
-    background () {
-      return this.$store.state.background
-    },
   },
   directives: {
     focus,
@@ -112,9 +106,6 @@ export default {
         this.$store.commit('notify', {'message': 'Problem Registering User', 'level': 'warning', 'sticky': true})
       })
     },
-  },
-  mounted () {
-    document.getElementsByTagName('body')[0].classList = this.background
   },
 }
 </script>

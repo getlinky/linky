@@ -293,22 +293,6 @@ const store = new Vuex.Store({
         context.commit('updateLinkUrlErrors', error)
       })
     },
-    updatePassword (context, data) {
-      const {old_password, new_password1, new_password2} = data
-      axios.post('/rest-auth/password/change/', {
-        'old_password': old_password,
-        'new_password1': new_password1,
-        'new_password2': new_password2,
-      }, {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
-      .then(response => {
-        console.info('Updated password')
-        context.commit('notify', {'message': 'Updated Password', 'level': 'info'})
-      })
-      .catch(error => {
-        console.warn('Problem updating password.', error)
-        context.commit('notify', {'message': 'Problem Updating Password', 'level': 'warning'})
-      })
-    },
   },
 })
 

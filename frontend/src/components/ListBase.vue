@@ -68,7 +68,6 @@ export default {
     this.$store.dispatch('refreshLinks')
     document.addEventListener('paste', this.pasteHandler)
     document.addEventListener('keydown', this.keybindsHandler)
-    document.getElementsByTagName('body')[0].classList = this.background
   },
   beforeDestroy () {
     document.removeEventListener('paste', this.pasteHandler)
@@ -84,14 +83,8 @@ export default {
     enablePaste () {
       return this.$store.state.errors.addLink == null && this.enableKeybinds
     },
-    background () {
-      return this.$store.state.background
-    },
   },
   watch: {
-    background () {
-      document.getElementsByTagName('body')[0].classList = this.background
-    },
     query () {
       this.$store.commit('setQuery', this.query)
     },

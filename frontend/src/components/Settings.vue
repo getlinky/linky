@@ -36,7 +36,7 @@
 
       <div class="item">
         <h1>Change Background</h1>
-        <background></background>
+        <linky-background></linky-background>
       </div>
 
       <div class="item">
@@ -44,15 +44,13 @@
         <a @click="exportLinks">Export Saved Links</a>
       </div>
     </div>
-    <linky-notification></linky-notification>
   </linky-base>
 </template>
 
 <script>
 import linkyBase from './LinkyBase.vue'
 import linkyNav from './LinkyNav.vue'
-import background from './background.vue'
-import linkyNotification from './linkyNotification.vue'
+import linkyBackground from './background.vue'
 
 import axios from 'axios'
 
@@ -61,8 +59,7 @@ export default {
   components: {
     linkyBase,
     linkyNav,
-    background,
-    linkyNotification,
+    linkyBackground,
   },
   data () {
     return {
@@ -70,6 +67,10 @@ export default {
       newPassword1: '',
       newPassword2: '',
       updatedEmail: this.$store.state.user.email,
+      errors: {
+        updatePassword: {},
+        updateEmail: {},
+      },
     }
   },
   computed: {
@@ -88,7 +89,16 @@ export default {
         'new_password1': this.newPassword1,
         'new_password2': this.newPassword2,
       }
-      this.$store.dispatch('updatePassword', data)
+      axios.post('/rest-auth/password/change/', data, {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
+      .then(response => {
+        console.info('Updated password')
+        this.$store.commit('notify', {'message': 'Updated Password', 'level': 'info'})
+      })
+      .catch(error => {
+        console.warn('Problem updating password.', error)
+        this.errors.updatePassword = error.response.data
+        this.$store.commit('notify', {'message': 'Problem Updating Password', 'level': 'warning', 'sticky': true})
+      })
       this.oldPassword = ''
       this.newPassword1 = ''
       this.newPassword2 = ''
@@ -125,12 +135,11 @@ export default {
   flex-wrap: wrap;
   padding-left: 10px;
   padding-right: 10px;
-  max-width: 40em;
   margin: 0 auto;
 
   .item {
     flex-basis: max-content;
-    padding-left: .5em;
+    padding-left: 2em;
     a {
       text-decoration: underline;
       &:hover {
