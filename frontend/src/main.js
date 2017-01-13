@@ -27,7 +27,13 @@ const loginRequired = (to, from, next) => {
 
 const anonRequired = (to, from, next) => {
   is_authenticated()
-    .then(() => next('/list'))
+    .then(() => {
+      if (from.path === '/list') {
+        store.commit('setLoadingProgress', 0)
+        next(false)
+      }
+      next('/list')
+    })
     .catch(() => next())
 }
 
@@ -40,6 +46,7 @@ const isAuthenticated = (to, from, next) => {
 const routes = [
   { path: '/',
     component: Index,
+    beforeEnter: anonRequired,
   },
   { path: '/list',
     component: List,
