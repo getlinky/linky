@@ -2,7 +2,13 @@
 
 > A tool for storing links
 
-[trello](https://trello.com/b/ovCceyss/linky)
+Linky is a website for storing links and nothing more, with a focus on simple
+to use keybinds for the utmost efficiency and ease of use.
+
+Linky is powered by [Vue.js][1] on the frontend, and [Django-Rest-Framework][2] on the backend.
+
+[1]: https://vuejs.org
+[2]: http://www.django-rest-framework.org
 
 ## Dev
 
