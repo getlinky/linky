@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import linkyModal from './Modal.vue'
+  import linkyModal from './modal.vue'
   import linkyBackgroundChooser from './BackgroundChooser.vue'
 
   export default {

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import linkyModal from './Modal.vue'
+import linkyModal from './modal.vue'
 import { focus } from 'vue-focus'
 
 import linkyErrorDisplay from './ErrorDisplay.vue'

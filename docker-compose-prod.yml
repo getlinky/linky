@@ -1,0 +1,34 @@
+version: '2'
+services:
+  nginx:
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes_from:
+      - web
+      - vue
+  web:
+    restart: always
+    build: ./backend
+    environment:
+      - EMAIL_HOST_USER
+      - EMAIL_HOST_PASSWORD
+    command: gunicorn -w 3 linky.wsgi
+    volumes:
+      - /code/static
+    ports:
+     - "8000:8000"
+    depends_on:
+     - db
+  db:
+    restart: always
+    image: postgres
+    ports:
+      "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+  vue:
+    build: ./frontend
+    command: npm run build
+    volumes:
+      - webpack:/var/app/dist
