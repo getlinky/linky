@@ -69,6 +69,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    # FIXME: disbaled for browser extensions
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
