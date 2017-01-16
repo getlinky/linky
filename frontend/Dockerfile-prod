@@ -8,6 +8,5 @@ COPY package.json /var/
 WORKDIR /var/
 RUN npm install
 
-# Volume for mounting our local files
 WORKDIR /var/app
 COPY . /var/app

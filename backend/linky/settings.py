@@ -199,7 +199,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-# if DEBUG:
-#     STATIC_ROOT = '/Users/chris/Dropbox/chris/projects/linky/backend/static'
-# else:
-STATIC_ROOT = '/var/www/'
+
+STATIC_ROOT = '/var/app/django/static'

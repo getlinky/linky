@@ -9,14 +9,15 @@ services:
       - vue
   web:
     restart: always
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-prod
     environment:
-      - DEBUG=1
       - EMAIL_HOST_USER
       - EMAIL_HOST_PASSWORD
     command: bash bootstrap-prod.sh
     volumes:
-      - /code/static
+      - /var/app/django/static
     ports:
      - "8000:8000"
     depends_on:

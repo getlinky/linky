@@ -2,12 +2,16 @@ version: '2'
 services:
   web:
     restart: always
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-dev
     environment:
       - DEBUG=1
     command: bash bootstrap-dev.sh
     ports:
       - "8000:8000"
+    volumes:
+      - ./backend:/var/app
     depends_on:
       - db
       - mailserver
@@ -16,7 +20,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /var/lib/postgresql/data/
+      - pgdata:/var/lib/postgresql/data/
   mailserver:
     image: python:3.6
     command: python -m smtpd -n -c DebuggingServer 0.0.0.0:1025
