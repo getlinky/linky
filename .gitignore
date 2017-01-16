@@ -4,3 +4,4 @@ venv/
 notes.md
 npm-debug.log*
 .env
+backend/static/
