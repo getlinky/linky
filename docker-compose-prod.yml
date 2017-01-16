@@ -7,14 +7,16 @@ services:
     volumes_from:
       - web
       - vue
+    depends_on:
+      - web
+      - vue
   web:
     restart: always
     build:
       context: ./backend
       dockerfile: Dockerfile-prod
-    environment:
-      - EMAIL_HOST_USER
-      - EMAIL_HOST_PASSWORD
+    env_file:
+      - .env
     command: bash bootstrap-prod.sh
     volumes:
       - /var/app/django/static
