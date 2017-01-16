@@ -11,9 +11,10 @@ services:
     restart: always
     build: ./backend
     environment:
+      - DEBUG=1
       - EMAIL_HOST_USER
       - EMAIL_HOST_PASSWORD
-    command: gunicorn -w 3 linky.wsgi
+    command: bash bootstrap-prod.sh
     volumes:
       - /code/static
     ports:
@@ -21,14 +22,22 @@ services:
     depends_on:
      - db
   db:
-    restart: always
     image: postgres
     ports:
-      "5432:5432"
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data/
   vue:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-prod
     command: npm run build
+    ports:
+      - "8080:8080"
     volumes:
       - webpack:/var/app/dist
+volumes:
+  pgdata:
+    driver: local
+  webpack:
+    driver: local

@@ -28,7 +28,7 @@ if os.getenv('DEBUG') == '1':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['web']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -199,7 +199,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-if DEBUG:
-    STATIC_ROOT = '/Users/chris/Dropbox/chris/projects/linky/backend/static'
-else:
-    STATIC_ROOT = '/var/www/'
+# if DEBUG:
+#     STATIC_ROOT = '/Users/chris/Dropbox/chris/projects/linky/backend/static'
+# else:
+STATIC_ROOT = '/var/www/'

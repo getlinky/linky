@@ -5,7 +5,7 @@ services:
     build: ./backend
     environment:
       - DEBUG=1
-    command: bash bootstrap.sh
+    command: bash bootstrap-dev.sh
     ports:
       - "8000:8000"
     depends_on:
@@ -25,6 +25,7 @@ services:
   vue:
     build:
       context: ./frontend
+      dockerfile: Dockerfile-dev
     command: npm run dev
     ports:
       - "8080:8080"
