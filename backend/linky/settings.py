@@ -73,7 +73,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # FIXME: disbaled for browser extensions
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -171,10 +172,10 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 if DEBUG:
     # TODO: figure out which of these are needed for production
-    CORS_ORIGIN_WHITELIST = ('localhost:8080', 'localhost:8000', 'http://127.0.0.1:8000')
     CORS_ALLOW_CREDENTIALS = True
     CSRF_COOKIE_DOMAIN = "localhost"
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
