@@ -1,9 +1,13 @@
 FROM node
-RUN mkdir -p /var/www/dist
-COPY package.json /var/www
-WORKDIR /var/www
+
+RUN mkdir -p /var/app
+
+# Install package.json /var/ so we can mount at /app and not have issues with dependences
+# http://stackoverflow.com/a/33106611/3555105
+COPY package.json /var/
+WORKDIR /var/
 RUN npm install
-WORKDIR /var/www
-COPY . /var/www
-RUN npm run build
-VOLUME /var/www/dist
+
+# Volume for mounting our local files
+WORKDIR /var/app
+VOLUME ["/var/app"]

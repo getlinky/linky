@@ -28,6 +28,8 @@ services:
     command: npm run dev
     ports:
       - "8080:8080"
+    volumes:
+      - ./frontend:/var/app
     depends_on:
       - web
 volumes:

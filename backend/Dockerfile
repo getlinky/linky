@@ -1,5 +1,7 @@
 FROM python:3.6
 ENV PYTHONUNBUFFERD 1
+RUN apt-get update
+RUN apt-get install netcat -y
 RUN mkdir /code
 WORKDIR /code
 COPY requirements.txt /code/
