@@ -9,14 +9,13 @@ brew install imagemagick
 ## Production
 
 ```bash
-make clean && make build
+make clean && make
 ```
 
 ## Dev
 
 ```bash
-# lint
-npm run lint
-
+npm run build
+# or with watchexec installed
 cd src/ && watchexec -- npm run build
 ```
