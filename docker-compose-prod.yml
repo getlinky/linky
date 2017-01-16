@@ -1,0 +1,46 @@
+version: '2'
+services:
+  nginx:
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes_from:
+      - web
+      - vue
+    depends_on:
+      - web
+      - vue
+  web:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-prod
+    env_file:
+      - .env
+    command: bash bootstrap-prod.sh
+    volumes:
+      - /var/app/django/static
+    ports:
+     - "8000:8000"
+    depends_on:
+     - db
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+  vue:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-prod
+    command: npm run build
+    ports:
+      - "8080:8080"
+    volumes:
+      - webpack:/var/app/dist
+volumes:
+  pgdata:
+    driver: local
+  webpack:
+    driver: local

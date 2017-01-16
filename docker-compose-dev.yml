@@ -1,0 +1,42 @@
+version: '2'
+services:
+  web:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-dev
+    environment:
+      - DEBUG=1
+    command: bash bootstrap-dev.sh
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/var/app
+    depends_on:
+      - db
+      - mailserver
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+  mailserver:
+    image: python:3.6
+    command: python -m smtpd -n -c DebuggingServer 0.0.0.0:1025
+    ports:
+      - "1025:1025"
+  vue:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-dev
+    command: npm run dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./frontend:/var/app
+    depends_on:
+      - web
+volumes:
+  pgdata:
+    driver: local

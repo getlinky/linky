@@ -33,7 +33,7 @@ import linkyBase from './Base.vue'
 import linkyNav from './Nav.vue'
 import linkyHelpModal from './HelpModal.vue'
 import linkySettingsModal from './SettingsModal.vue'
-import linkyAddLinkModal from './AddLinkModal.vue'
+import linkyAddLinkModal from './addLinkModal.vue'
 
 import { handle_event } from '../nav.js'
 

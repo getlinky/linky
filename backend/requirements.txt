@@ -14,6 +14,7 @@ django-filter==1.0.1
 django-rest-auth==0.9.0
 djangorestframework==3.5.3
 freezegun==0.3.8
+gunicorn==19.6.0
 ipython==5.1.0
 ipython-genutils==0.1.0
 kombu==4.0.2

@@ -19,20 +19,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'h+yf&^l&1_)0v9g3sfiu^hv0%77ly0e$#-4yrj5mvqh#4o@@fh'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.getenv('DEBUG') == '1':
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: keep the secret key used in production secret!
+if DEBUG:
+    SECRET_KEY = 'h+yf&^l&1_)0v9g3sfiu^hv0%77ly0e$#-4yrj5mvqh#4o@@fh'
+else:
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
-    'frontend.apps.FrontendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -107,14 +111,12 @@ WSGI_APPLICATION = 'linky.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'linkydb',
-        'USER': 'linkyadmin',
-        'PASSWORD': '',
-        'HOST': '',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -148,13 +150,23 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.mailgun.org'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+SITE_ID = 1
 
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+if DEBUG:
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 1025
+    EMAIL_HOST_USER = ''
+    EMAIL_HOST_PASSWORD = ''
+    EMAIL_USE_TLS = False
+    DEFAULT_FROM_EMAIL = 'testing@example.com'
+else:
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.mailgun.org'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 SERVER_EMAIL = EMAIL_HOST_USER
 
 if DEBUG:
@@ -162,12 +174,6 @@ if DEBUG:
     CORS_ORIGIN_WHITELIST = ('localhost:8080', 'localhost:8000', 'http://127.0.0.1:8000')
     CORS_ALLOW_CREDENTIALS = True
     CSRF_COOKIE_DOMAIN = "localhost"
-    EMAIL_HOST = 'localhost'
-    EMAIL_PORT = 1025
-    EMAIL_HOST_USER = ''
-    EMAIL_HOST_PASSWORD = ''
-    EMAIL_USE_TLS = False
-    DEFAULT_FROM_EMAIL = 'testing@example.com'
 
 
 # Internationalization
@@ -188,3 +194,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = '/var/app/django/static'

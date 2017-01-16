@@ -3,3 +3,4 @@ venv/
 *.sqlite3
 notes.md
 npm-debug.log*
+.env

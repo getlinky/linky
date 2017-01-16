@@ -25,15 +25,15 @@ module.exports = {
     // proxyTable is DEPRECATED
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'http://web:8000',
         changeOrigin: true,
       },
       '/rest-auth': {
-        target: 'http://localhost:8000',
+        target: 'http://web:8000',
         changeOrigin: true,
       },
       '/admin': {
-        target: 'http://localhost:8000',
+        target: 'http://web:8000',
         changeOrigin: true,
       },
     },

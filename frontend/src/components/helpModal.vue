@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import linkyModal from './Modal.vue'
+  import linkyModal from './modal.vue'
 
   export default {
     name: 'HelpModal',
