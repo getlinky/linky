@@ -18,6 +18,9 @@
     "css": ["css/content_script.css"]
   }],
   "options_page": "index.html",
+  "options_ui": {
+    "page": "index.html"
+  },
   "browser_action": {
     "default_title": "Add URL to Linky"
   },

@@ -1,11 +1,18 @@
 <template>
-  <transition name="fade">
-  <div v-if="show" class="linky-note linky-bottom" :class="'linky-'+level">
-    <span v-if="html" v-html="message"></span>
-    <span v-else >{{ message }}</span>
-    <a v-if="button" class="linky-close" @click="closed">✕</a>
-  </div>
+  <transition v-if="!isFirefox" name="fade">
+    <div v-if="show" class="linky-note linky-bottom" :class="'linky-'+level">
+      <span v-if="html" v-html="message"></span>
+      <span v-else >{{ message }}</span>
+      <a v-if="button" class="linky-close" @click="closed">✕</a>
+    </div>
   </transition>
+  <div v-else>
+    <div v-if="show" class="linky-note linky-bottom" :class="'linky-'+level">
+      <span v-if="html" v-html="message"></span>
+      <span v-else >{{ message }}</span>
+      <a v-if="button" class="linky-close" @click="closed">✕</a>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -81,6 +88,9 @@ export default {
         'theme': this.theme,
         'show': this.show,
       }
+    },
+    isFirefox () {
+      return navigator.userAgent.indexOf('Firefox') > 0
     },
   },
 }

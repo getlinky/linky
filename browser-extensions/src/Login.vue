@@ -46,7 +46,15 @@ import axios from 'axios'
 import { focus } from 'vue-focus'
 import config from './config.js'
 
-const baseURL = config.isDebug ? 'http:localhost:8000' : 'https://getlinky.com'
+const baseURL =
+  config.isDebug
+  ? 'http:localhost:8000'
+  : 'https://getlinky.com'
+
+const storage =
+  typeof chrome.storage.sync !== 'undefined'
+  ? chrome.storage.sync
+  : chrome.storage.local
 
 export default {
   directives: {
@@ -66,7 +74,7 @@ export default {
       axios.post(baseURL + '/rest-auth/login/', credentials)
         .then(response => {
           console.info('login successful')
-          chrome.storage.sync.set({'token': response.data.key})
+          storage.set({'token': response.data.key})
           this.inputErrors = false
           this.authenticated = true
           this.password = ''
@@ -80,7 +88,7 @@ export default {
     },
     logout () {
       // Note: empty data payload needed for axios to send the headers as headers
-      chrome.storage.sync.get('token', token => {
+      storage.get('token', token => {
         axios.post(baseURL + '/rest-auth/logout/', {}, {headers: {'Authorization': 'Token ' + token.token}})
           .then(response => {
             console.info('logged out')
@@ -94,8 +102,7 @@ export default {
   },
   mounted () {
     console.log('mounted')
-
-    chrome.storage.sync.get('token', token => {
+    storage.get('token', token => {
       axios.get(baseURL + '/api/users/me/',
         {headers: {'Authorization': 'Token ' + token.token}})
         .then(response => {

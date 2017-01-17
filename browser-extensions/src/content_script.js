@@ -10,6 +10,11 @@ const div = document.createElement('div')
 div.id = 'linky-vue'
 document.querySelector('body').appendChild(div)
 
+const storage =
+  typeof chrome.storage.sync !== 'undefined'
+  ? chrome.storage.sync
+  : chrome.storage.local
+
 // eslint-disable-next-line no-new
 const v = new Vue({
   el: '#linky-vue',
@@ -28,7 +33,7 @@ const v = new Vue({
   },
   methods: {
     addURL (URL) {
-      chrome.storage.sync.get('token', token => {
+      storage.get('token', token => {
         axios.post(baseURL + '/api/links/', {'url': URL},
           {headers: {'Authorization': 'Token ' + token.token}})
           .then(response => {

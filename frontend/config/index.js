@@ -36,6 +36,14 @@ module.exports = {
         target: 'http://web:8000',
         changeOrigin: true,
       },
+      '/static/rest_framework': {
+        target: 'http://web:8000',
+        cahngeOrigin: true,
+      },
+      '/static/admin': {
+        target: 'http://web:8000',
+        cahngeOrigin: true,
+      },
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
