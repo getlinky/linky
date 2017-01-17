@@ -31,7 +31,7 @@
 <script>
 import linkyBase from './Base.vue'
 import linkyNav from './Nav.vue'
-import linkyHelpModal from './HelpModal.vue'
+import linkyHelpModal from './helpModal.vue'
 import linkySettingsModal from './SettingsModal.vue'
 import linkyAddLinkModal from './addLinkModal.vue'
 
