@@ -1,9 +1,9 @@
 <template>
   <transition name="fade">
-  <div v-if="show" class="note" :class="[position, level]">
+  <div v-if="show" class="linky-note linky-bottom" :class="'linky-'+level">
     <span v-if="html" v-html="message"></span>
-    <span v-else class="message">{{ message }}</span>
-    <a v-if="button" class="close" @click="closed">✕</a>
+    <span v-else >{{ message }}</span>
+    <a v-if="button" class="linky-close" @click="closed">✕</a>
   </div>
   </transition>
 </template>
@@ -87,16 +87,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fade-enter-active, .fade-leave-active {
+.linky-fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
-.fade-enter, .fade-leave-to {
+.linky-fade-enter, .fade-leave-to {
   opacity: 0;
 }
 
-.note {
+.linky-note {
   font-family: georgia, serif;
   font-style: italic;
+  font-weight: bold;
   position: fixed;
   z-index: 101;
   text-align: center;
@@ -106,7 +107,7 @@ export default {
   padding: 15px 80px;
   user-select: none;
 
-  .close {
+  .linky-close {
     position: absolute;
     font-style: normal;
     font-family: sans-serif;
@@ -126,11 +127,11 @@ export default {
 }
 
 @media only screen and (max-width : 600px) {
-  .note {
+  .linky-note {
     font-size: 1em;
     padding: 12px 25px;
 
-    .close {
+    .linky-close {
       font-size: .8em;
       height: 20px;
       line-height: 20px;
@@ -142,11 +143,11 @@ export default {
 }
 
 @media only screen and (max-width : 400px) {
-  .note {
+  .linky-note {
     font-size: .8em;
     padding: 15px 25px 15px 10px;
 
-    .close {
+    .linky-close {
       font-size: .8em;
       height: 20px;
       line-height: 20px;
@@ -157,25 +158,22 @@ export default {
   }
 }
 
-.top {
-  top: 0;
-}
-.bottom {
+.linky-bottom {
   bottom: 0;
 }
-.success {
+.linky-success {
   background: #468966;
   color: white;
 }
-.info {
+.linky-info {
   background: #1695A3;
   color: white;
 }
-.warning {
+.linky-warning {
   background: #EB7F00;
   color: white;
 }
-.danger {
+.linky-danger {
   background: #B64926;
   color: white;
 }
