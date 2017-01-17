@@ -31,6 +31,9 @@
                 <a href="https://getlinky.com/reset">Forgot Password?</a>
               </div>
             </form>
+            <p v-if='inputErrors'>
+              Error with login info
+            </p>
           </div>
         </section>
     </div>
@@ -53,7 +56,7 @@ export default {
   data () {
     return {
       emailFocused: true,
-      inputErrors: null,
+      inputErrors: false,
       authenticated: false,
     }
   },
@@ -64,14 +67,14 @@ export default {
         .then(response => {
           console.info('login successful')
           chrome.storage.sync.set({'token': response.data.key})
-          this.inputErrors = null
+          this.inputErrors = false
           this.authenticated = true
           this.password = ''
         })
         .catch(error => {
           console.warn('problem logging in', error)
           this.authenticated = false
-          this.inputErrors = error.response.data
+          this.inputErrors = true
           this.password = ''
         })
     },
