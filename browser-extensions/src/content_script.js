@@ -4,6 +4,8 @@ import Vue from 'vue'
 import axios from 'axios'
 import Notification from './Notification.vue'
 
+import config from './config.js'
+
 const div = document.createElement('div')
 div.id = 'linky-vue'
 document.querySelector('body').appendChild(div)
@@ -48,6 +50,6 @@ const v = new Vue({
   },
 })
 
-const baseURL = 'http://localhost:8000'
+const baseURL = config.isDebug ? 'http://localhost:8000' : 'https://getlinky.com'
 
 chrome.runtime.onMessage.addListener(() => v.addURL(window.location.href))

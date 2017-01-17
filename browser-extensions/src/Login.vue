@@ -41,8 +41,9 @@
 /* globals chrome */
 import axios from 'axios'
 import { focus } from 'vue-focus'
+import config from './config.js'
 
-const baseURL = 'http://localhost:8000'
+const baseURL = config.isDebug ? 'http:localhost:8000' : 'https://getlinky.com'
 
 export default {
   directives: {
