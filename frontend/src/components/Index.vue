@@ -82,7 +82,21 @@ export default {
   },
   methods: {
     logoutUser () {
-      this.$store.dispatch('logout')
+      this.$store.commit('setLoadingProgress', 30)
+      axios.post('/rest-auth/logout/', {},
+        {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
+      .then(response => {
+        console.info('logged out')
+        this.$store.commit('logout')
+        this.$store.commit('notify', {'message': 'Logged out', 'level': 'success'})
+        this.$store.commit('setLoadingProgress', 100)
+      })
+      .catch(error => {
+        this.$store.commit('notify', {'message': 'Problem Logging Out', 'level': 'warning'})
+        console.warn('Problem logging out user.', error)
+        this.$store.commit('logoutErrors', error)
+        this.$store.commit('setLoadingProgress', 0)
+      })
     },
     registerUser () {
       const data = {

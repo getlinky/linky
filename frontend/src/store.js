@@ -175,24 +175,6 @@ const store = new Vuex.Store({
           context.commit('logout')
         })
     },
-    logout (context) {
-      // Note: empty data payload needed for axios to send the headers as headers
-      context.commit('setLoadingProgress', 30)
-      axios.post('/rest-auth/logout/', {},
-        {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
-      .then(response => {
-        console.info('logged out')
-        context.commit('logout')
-        context.commit('notify', {'message': 'Logged out', 'level': 'success'})
-        context.commit('setLoadingProgress', 100)
-      })
-      .catch(error => {
-        context.commit('notify', {'message': 'Problem Logging Out', 'level': 'warning'})
-        console.warn('Problem logging out user.', error)
-        context.commit('logoutErrors', error)
-        context.commit('setLoadingProgress', 0)
-      })
-    },
     addLink (context, url) {
       url = formatUrl(url)
       context.commit('setLoadingProgress', 30)

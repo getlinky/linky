@@ -34,6 +34,7 @@ import linkyNav from './Nav.vue'
 import linkyHelpModal from './helpModal.vue'
 import linkySettingsModal from './SettingsModal.vue'
 import linkyAddLinkModal from './addLinkModal.vue'
+import axios from 'axios'
 
 import { handle_event } from '../nav.js'
 
@@ -91,7 +92,22 @@ export default {
   },
   methods: {
     logout () {
-      this.$store.dispatch('logout').then(this.$router.replace('/'))
+      this.$store.commit('setLoadingProgress', 30)
+      axios.post('/rest-auth/logout/', {},
+        {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
+      .then(response => {
+        console.info('logged out')
+        this.$store.commit('logout')
+        this.$router.replace('/login')
+        this.$store.commit('notify', {'message': 'Logged out', 'level': 'success'})
+        this.$store.commit('setLoadingProgress', 100)
+      })
+      .catch(error => {
+        this.$store.commit('notify', {'message': 'Problem Logging Out', 'level': 'warning'})
+        console.warn('Problem logging out user.', error)
+        this.$store.commit('logoutErrors', error)
+        this.$store.commit('setLoadingProgress', 0)
+      })
     },
     pasteHandler (e) {
       const paste = e.clipboardData.getData('text')
