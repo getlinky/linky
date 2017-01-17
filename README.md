@@ -27,6 +27,7 @@ docker-compose -f docker-compose-prod.yml down
 ```
 
 ## Setup production environment
+Be sure to Rename the `.env-example` file to `.env` and add the secrets for production.
 ``` bash
 docker-compose -f docker-compose-prod.yml up
 

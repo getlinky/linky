@@ -154,7 +154,7 @@ AUTH_PASSWORD_VALIDATORS = [
 SITE_ID = 1
 
 if DEBUG:
-    EMAIL_HOST = 'localhost'
+    EMAIL_HOST = 'mailserver'
     EMAIL_PORT = 1025
     EMAIL_HOST_USER = ''
     EMAIL_HOST_PASSWORD = ''
