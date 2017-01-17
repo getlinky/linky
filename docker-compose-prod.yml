@@ -38,9 +38,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - webpack:/var/app/dist
+      - /var/app/dist
 volumes:
   pgdata:
-    driver: local
-  webpack:
     driver: local
