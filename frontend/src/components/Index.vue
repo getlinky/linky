@@ -16,7 +16,7 @@
           <li>Use simple keybinds to breeze through your lists.</li>
           <li>A no fuss design enables quick access to what you need.</li>
           <li>Copy and paste links into your queue like you copy urls.</li>
-          <li>Open Source</li>
+          <li><a href="https://github.com/sbdchd/linky">Open Source</a></li>
         </ul>
       </div>
       <div class="item">
