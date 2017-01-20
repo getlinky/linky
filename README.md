@@ -36,3 +36,17 @@ docker-compose -f docker-compose-prod.yml up
 # stop
 docker-compose -f docker-compose-prod.yml down
 ```
+
+## Deploying and redeploying changes to production
+``` bash
+# Find the machine name you want to deploy to
+docker-machine ls
+# Find command to set as active machine (in this case linky-sloth)
+docker-machine env linky-sloth
+# Set as active
+eval $(docker-machine env linky-sloth)
+# Deploy everything
+docker-compose up -d --build
+# Redeploy select service "web" without change others
+docker-compose up --no-deps -d --build web
+```
