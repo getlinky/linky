@@ -10,6 +10,14 @@ Linky is powered by [Vue.js][1] on the frontend, and [Django-Rest-Framework][2] 
 [1]: https://vuejs.org
 [2]: http://www.django-rest-framework.org
 
+## Browser Extensions
+
+[chrome][3]
+
+firefox (awaiting review)
+
+[3]: https://chrome.google.com/webstore/detail/linky/lejblldallegoffbjjogkmfnmnbkfgcg
+
 ## Install
 ``` bash
 git clone https://github.com/sbdchd/linky && cd linky
