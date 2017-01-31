@@ -8,17 +8,23 @@ build:
 	mkdir -p dist/js
 	npm run build
 
+install:
+	npm install
+
 src_zip:
-	mkdir -p                $(src_zip_dir)
-	cp	  -R src/  			$(src_zip_dir)
+	mkdir -p                $(src_zip_dir)/src/
+	mkdir -p                $(src_zip_dir)/build/
+	mkdir -p                $(src_zip_dir)/config/
+	cp -r src/  			$(src_zip_dir)/src/
 	cp    package.json      $(src_zip_dir)
 	cp    Makefile          $(src_zip_dir)
-	cp -R build/ 			$(src_zip_dir)
-	cp -R config/			$(src_zip_dir)
+	cp    index.html        $(src_zip_dir)
+	cp -r build/ 			$(src_zip_dir)/build/
+	cp -r config/			$(src_zip_dir)/config/
 	cp	  README.md			$(src_zip_dir)
 	cp	  .babelrc			$(src_zip_dir)
 	cd    $(src_zip_dir)    &&     \
-	zip   src.zip           *      && \
+	zip -r src.zip           *      && \
 	cd    - && \
 	cp	  $(src_zip_dir)/src.zip ./
 	rm -rf $(src_zip_dir)

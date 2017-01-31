@@ -15,7 +15,9 @@ make clean && make
 ## Dev
 
 ```bash
-npm run build
+make install
+
+make build
 # or with watchexec installed
 cd src/ && watchexec -- npm run build
 ```
