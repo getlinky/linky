@@ -10,6 +10,8 @@ Linky is powered by [Vue.js][1] on the frontend, and [Django-Rest-Framework][2] 
 [1]: https://vuejs.org
 [2]: http://www.django-rest-framework.org
 
+![img](screenshots/list.png)
+
 ## Browser Extensions
 
 [chrome][3]
