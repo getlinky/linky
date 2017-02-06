@@ -1,7 +1,7 @@
 <template>
   <linky-modal :show='show' @closed='closeModal'>
     <h1 slot='header'>Add Item</h1>
-    <form slot='body' action="" method="post" @submit.prevent.once="addLink">
+    <form slot='body' action="" method="post" @submit.prevent="addLink">
       <input type='text' placeholder='https://example.com' required v-focus="urlFocused" v-model="url">
       <input type='submit' value='Add'>
         <h2 v-if="Object.keys(errors).length > 0">Errors</h2>
@@ -59,14 +59,17 @@ export default {
     addLink () {
       this.$store.dispatch('addLink', this.url)
       this.url = ''
+      this.urlFocused = false
       this.$emit('closed')
     },
     closeModal () {
       this.$store.commit('addLinkErrorsClear')
       this.url = ''
+      this.urlFocused = false
       this.$emit('closed')
     },
     showModal () {
+      this.urlFocused = true
       this.$emit('show')
     },
   },
