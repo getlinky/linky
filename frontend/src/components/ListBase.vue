@@ -122,6 +122,13 @@ export default {
       this.searching = false
     },
     keybindsHandler (event) {
+      // we should always be able to <esc> the search to nav the list again
+      const is_esc_key = event.keyCode === 27
+      const is_terminal_esc = event.keyCode === 219 && event.ctrlKey
+      if (is_esc_key || is_terminal_esc) {
+        document.querySelector('input.search').blur()
+      }
+
       if (this.enableKeybinds) {
         handle_event(event)
         // l or h - switch list
