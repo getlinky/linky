@@ -156,6 +156,16 @@ $text-gray: #444;
 $light-gray: #eee;
 $sepia: #f8f2e3;
 
+button {
+  font-family: georgia;
+  margin-right: 2px;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+
+}
+
 .link {
   padding-left: 5px;
   padding-bottom: .7em;

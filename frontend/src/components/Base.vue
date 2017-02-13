@@ -25,6 +25,13 @@ export default {
 </script>
 
 <style lang="scss">
+
+body {
+  // disable default margin of browser
+  margin: 0;
+  margin-bottom: 10px;
+}
+
 .nanobar {
   width: 100%;
   height: 3px;

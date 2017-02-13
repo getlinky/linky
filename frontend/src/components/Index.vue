@@ -10,16 +10,10 @@
     </linky-nav>
     <h1><i>Linky</i> — Save links for later</h1>
     <div class="container">
-      <div class="item">
-        <h2>Why choose this?</h2>
-        <ul>
-          <li>Use simple keybinds to breeze through your lists.</li>
-          <li>A no fuss design enables quick access to what you need.</li>
-          <li>Copy and paste links into your queue like you copy urls.</li>
-          <li><a href="https://github.com/sbdchd/linky">Open Source</a></li>
-        </ul>
+      <div class="item landing-page-image-container">
+       <img class="landing-page-image" src="static/list.png">
       </div>
-      <div class="item">
+      <div class="item register">
         <h2>Register Now</h1>
         <form @submit.prevent="registerUser">
           <label>Email<br>
@@ -39,6 +33,17 @@
         <div class="errors">
           <linky-error-display :errors="inputErrors"></linky-error-display>
         </div>
+      </div>
+    </div>
+    <div class='container'>
+      <div class="item copy">
+        <h2 class='center'>Why Linky?</h2>
+        <ul>
+          <li>Keybinds — breeze through links.</li>
+          <li>Simple design.</li>
+          <li>Copy and paste links into queue.</li>
+          <li><a href="https://github.com/sbdchd/linky">Open Source</a></li>
+        </ul>
       </div>
     </div>
   </linky-base>
@@ -135,27 +140,47 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
 
-  .item {
-    flex-basis: max-content;
-    padding-left: 20px;
-    padding-right: 20px;
-    max-width: 400px;
-    font-size: 1.25em;
+  .landing-page-image-container {
+     max-width: 800px;
+  }
 
-    h2 {
-      font-size: 1.2em;
-      margin: 0;
-    }
+  .register {
+    margin-top: 25px;
+  }
 
-    form {
-      font-weight: normal;
-      padding-top: 1em;
-      font-size: .8em;
-    }
-    .errors {
-      font-size: .6em;
-      font-weight: normal;
-    }
+  .copy {
+    margin-top: 20px;
+  }
+
+}
+
+.item {
+  flex-basis: max-width;
+  margin: 0 10px;
+  font-size: 1.25em;
+  max-width: 400px;
+
+  .landing-page-image {
+    max-width: 100%;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    margin: 0;
+  }
+
+  form {
+    font-weight: normal;
+    padding-top: 1em;
+    font-size: .8em;
+  }
+  .errors {
+    font-size: .6em;
+    font-weight: normal;
   }
 }
 </style>

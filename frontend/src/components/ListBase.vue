@@ -174,11 +174,6 @@ html {
   background-color: white;
 }
 
-body {
-  // disable default margin of browser
-  margin: 0;
-}
-
 a {
   color: inherit;
 }
