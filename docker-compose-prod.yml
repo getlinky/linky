@@ -6,7 +6,8 @@ services:
       - "80:80"
     volumes_from:
       - web
-      - vue
+    volumes:
+      - static-files:/var/app/dist
     depends_on:
       - web
       - vue
@@ -35,10 +36,10 @@ services:
       context: ./frontend
       dockerfile: Dockerfile-prod
     command: npm run build
-    ports:
-      - "8080:8080"
     volumes:
-      - /var/app/dist
+      - static-files:/var/app/dist
 volumes:
   pgdata:
+    driver: local
+  static-files:
     driver: local
