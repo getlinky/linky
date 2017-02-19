@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "nanobar": "^0.4.2",
+    "raven-js": "^3.11.0",
     "vue": "^2.1.8",
     "vue-focus": "^2.1.0",
     "vue-router": "^2.1.1",

@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from './store.js'
 
+import Raven from 'raven-js'
+import RavenVue from 'raven-js/plugins/vue'
+
 import Index from './components/Index.vue'
 import List from './components/List.vue'
 import Archive from './components/Archive.vue'
@@ -11,6 +14,11 @@ import ResetPassword from './components/ResetPassword.vue'
 import ConfirmResetPassword from './components/ConfirmResetPassword.vue'
 
 Vue.use(VueRouter)
+
+Raven
+    .config('https://5e9833708bb047ac977f7839110f83fd@sentry.io/140375')
+    .addPlugin(RavenVue, Vue)
+    .install()
 
 import axios from 'axios'
 

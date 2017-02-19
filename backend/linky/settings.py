@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -52,7 +53,13 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'rest_framework.authtoken',
     'crispy_forms',
+    'raven.contrib.django.raven_compat',
 ]
+
+RAVEN_CONFIG = {
+    'dsn': os.getenv('SENTRY_DSN'),
+}
+
 # NOTE: this may not actually be needed
 SITE_ID = 1
 
