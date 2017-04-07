@@ -151,7 +151,7 @@ const store = new Vuex.Store({
     },
     setBackground (state, color) {
       state.background = color
-      document.getElementsByTagName('body')[0].classList = color
+      document.getElementsByTagName('body')[0].className = color
       localStorage.setItem('backgroundColor', color)
     },
     setLoadingProgress (state, percentage) {

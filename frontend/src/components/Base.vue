@@ -19,7 +19,7 @@ export default {
     },
   },
   mounted () {
-    document.getElementsByTagName('body')[0].classList = this.background
+    document.getElementsByTagName('body')[0].className = this.background
   },
 }
 </script>
