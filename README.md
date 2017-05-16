@@ -16,9 +16,10 @@ Linky is powered by [Vue.js][1] on the frontend, and [Django-Rest-Framework][2] 
 
 [chrome][3]
 
-firefox (awaiting review)
+[firefox][4]
 
 [3]: https://chrome.google.com/webstore/detail/linky/lejblldallegoffbjjogkmfnmnbkfgcg
+[4]: https://addons.mozilla.org/en-US/firefox/addon/getlinky/
 
 ## Install
 ``` bash
