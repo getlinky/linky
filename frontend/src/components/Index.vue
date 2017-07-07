@@ -14,7 +14,7 @@
        <img class="landing-page-image" src="static/list.png">
       </div>
       <div class="item register">
-        <h2>Register Now</h1>
+        <h2>Register Now</h2>
         <form @submit.prevent="registerUser">
           <label>Email<br>
             <input type="email" v-model="email" v-focus="focusEmail" @blur="focusEmail = false" @focus="focusEmail = true" required>

@@ -5,7 +5,7 @@
         <linky-background-chooser></linky-background-chooser>
         <router-link to="/settings">Account Settings</router-link>
       </div>
-  </modal>
+  </linky-modal>
 </template>
 
 <script>

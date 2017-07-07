@@ -12,6 +12,7 @@
             <slot name='body'></slot>
         </div>
     </div>
+    </div>
   </transition>
 </template>
 
