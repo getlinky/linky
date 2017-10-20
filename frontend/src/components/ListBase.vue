@@ -150,9 +150,6 @@ export default {
 <style lang="scss">
 @import '../styles/_partials.scss';
 
-$font-family: georgia, serif;
-$base-font-size: 18px;
-
 $text-gray: #444;
 $max-width-main-content: 40em;
 

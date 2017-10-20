@@ -40,7 +40,7 @@
         <h2 class='center'>Why Linky?</h2>
         <ul>
           <li>Keybinds — breeze through links.</li>
-          <li>Simple design.</li>
+          <li>Efficent design.</li>
           <li>Copy and paste links into queue.</li>
           <li><a href="https://github.com/sbdchd/linky">Open Source</a></li>
         </ul>
@@ -158,7 +158,6 @@ h1 {
   flex-basis: max-width;
   margin: 0 10px;
   font-size: 1.25em;
-  max-width: 400px;
 
   .landing-page-image {
     max-width: 100%;
