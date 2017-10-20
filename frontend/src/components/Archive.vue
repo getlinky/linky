@@ -6,7 +6,7 @@
         :li='item'>
       </linky-link>
     </template>
-    <li v-else>
+    <li v-else class="no-links">
       No links found.
     </li>
   </linky-list-base>
@@ -35,3 +35,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.no-links {
+  text-align: center;
+  font-style: italic;
+}
+</style>
