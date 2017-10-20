@@ -57,8 +57,10 @@ export default {
   methods: {
     addLink () {
       this.$store.dispatch('addLink', this.url)
-      this.url = ''
-      this.$emit('closed')
+        .then(() => {
+          this.url = ''
+          this.$emit('closed')
+        })
     },
     closeModal () {
       this.$store.commit('addLinkErrorsClear')
