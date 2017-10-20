@@ -178,7 +178,7 @@ const store = new Vuex.Store({
     addLink (context, url) {
       url = formatUrl(url)
       context.commit('setLoadingProgress', 30)
-      axios.post('/api/links/', {'url': url},
+      return axios.post('/api/links/', {'url': url},
         {headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
         .then(response => {
           console.info('Added ' + url)
