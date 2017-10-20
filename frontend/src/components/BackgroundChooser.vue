@@ -36,6 +36,7 @@ $blue: #0074bf;
   justify-content: space-around;
   color: $text-gray;
   user-select: none;
+  margin-bottom: 1rem;
 
   .item {
     padding: 1em;
