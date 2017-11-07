@@ -17,6 +17,7 @@ a {
 }
 
 .button, button, input[type="submit"] {
+      cursor: pointer;
       background-color: $sepia;
       color: #fff;
       font-size: 0.9em;
