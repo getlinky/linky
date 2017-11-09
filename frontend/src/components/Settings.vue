@@ -169,8 +169,6 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding-left: 10px;
-    padding-right: 10px;
 
     .item {
       flex-basis: max-content;

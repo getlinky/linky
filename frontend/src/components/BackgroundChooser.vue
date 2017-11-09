@@ -1,8 +1,23 @@
 <template>
   <div class="container">
-    <a tabindex="1" @click="setBackground('white')" @keydown.enter="setBackground('white')" class="item white" :class="{active: background === 'white'}"> White</a>
-    <a tabindex="1" @click="setBackground('sepia')" @keydown.enter="setBackground('sepia')" class="item sepia" :class="{active: background === 'sepia'}">Sepia</a>
-    <a tabindex="1" @click="setBackground('grayblack')" @keydown.enter="setBackground('grayblack')" class="item grayblack" :class="{active: background === 'grayblack'}">Black</a>
+    <a
+      tabindex="1"
+      @click="setBackground('white')"
+      @keydown.enter="setBackground('white')"
+      class="item white"
+      :class="{active: background === 'white'}">White</a>
+    <a
+      tabindex="1"
+      @click="setBackground('sepia')"
+      @keydown.enter="setBackground('sepia')"
+      class="item sepia"
+      :class="{active: background === 'sepia'}">Sepia</a>
+    <a
+      tabindex="1"
+      @click="setBackground('grayblack')"
+      @keydown.enter="setBackground('grayblack')"
+      class="item grayblack"
+      :class="{active: background === 'grayblack'}">Black</a>
   </div>
 </template>
 
@@ -15,7 +30,6 @@ export default {
   },
   methods: {
     setBackground (color) {
-      console.info('Set background', color)
       this.$store.commit('setBackground', color)
     },
   },
@@ -39,15 +53,14 @@ $blue: #0074bf;
   margin-bottom: 1rem;
 
   .item {
-    padding: 1em;
-    border-radius: 5px;
-    border-color: gray;
-    border-width: 3px;
+    padding: 1.5rem;
     flex-basis: max-content;
     outline: none;
-    border-width: 3px;
-    border-style: solid;
-    border-color: $text-gray;
+    border-radius: 5px;
+
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
 
     a {
       &:focus, &:active {
