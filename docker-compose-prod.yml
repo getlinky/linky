@@ -11,9 +11,6 @@ services:
     depends_on:
       - web
       - vue
-    networks:
-      - linky_net
-      - outside
   web:
     restart: always
     build:
@@ -24,20 +21,12 @@ services:
     command: bash bootstrap-prod.sh
     volumes:
       - /var/app/django/static
-    ports:
-     - "8000:8000"
     depends_on:
      - db
-    networks:
-      - linky_net
   db:
     image: postgres
-    ports:
-      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data/
-    networks:
-      - linky_net
   vue:
     build:
       context: ./frontend
@@ -45,15 +34,8 @@ services:
     command: npm run build
     volumes:
       - static-files:/var/app/dist
-    networks:
-      - linky_net
 volumes:
   pgdata:
     driver: local
   static-files:
     driver: local
-
-networks:
-  linky_net:
-    internal: true
-  outside:
