@@ -16,7 +16,7 @@ a {
   }
 }
 
-.button, button, input[type="submit"] {
+.button, button {
       cursor: pointer;
       background-color: $sepia;
       color: #fff;
@@ -38,9 +38,6 @@ a {
 }
 
 input {
-  border-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: lightgray;
   width: 100%;
   margin: 3px 0;
   height: auto;
@@ -49,7 +46,7 @@ input {
   background-color: $sepia;
   padding: 5px;
   transition: box-shadow 0.2s ease;
-  border-color: $text-gray;
+  border: 1px solid $text-gray;
   border-radius: 5px;
 
   &::placeholder {

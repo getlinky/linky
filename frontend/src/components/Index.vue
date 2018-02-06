@@ -8,24 +8,30 @@
       </template>
       <router-link v-else to="/login">Login</router-link>
     </linky-nav>
-    <h1><i>Linky</i> — Save links for later</h1>
+    <h1>Save links for later</h1>
     <div class="container">
-      <div class="item landing-page-image-container">
-       <img class="landing-page-image" src="static/list.png">
+      <div class="item">
+       <img width="1000px" height="658px" src="static/list.png">
       </div>
-      <div class="item register">
+      <div class="item register min-width-300px">
         <h2>Register Now</h2>
         <form @submit.prevent="registerUser">
           <label>Email<br>
-            <input type="email" v-model="email" v-focus="focusEmail" @blur="focusEmail = false" @focus="focusEmail = true" required>
+            <input type="email"
+              v-model="email"
+              v-focus="focusEmail"
+              @blur="focusEmail = false"
+              @focus="focusEmail = true"
+              placeholder="j.appleseed@leominster.net"
+              required>
           </label>
           <br>
           <label>Password<br>
-            <input type="password" v-model="password1" required>
+            <input type="password" v-model="password1" placeholder="super secret password" required>
           </label>
           <br>
           <label>Password Again<br>
-            <input type="password" v-model="password2" required>
+            <input type="password" v-model="password2" placeholder="super secret password (again)" required>
           </label>
           <br>
           <input class="button" type="submit" value="Register">
@@ -36,16 +42,19 @@
       </div>
     </div>
     <div class='container'>
-      <div class="item copy">
-        <h2 class='center'>Why Linky?</h2>
-        <ul>
+      <div class="item copy fs-2rem">
+        <h2 class='center'>Features</h2>
+        <ul class='list-style-none mt-0'>
           <li>Keybinds — breeze through links.</li>
-          <li>Efficent design.</li>
+          <li>Efficient to its core.</li>
           <li>Copy and paste links into queue.</li>
-          <li><a href="https://github.com/sbdchd/linky">Open Source</a></li>
+          <li><a href="https://github.com/getlinky/linky">Open Source</a></li>
         </ul>
       </div>
     </div>
+    <footer class='d-flex ml-4 mr-4 bold justify-content-end'>
+    Est. 2016
+    </footer>
   </linky-base>
 </template>
 
@@ -140,10 +149,6 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
 
-  .landing-page-image-container {
-     max-width: 800px;
-  }
-
   .register {
     margin-top: 25px;
   }
@@ -154,14 +159,40 @@ h1 {
 
 }
 
+.fs-2rem {
+  font-size: 2rem !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+@for $i from 0 to 8 {
+  .ml-#{$i} {
+    margin-left: #{$i/4}rem;
+  }
+
+  .mr-#{$i} {
+    margin-right: #{$i/4}rem;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
 .item {
   flex-basis: max-width;
   margin: 0 10px;
   font-size: 1.25em;
-
-  .landing-page-image {
-    max-width: 100%;
-  }
 
   .center {
     text-align: center;
@@ -181,5 +212,13 @@ h1 {
     font-size: .6em;
     font-weight: normal;
   }
+}
+
+.list-style-none {
+  list-style: none;
+}
+
+.min-width-300px {
+  min-width: 300px;
 }
 </style>
