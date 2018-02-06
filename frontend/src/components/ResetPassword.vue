@@ -6,9 +6,9 @@
        <h1>Reset Password</h1>
         <form @submit.prevent.once="resetPassword">
           <label> Email
-            <input v-focus="emailFocus" @focus="emailFocus = true" @blur="emailFocus = false" type="email" v-model="email" required>
+            <input placeholder="j.appleseed@leominster.net" v-focus="emailFocus" @focus="emailFocus = true" @blur="emailFocus = false" type="email" v-model="email" required>
           </label>
-          <input type="submit" value="Reset">
+          <input type="submit" class="button" value="Reset">
         </form>
       </div>
     </div>
