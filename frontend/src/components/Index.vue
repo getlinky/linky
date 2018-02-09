@@ -11,7 +11,7 @@
     <h1>Save links for later</h1>
     <div class="container">
       <div class="item">
-       <img width="1000px" height="658px" src="static/list.png">
+       <img class="max-width-800px w-100" src="static/list.png">
       </div>
       <div class="item register min-width-300px">
         <h2>Register Now</h2>
@@ -220,5 +220,13 @@ h1 {
 
 .min-width-300px {
   min-width: 300px;
+}
+
+.max-width-800px {
+  max-width: 800px;
+}
+
+.w-100 {
+  width: 100%;
 }
 </style>
